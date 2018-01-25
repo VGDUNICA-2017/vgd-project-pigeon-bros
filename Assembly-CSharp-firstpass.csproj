@@ -1,0 +1,325 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <LangVersion>4</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0.20506</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <RootNamespace></RootNamespace>
+    <ProjectGuid>{30932208-5B87-F705-A118-73D826FAEB12}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <AssemblyName>Assembly-CSharp-firstpass</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <BaseDirectory>Assets</BaseDirectory>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Temp\bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_5_OR_NEWER;UNITY_5_6_OR_NEWER;UNITY_2017_1_OR_NEWER;UNITY_2017_2_OR_NEWER;UNITY_2017_2_0;UNITY_2017_2;UNITY_2017;PLATFORM_ARCH_64;UNITY_64;UNITY_ANALYTICS;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_DUCK_TYPING;ENABLE_GENERICS;ENABLE_PVR_GI;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_SPRITERENDERER_FLIPPING;ENABLE_SPRITES;ENABLE_GRID;ENABLE_TILEMAP;ENABLE_TERRAIN;ENABLE_RAKNET;ENABLE_DIRECTOR;ENABLE_UNET;ENABLE_LZMA;ENABLE_UNITYEVENTS;ENABLE_WEBCAM;ENABLE_WWW;ENABLE_CLOUD_SERVICES_COLLAB;ENABLE_CLOUD_SERVICES_COLLAB_SOFTLOCKS;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_HUB;ENABLE_CLOUD_PROJECT_ID;ENABLE_CLOUD_SERVICES_USE_WEBREQUEST;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_HUB;ENABLE_EDITOR_HUB_LICENSE;ENABLE_WEBSOCKET_CLIENT;ENABLE_DIRECTOR_AUDIO;ENABLE_TIMELINE;ENABLE_EDITOR_METRICS;ENABLE_EDITOR_METRICS_CACHING;ENABLE_NATIVE_ARRAY;ENABLE_SPRITE_MASKING;INCLUDE_DYNAMIC_GI;INCLUDE_GI;ENABLE_MONO_BDWGC;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;INCLUDE_PUBNUB;ENABLE_PLAYMODE_TESTS_RUNNER;ENABLE_VIDEO;ENABLE_RMGUI;ENABLE_PACKMAN;ENABLE_CUSTOM_RENDER_TEXTURE;ENABLE_STYLE_SHEETS;PLATFORM_STANDALONE_WIN;PLATFORM_STANDALONE;UNITY_STANDALONE_WIN;UNITY_STANDALONE;ENABLE_SUBSTANCE;ENABLE_RUNTIME_GI;ENABLE_MOVIES;ENABLE_NETWORK;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_UNITYWEBREQUEST;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;ENABLE_EVENT_QUEUE;ENABLE_CLUSTERINPUT;ENABLE_VR;ENABLE_AR;ENABLE_SPATIALTRACKING;ENABLE_WEBSOCKET_HOST;ENABLE_MONO;NET_2_0_SUBSET;ENABLE_PROFILER;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN;ENABLE_NATIVE_ARRAY_CHECKS;UNITY_TEAM_LICENSE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoWarn>0169</NoWarn>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>Temp\bin\Release\</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoWarn>0169</NoWarn>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.XML" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="UnityEngine">
+      <HintPath>C:/Program Files/Unity/Editor/Data/Managed\UnityEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor">
+      <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+     <Compile Include="Assets\Plugins\Github\common\SolutionInfo.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Application\ApiClient.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Application\AppConfiguration.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Application\ApplicationInfo.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Application\ApplicationManagerBase.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Application\IApiClient.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Application\IApplicationManager.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Application\LoginResult.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Application\OctokitExtensions.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Application\Organization.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Authentication\AuthenticationResult.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Authentication\AuthenticationResultExtensions.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Authentication\Credential.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Authentication\ICredentialManager.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Authentication\IKeychain.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Authentication\ILoginManager.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Authentication\Keychain.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Authentication\KeychainAdapter.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Authentication\LoginManager.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Cache\CacheInterfaces.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Events\RepositoryWatcher.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Extensions\AsyncExtensions.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Extensions\EnvironmentExtensions.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Extensions\ExceptionExtensions.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Extensions\FileEventExtensions.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Extensions\FileSystemExtensions.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Extensions\ListExtensions.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Extensions\StreamExtensions.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Extensions\StringExtensions.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Extensions\UriExtensions.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Git\FailureSeverity.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Git\GitAheadBehindStatus.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Git\GitBranch.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Git\GitClient.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Git\GitConfig.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Git\GitConfigSource.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Git\GitCredentialManager.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Git\GitFileStatus.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Git\GitLock.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Git\GitLogEntry.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Git\GitObjectFactory.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Git\GitRemote.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Git\GitStatus.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Git\GitStatusEntry.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Git\IGitObjectFactory.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Git\IRepository.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Git\Repository.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Git\RepositoryManager.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Git\Tasks\GitAddTask.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Git\Tasks\GitAheadBehindStatusTask.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Git\Tasks\GitBranchCreateTask.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Git\Tasks\GitBranchDeleteTask.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Git\Tasks\GitCommitTask.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Git\Tasks\GitConfigGetTask.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Git\Tasks\GitConfigListTask.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Git\Tasks\GitConfigSetTask.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Git\Tasks\GitFetchTask.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Git\Tasks\GitInitTask.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Git\Tasks\GitLfsInstallTask.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Git\Tasks\GitLfsVersionTask.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Git\Tasks\GitListBranchesTask.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Git\Tasks\GitListLocksTask.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Git\Tasks\GitLockTask.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Git\Tasks\GitLogTask.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Git\Tasks\GitPullTask.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Git\Tasks\GitPushTask.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Git\Tasks\GitRemoteAddTask.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Git\Tasks\GitRemoteBranchDeleteTask.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Git\Tasks\GitRemoteChangeTask.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Git\Tasks\GitRemoteListTask.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Git\Tasks\GitRemoteRemoveTask.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Git\Tasks\GitRemoveFromIndexTask.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Git\Tasks\GitRevertTask.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Git\Tasks\GitStatusTask.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Git\Tasks\GitSwitchBranchesTask.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Git\Tasks\GitUnlockTask.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Git\Tasks\GitVersionTask.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Git\TreeData.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Git\ValidateGitInstallResult.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Helpers\AssemblyResources.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Helpers\Constants.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Helpers\Guard.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Helpers\ProgressReport.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Helpers\SimpleJson.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Helpers\TaskHelpers.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Helpers\Validation.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Installer\GitInstaller.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Installer\IGitInstaller.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Installer\IZipHelper.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Installer\ZipHelper.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\IO\FileSystem.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\IO\FileSystemHelpers.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\IO\IFileSystem.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\IO\NiceIO.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\IO\Watches\AdaptiveFileSystemWatch.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\IO\Watches\DefaultFileSystemWatch.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\IO\Watches\FileSystemWatch.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\IO\Watches\FileSystemWatcherWrapper.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\IO\Watches\FileSystemWatchFactory.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\IO\Watches\FileSystemWatchWrapperFactory.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\IO\Watches\IFileSystemWatcherWrapper.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\IO\Watches\IFileSystemWatchListener.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\IO\Watches\IFileSystemWatchWrapperFactory.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\IO\Watches\WatchArguments.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Localization.Designer.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Metrics\IMetricsService.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Metrics\IUsageTracker.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Metrics\UsageModel.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Metrics\UsageTracker.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\OutputProcessors\BranchListOutputProcessor.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\OutputProcessors\GitAheadBehindStatusOutputProcessor.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\OutputProcessors\IProcessManager.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\OutputProcessors\LfsVersionOutputProcessor.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\OutputProcessors\LineProcessor.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\OutputProcessors\LockOutputProcessor.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\OutputProcessors\LogEntryOutputProcessor.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\OutputProcessors\ProcessManager.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\OutputProcessors\RemoteListOutputProcessor.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\OutputProcessors\StatusOutputProcessor.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\OutputProcessors\VersionOutputProcessor.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Platform\DefaultEnvironment.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Platform\FindExecTask.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Platform\IEnvironment.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Platform\IProcessEnvironment.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Platform\ISettings.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Platform\Platform.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Platform\ProcessEnvironment.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Platform\Settings.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Primitives\HostAddress.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Primitives\StringEquivalent.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Primitives\UriString.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Properties\AssemblyInfo.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Tasks\ActionTask.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Tasks\BaseOutputProcessor.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Tasks\ConcurrentExclusiveInterleave.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Tasks\ConfigOutputProcessor.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Tasks\ITaskManager.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Tasks\ProcessTask.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Tasks\TaskBase.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Tasks\TaskCanceledExceptions.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Tasks\TaskExtensions.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Tasks\TaskManager.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Threading\IAwaitable.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Threading\IAwaiter.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Threading\IMainThreadSynchronizationContext.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\Threading\ThreadingHelper.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Api\UI\TreeBase.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Logging\ConsoleLogAdapter.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Logging\Extensions\ExceptionExtensions.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Logging\FileLogAdapter.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Logging\ILogging.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Logging\LogAdapterBase.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Logging\LogFacade.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Logging\Logging.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Logging\MultipleLogAdapter.cs" />
+     <Compile Include="Assets\Plugins\Github\src\GitHub.Logging\Properties\AssemblyInfo.cs" />
+     <Compile Include="Assets\Plugins\Github\src\packaging\CopyLibrariesToDevelopmentFolder\Class1.cs" />
+     <Compile Include="Assets\Plugins\Github\src\packaging\CopyLibrariesToPackageProject\Class1.cs" />
+     <Compile Include="Assets\Plugins\Github\src\tests\IntegrationTests\Auth\LoginTests.cs" />
+     <Compile Include="Assets\Plugins\Github\src\tests\IntegrationTests\BaseGitEnvironmentTest.cs" />
+     <Compile Include="Assets\Plugins\Github\src\tests\IntegrationTests\BaseIntegrationTest.cs" />
+     <Compile Include="Assets\Plugins\Github\src\tests\IntegrationTests\BasePlatformIntegrationTest.cs" />
+     <Compile Include="Assets\Plugins\Github\src\tests\IntegrationTests\BaseTaskManagerTest.cs" />
+     <Compile Include="Assets\Plugins\Github\src\tests\IntegrationTests\Events\RepositoryManagerTests.cs" />
+     <Compile Include="Assets\Plugins\Github\src\tests\IntegrationTests\Events\RepositoryWatcherTests.cs" />
+     <Compile Include="Assets\Plugins\Github\src\tests\IntegrationTests\Git\GitSetupTests.cs" />
+     <Compile Include="Assets\Plugins\Github\src\tests\IntegrationTests\Git\IntegrationTestEnvironment.cs" />
+     <Compile Include="Assets\Plugins\Github\src\tests\IntegrationTests\GitClientTests.cs" />
+     <Compile Include="Assets\Plugins\Github\src\tests\IntegrationTests\Process\ProcessManagerIntegrationTests.cs" />
+     <Compile Include="Assets\Plugins\Github\src\tests\IntegrationTests\ProcessManagerExtensions.cs" />
+     <Compile Include="Assets\Plugins\Github\src\tests\IntegrationTests\Properties\AssemblyInfo.cs" />
+     <Compile Include="Assets\Plugins\Github\src\tests\IntegrationTests\SetUpFixture.cs" />
+     <Compile Include="Assets\Plugins\Github\src\tests\IntegrationTests\ThreadSynchronizationContext.cs" />
+     <Compile Include="Assets\Plugins\Github\src\tests\Properties\AssemblyInfo.cs" />
+     <Compile Include="Assets\Plugins\Github\src\tests\TaskSystemIntegrationTests\Properties\AssemblyInfo.cs" />
+     <Compile Include="Assets\Plugins\Github\src\tests\TaskSystemIntegrationTests\SynchronizationContextTaskScheduler.cs" />
+     <Compile Include="Assets\Plugins\Github\src\tests\TaskSystemIntegrationTests\Tests.cs" />
+     <Compile Include="Assets\Plugins\Github\src\tests\TaskSystemIntegrationTests\ThreadSynchronizationContext.cs" />
+     <Compile Include="Assets\Plugins\Github\src\tests\TestApp\Mono.Options-PCL.cs" />
+     <Compile Include="Assets\Plugins\Github\src\tests\TestApp\Program.cs" />
+     <Compile Include="Assets\Plugins\Github\src\tests\TestApp\Properties\AssemblyInfo.cs" />
+     <Compile Include="Assets\Plugins\Github\src\tests\TestUtils\Events\IRepositoryListener.cs" />
+     <Compile Include="Assets\Plugins\Github\src\tests\TestUtils\Events\IRepositoryManagerListener.cs" />
+     <Compile Include="Assets\Plugins\Github\src\tests\TestUtils\Helpers\Args.cs" />
+     <Compile Include="Assets\Plugins\Github\src\tests\TestUtils\Helpers\AssertExtensions.cs" />
+     <Compile Include="Assets\Plugins\Github\src\tests\TestUtils\Helpers\TestSynchronizationContext.cs" />
+     <Compile Include="Assets\Plugins\Github\src\tests\TestUtils\Helpers\TestUIDispatcher.cs" />
+     <Compile Include="Assets\Plugins\Github\src\tests\TestUtils\Properties\AssemblyInfo.cs" />
+     <Compile Include="Assets\Plugins\Github\src\tests\TestUtils\Substitutes\CreateEnvironmentOptions.cs" />
+     <Compile Include="Assets\Plugins\Github\src\tests\TestUtils\Substitutes\CreateFileSystemOptions.cs" />
+     <Compile Include="Assets\Plugins\Github\src\tests\TestUtils\Substitutes\CreateRepositoryProcessRunnerOptions.cs" />
+     <Compile Include="Assets\Plugins\Github\src\tests\TestUtils\Substitutes\SubstituteFactory.cs" />
+     <Compile Include="Assets\Plugins\Github\src\tests\UnitTests\Authentication\KeychainTests.cs" />
+     <Compile Include="Assets\Plugins\Github\src\tests\UnitTests\Extensions\EnvironmentExtensionTests.cs" />
+     <Compile Include="Assets\Plugins\Github\src\tests\UnitTests\Extensions\ListExtensionTests.cs" />
+     <Compile Include="Assets\Plugins\Github\src\tests\UnitTests\Git\GitConfigTests.cs" />
+     <Compile Include="Assets\Plugins\Github\src\tests\UnitTests\Git\ValidationTests.cs" />
+     <Compile Include="Assets\Plugins\Github\src\tests\UnitTests\IO\BaseOutputProcessorTests.cs" />
+     <Compile Include="Assets\Plugins\Github\src\tests\UnitTests\IO\BranchListOutputProcessorTests.cs" />
+     <Compile Include="Assets\Plugins\Github\src\tests\UnitTests\IO\FileSystemHelperTests.cs" />
+     <Compile Include="Assets\Plugins\Github\src\tests\UnitTests\IO\GitEnvironmentTestsBase.cs" />
+     <Compile Include="Assets\Plugins\Github\src\tests\UnitTests\IO\GitLogEntryListTests.cs" />
+     <Compile Include="Assets\Plugins\Github\src\tests\UnitTests\IO\GitLogEntryTests.cs" />
+     <Compile Include="Assets\Plugins\Github\src\tests\UnitTests\IO\GitStatusEntryFactoryTests.cs" />
+     <Compile Include="Assets\Plugins\Github\src\tests\UnitTests\IO\GitStatusEntryListTests.cs" />
+     <Compile Include="Assets\Plugins\Github\src\tests\UnitTests\IO\GitStatusEntryTests.cs" />
+     <Compile Include="Assets\Plugins\Github\src\tests\UnitTests\IO\LfsVersionOutputProcessorTests.cs" />
+     <Compile Include="Assets\Plugins\Github\src\tests\UnitTests\IO\LinuxBasedGitEnvironmentTests.cs" />
+     <Compile Include="Assets\Plugins\Github\src\tests\UnitTests\IO\LockOutputProcessorTests.cs" />
+     <Compile Include="Assets\Plugins\Github\src\tests\UnitTests\IO\LogEntryOutputProcessorTests.cs" />
+     <Compile Include="Assets\Plugins\Github\src\tests\UnitTests\IO\MacBasedGitEnvironmentTests.cs" />
+     <Compile Include="Assets\Plugins\Github\src\tests\UnitTests\IO\RemoteListOutputProcessorTests.cs" />
+     <Compile Include="Assets\Plugins\Github\src\tests\UnitTests\IO\StatusOutputProcessorTests.cs" />
+     <Compile Include="Assets\Plugins\Github\src\tests\UnitTests\IO\VersionOutputProcessorTests.cs" />
+     <Compile Include="Assets\Plugins\Github\src\tests\UnitTests\IO\WindowsGitEnvironmentTests.cs" />
+     <Compile Include="Assets\Plugins\Github\src\tests\UnitTests\ProcessManagerExtensions.cs" />
+     <Compile Include="Assets\Plugins\Github\src\tests\UnitTests\Properties\AssemblyInfo.cs" />
+     <Compile Include="Assets\Plugins\Github\src\tests\UnitTests\SetUpFixture.cs" />
+     <Compile Include="Assets\Plugins\Github\src\tests\UnitTests\Ssl\MozRootsTests.cs" />
+     <Compile Include="Assets\Plugins\Github\src\tests\UnitTests\UI\TreeBaseTests.cs" />
+     <None Include="Assets\Plugins\Github\lib\dotnet-httpClient35\md5sums.txt" />
+     <None Include="Assets\Plugins\Github\CREDITS.txt" />
+     <None Include="Assets\Plugins\Github\lib\dotnet-httpClient35\version.txt" />
+     <None Include="Assets\Plugins\Github\unity\TestProject\ProjectSettings\ProjectVersion.txt" />
+     <None Include="Assets\Plugins\Github\lib\octokit.net\version.txt" />
+     <None Include="Assets\Plugins\Github\EULA.txt" />
+     <None Include="Assets\Plugins\Github\unity\TestProject\license.txt" />
+     <None Include="Assets\Plugins\Github\lib\octokit.net\md5sums.txt" />
+ <Reference Include="UnityEngine.UI">
+ <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.Networking">
+ <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.TestRunner">
+ <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/TestRunner/UnityEngine.TestRunner.dll</HintPath>
+ </Reference>
+ <Reference Include="nunit.framework">
+ <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/TestRunner/net35/unity-custom/nunit.framework.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.Timeline">
+ <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Timeline/RuntimeEditor/UnityEngine.Timeline.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.UIAutomation">
+ <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UIAutomation/UnityEngine.UIAutomation.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.GoogleAudioSpatializer">
+ <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityGoogleAudioSpatializer/RuntimeEditor/UnityEngine.GoogleAudioSpatializer.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.HoloLens">
+ <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityHoloLens/RuntimeEditor/UnityEngine.HoloLens.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.SpatialTracking">
+ <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnitySpatialTracking/RuntimeEditor/UnityEngine.SpatialTracking.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.Analytics">
+ <HintPath>C:/Users/Giacomo/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.analytics@1.0.1/UnityEngine.Analytics.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.Purchasing">
+ <HintPath>C:/Users/Giacomo/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.purchasing@1.0.1/UnityEngine.Purchasing.dll</HintPath>
+ </Reference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  
+</Project>

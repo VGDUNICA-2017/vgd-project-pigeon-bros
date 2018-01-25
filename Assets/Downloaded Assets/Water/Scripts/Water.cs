@@ -34,7 +34,6 @@ public class Water : MonoBehaviour {
 
 	//The properties of our water
 	float baseheight;
-	float left;
 	float bottom;
 
 	public float LeftDef = -10; 
@@ -119,7 +118,6 @@ public class Water : MonoBehaviour {
 		//Set our variables
 		baseheight = Top;
 		bottom = Bottom;
-		left = Left;
 
 		//For each node, set the line renderer and our physics arrays
 		for (int i = 0; i < nodecount; i++)

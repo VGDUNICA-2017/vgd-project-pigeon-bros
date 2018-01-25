@@ -1,0 +1,148 @@
+C:\MyGames\Thirang_s_Journey\obj\Debug\Assembly-CSharp.csprojResolveAssemblyReference.cache
+C:\MyGames\Thirang_s_Journey\Temp\bin\Debug\Assembly-CSharp.dll
+C:\MyGames\Thirang_s_Journey\Temp\bin\Debug\Assembly-CSharp.pdb
+C:\MyGames\Thirang_s_Journey\Temp\bin\Debug\AsyncBridge.Net35.dll
+C:\MyGames\Thirang_s_Journey\Temp\bin\Debug\DotNetHttp35.dll
+C:\MyGames\Thirang_s_Journey\Temp\bin\Debug\GitHub.Api.dll
+C:\MyGames\Thirang_s_Journey\Temp\bin\Debug\GitHub.Logging.dll
+C:\MyGames\Thirang_s_Journey\Temp\bin\Debug\GitHub.Unity.dll
+C:\MyGames\Thirang_s_Journey\Temp\bin\Debug\ICSharpCode.SharpZipLib.dll
+C:\MyGames\Thirang_s_Journey\Temp\bin\Debug\Mono.Security.dll
+C:\MyGames\Thirang_s_Journey\Temp\bin\Debug\nunit.framework.dll
+C:\MyGames\Thirang_s_Journey\Temp\bin\Debug\Octokit.dll
+C:\MyGames\Thirang_s_Journey\Temp\bin\Debug\Rackspace.Threading.dll
+C:\MyGames\Thirang_s_Journey\Temp\bin\Debug\ReadOnlyCollectionsInterfaces.dll
+C:\MyGames\Thirang_s_Journey\Temp\bin\Debug\sfw.net.dll
+C:\MyGames\Thirang_s_Journey\Temp\bin\Debug\System.Threading.dll
+C:\MyGames\Thirang_s_Journey\Temp\bin\Debug\UnityEditor.Advertisements.dll
+C:\MyGames\Thirang_s_Journey\Temp\bin\Debug\UnityEditor.Analytics.dll
+C:\MyGames\Thirang_s_Journey\Temp\bin\Debug\UnityEditor.Android.Extensions.dll
+C:\MyGames\Thirang_s_Journey\Temp\bin\Debug\UnityEditor.dll
+C:\MyGames\Thirang_s_Journey\Temp\bin\Debug\UnityEditor.GoogleAudioSpatializer.dll
+C:\MyGames\Thirang_s_Journey\Temp\bin\Debug\UnityEditor.Graphs.dll
+C:\MyGames\Thirang_s_Journey\Temp\bin\Debug\UnityEditor.HoloLens.dll
+C:\MyGames\Thirang_s_Journey\Temp\bin\Debug\UnityEditor.Networking.dll
+C:\MyGames\Thirang_s_Journey\Temp\bin\Debug\UnityEditor.Purchasing.dll
+C:\MyGames\Thirang_s_Journey\Temp\bin\Debug\UnityEditor.SpatialTracking.dll
+C:\MyGames\Thirang_s_Journey\Temp\bin\Debug\UnityEditor.TestRunner.dll
+C:\MyGames\Thirang_s_Journey\Temp\bin\Debug\UnityEditor.Timeline.dll
+C:\MyGames\Thirang_s_Journey\Temp\bin\Debug\UnityEditor.TreeEditor.dll
+C:\MyGames\Thirang_s_Journey\Temp\bin\Debug\UnityEditor.UI.dll
+C:\MyGames\Thirang_s_Journey\Temp\bin\Debug\UnityEditor.UIAutomation.dll
+C:\MyGames\Thirang_s_Journey\Temp\bin\Debug\UnityEditor.VR.dll
+C:\MyGames\Thirang_s_Journey\Temp\bin\Debug\UnityEditor.WindowsStandalone.Extensions.dll
+C:\MyGames\Thirang_s_Journey\Temp\bin\Debug\UnityEngine.Advertisements.dll
+C:\MyGames\Thirang_s_Journey\Temp\bin\Debug\UnityEngine.Analytics.dll
+C:\MyGames\Thirang_s_Journey\Temp\bin\Debug\UnityEngine.dll
+C:\MyGames\Thirang_s_Journey\Temp\bin\Debug\UnityEngine.GoogleAudioSpatializer.dll
+C:\MyGames\Thirang_s_Journey\Temp\bin\Debug\UnityEngine.HoloLens.dll
+C:\MyGames\Thirang_s_Journey\Temp\bin\Debug\UnityEngine.Networking.dll
+C:\MyGames\Thirang_s_Journey\Temp\bin\Debug\UnityEngine.Purchasing.dll
+C:\MyGames\Thirang_s_Journey\Temp\bin\Debug\UnityEngine.SpatialTracking.dll
+C:\MyGames\Thirang_s_Journey\Temp\bin\Debug\UnityEngine.StandardEvents.dll
+C:\MyGames\Thirang_s_Journey\Temp\bin\Debug\UnityEngine.TestRunner.dll
+C:\MyGames\Thirang_s_Journey\Temp\bin\Debug\UnityEngine.Timeline.dll
+C:\MyGames\Thirang_s_Journey\Temp\bin\Debug\UnityEngine.UI.dll
+C:\MyGames\Thirang_s_Journey\Temp\bin\Debug\UnityEngine.UIAutomation.dll
+C:\MyGames\Thirang_s_Journey\Temp\bin\Debug\Unity.Cecil.dll
+C:\MyGames\Thirang_s_Journey\Temp\bin\Debug\Unity.SerializationLogic.dll
+C:\MyGames\Thirang_s_Journey\Temp\bin\Debug\Unity.DataContract.dll
+C:\MyGames\Thirang_s_Journey\Temp\bin\Debug\ExCSS.Unity.dll
+C:\MyGames\Thirang_s_Journey\Temp\bin\Debug\Unity.Legacy.NRefactory.dll
+C:\MyGames\Thirang_s_Journey\Temp\bin\Debug\Unity.UNetWeaver.dll
+C:\MyGames\Thirang_s_Journey\Temp\bin\Debug\Unity.Cecil.Mdb.dll
+C:\MyGames\Thirang_s_Journey\Temp\bin\Debug\UnityEditor.iOS.Extensions.Xcode.dll
+C:\MyGames\Thirang_s_Journey\Temp\bin\Debug\Unity.CecilTools.dll
+C:\MyGames\Thirang_s_Journey\Temp\bin\Debug\Unity.Cecil.Pdb.dll
+C:\MyGames\Thirang_s_Journey\Temp\bin\Debug\UnityEngine.xml
+C:\MyGames\Thirang_s_Journey\Temp\bin\Debug\UnityEditor.xml
+C:\MyGames\Thirang_s_Journey\Temp\bin\Debug\UnityEngine.UI.xml
+C:\MyGames\Thirang_s_Journey\Temp\bin\Debug\UnityEditor.UI.xml
+C:\MyGames\Thirang_s_Journey\Temp\bin\Debug\UnityEngine.Networking.xml
+C:\MyGames\Thirang_s_Journey\Temp\bin\Debug\UnityEditor.Networking.xml
+C:\MyGames\Thirang_s_Journey\Temp\bin\Debug\UnityEditor.TestRunner.xml
+C:\MyGames\Thirang_s_Journey\Temp\bin\Debug\UnityEngine.TestRunner.xml
+C:\MyGames\Thirang_s_Journey\Temp\bin\Debug\nunit.framework.xml
+C:\MyGames\Thirang_s_Journey\Temp\bin\Debug\UnityEngine.Timeline.xml
+C:\MyGames\Thirang_s_Journey\Temp\bin\Debug\UnityEditor.Timeline.xml
+C:\MyGames\Thirang_s_Journey\Temp\bin\Debug\UnityEditor.TreeEditor.xml
+C:\MyGames\Thirang_s_Journey\Temp\bin\Debug\UnityEngine.UIAutomation.xml
+C:\MyGames\Thirang_s_Journey\Temp\bin\Debug\UnityEditor.UIAutomation.xml
+C:\MyGames\Thirang_s_Journey\Temp\bin\Debug\UnityEditor.GoogleAudioSpatializer.xml
+C:\MyGames\Thirang_s_Journey\Temp\bin\Debug\UnityEngine.GoogleAudioSpatializer.xml
+C:\MyGames\Thirang_s_Journey\Temp\bin\Debug\UnityEditor.HoloLens.xml
+C:\MyGames\Thirang_s_Journey\Temp\bin\Debug\UnityEngine.HoloLens.xml
+C:\MyGames\Thirang_s_Journey\Temp\bin\Debug\UnityEditor.SpatialTracking.xml
+C:\MyGames\Thirang_s_Journey\Temp\bin\Debug\UnityEngine.SpatialTracking.xml
+C:\MyGames\Thirang_s_Journey\Temp\bin\Debug\UnityEditor.VR.xml
+C:\MyGames\Thirang_s_Journey\Temp\bin\Debug\UnityEditor.iOS.Extensions.Xcode.xml
+C:\MyGames\Thirang_s_Journey\obj\Debug\Assembly-CSharp.dll
+C:\MyGames\Thirang_s_Journey\obj\Debug\Assembly-CSharp.pdb
+C:\Users\Public\Documents\Unity Projects\Thirang_s_Journey\Temp\bin\Debug\Assembly-CSharp.dll
+C:\Users\Public\Documents\Unity Projects\Thirang_s_Journey\Temp\bin\Debug\Assembly-CSharp.pdb
+C:\Users\Public\Documents\Unity Projects\Thirang_s_Journey\Temp\bin\Debug\nunit.framework.dll
+C:\Users\Public\Documents\Unity Projects\Thirang_s_Journey\Temp\bin\Debug\UnityEditor.Advertisements.dll
+C:\Users\Public\Documents\Unity Projects\Thirang_s_Journey\Temp\bin\Debug\UnityEditor.Analytics.dll
+C:\Users\Public\Documents\Unity Projects\Thirang_s_Journey\Temp\bin\Debug\UnityEditor.Android.Extensions.dll
+C:\Users\Public\Documents\Unity Projects\Thirang_s_Journey\Temp\bin\Debug\UnityEditor.dll
+C:\Users\Public\Documents\Unity Projects\Thirang_s_Journey\Temp\bin\Debug\UnityEditor.GoogleAudioSpatializer.dll
+C:\Users\Public\Documents\Unity Projects\Thirang_s_Journey\Temp\bin\Debug\UnityEditor.Graphs.dll
+C:\Users\Public\Documents\Unity Projects\Thirang_s_Journey\Temp\bin\Debug\UnityEditor.HoloLens.dll
+C:\Users\Public\Documents\Unity Projects\Thirang_s_Journey\Temp\bin\Debug\UnityEditor.Networking.dll
+C:\Users\Public\Documents\Unity Projects\Thirang_s_Journey\Temp\bin\Debug\UnityEditor.Purchasing.dll
+C:\Users\Public\Documents\Unity Projects\Thirang_s_Journey\Temp\bin\Debug\UnityEditor.SpatialTracking.dll
+C:\Users\Public\Documents\Unity Projects\Thirang_s_Journey\Temp\bin\Debug\UnityEditor.TestRunner.dll
+C:\Users\Public\Documents\Unity Projects\Thirang_s_Journey\Temp\bin\Debug\UnityEditor.Timeline.dll
+C:\Users\Public\Documents\Unity Projects\Thirang_s_Journey\Temp\bin\Debug\UnityEditor.TreeEditor.dll
+C:\Users\Public\Documents\Unity Projects\Thirang_s_Journey\Temp\bin\Debug\UnityEditor.UI.dll
+C:\Users\Public\Documents\Unity Projects\Thirang_s_Journey\Temp\bin\Debug\UnityEditor.UIAutomation.dll
+C:\Users\Public\Documents\Unity Projects\Thirang_s_Journey\Temp\bin\Debug\UnityEditor.VR.dll
+C:\Users\Public\Documents\Unity Projects\Thirang_s_Journey\Temp\bin\Debug\UnityEditor.WindowsStandalone.Extensions.dll
+C:\Users\Public\Documents\Unity Projects\Thirang_s_Journey\Temp\bin\Debug\UnityEngine.Advertisements.dll
+C:\Users\Public\Documents\Unity Projects\Thirang_s_Journey\Temp\bin\Debug\UnityEngine.Analytics.dll
+C:\Users\Public\Documents\Unity Projects\Thirang_s_Journey\Temp\bin\Debug\UnityEngine.dll
+C:\Users\Public\Documents\Unity Projects\Thirang_s_Journey\Temp\bin\Debug\UnityEngine.GoogleAudioSpatializer.dll
+C:\Users\Public\Documents\Unity Projects\Thirang_s_Journey\Temp\bin\Debug\UnityEngine.HoloLens.dll
+C:\Users\Public\Documents\Unity Projects\Thirang_s_Journey\Temp\bin\Debug\UnityEngine.Networking.dll
+C:\Users\Public\Documents\Unity Projects\Thirang_s_Journey\Temp\bin\Debug\UnityEngine.Purchasing.dll
+C:\Users\Public\Documents\Unity Projects\Thirang_s_Journey\Temp\bin\Debug\UnityEngine.SpatialTracking.dll
+C:\Users\Public\Documents\Unity Projects\Thirang_s_Journey\Temp\bin\Debug\UnityEngine.StandardEvents.dll
+C:\Users\Public\Documents\Unity Projects\Thirang_s_Journey\Temp\bin\Debug\UnityEngine.TestRunner.dll
+C:\Users\Public\Documents\Unity Projects\Thirang_s_Journey\Temp\bin\Debug\UnityEngine.Timeline.dll
+C:\Users\Public\Documents\Unity Projects\Thirang_s_Journey\Temp\bin\Debug\UnityEngine.UI.dll
+C:\Users\Public\Documents\Unity Projects\Thirang_s_Journey\Temp\bin\Debug\UnityEngine.UIAutomation.dll
+C:\Users\Public\Documents\Unity Projects\Thirang_s_Journey\Temp\bin\Debug\Unity.Cecil.dll
+C:\Users\Public\Documents\Unity Projects\Thirang_s_Journey\Temp\bin\Debug\Unity.SerializationLogic.dll
+C:\Users\Public\Documents\Unity Projects\Thirang_s_Journey\Temp\bin\Debug\Unity.DataContract.dll
+C:\Users\Public\Documents\Unity Projects\Thirang_s_Journey\Temp\bin\Debug\ExCSS.Unity.dll
+C:\Users\Public\Documents\Unity Projects\Thirang_s_Journey\Temp\bin\Debug\Unity.Legacy.NRefactory.dll
+C:\Users\Public\Documents\Unity Projects\Thirang_s_Journey\Temp\bin\Debug\Unity.UNetWeaver.dll
+C:\Users\Public\Documents\Unity Projects\Thirang_s_Journey\Temp\bin\Debug\Unity.Cecil.Mdb.dll
+C:\Users\Public\Documents\Unity Projects\Thirang_s_Journey\Temp\bin\Debug\UnityEditor.iOS.Extensions.Xcode.dll
+C:\Users\Public\Documents\Unity Projects\Thirang_s_Journey\Temp\bin\Debug\Unity.CecilTools.dll
+C:\Users\Public\Documents\Unity Projects\Thirang_s_Journey\Temp\bin\Debug\Unity.Cecil.Pdb.dll
+C:\Users\Public\Documents\Unity Projects\Thirang_s_Journey\Temp\bin\Debug\UnityEngine.xml
+C:\Users\Public\Documents\Unity Projects\Thirang_s_Journey\Temp\bin\Debug\UnityEditor.xml
+C:\Users\Public\Documents\Unity Projects\Thirang_s_Journey\Temp\bin\Debug\UnityEngine.UI.xml
+C:\Users\Public\Documents\Unity Projects\Thirang_s_Journey\Temp\bin\Debug\UnityEditor.UI.xml
+C:\Users\Public\Documents\Unity Projects\Thirang_s_Journey\Temp\bin\Debug\UnityEngine.Networking.xml
+C:\Users\Public\Documents\Unity Projects\Thirang_s_Journey\Temp\bin\Debug\UnityEditor.Networking.xml
+C:\Users\Public\Documents\Unity Projects\Thirang_s_Journey\Temp\bin\Debug\UnityEditor.TestRunner.xml
+C:\Users\Public\Documents\Unity Projects\Thirang_s_Journey\Temp\bin\Debug\UnityEngine.TestRunner.xml
+C:\Users\Public\Documents\Unity Projects\Thirang_s_Journey\Temp\bin\Debug\nunit.framework.xml
+C:\Users\Public\Documents\Unity Projects\Thirang_s_Journey\Temp\bin\Debug\UnityEngine.Timeline.xml
+C:\Users\Public\Documents\Unity Projects\Thirang_s_Journey\Temp\bin\Debug\UnityEditor.Timeline.xml
+C:\Users\Public\Documents\Unity Projects\Thirang_s_Journey\Temp\bin\Debug\UnityEditor.TreeEditor.xml
+C:\Users\Public\Documents\Unity Projects\Thirang_s_Journey\Temp\bin\Debug\UnityEngine.UIAutomation.xml
+C:\Users\Public\Documents\Unity Projects\Thirang_s_Journey\Temp\bin\Debug\UnityEditor.UIAutomation.xml
+C:\Users\Public\Documents\Unity Projects\Thirang_s_Journey\Temp\bin\Debug\UnityEditor.GoogleAudioSpatializer.xml
+C:\Users\Public\Documents\Unity Projects\Thirang_s_Journey\Temp\bin\Debug\UnityEngine.GoogleAudioSpatializer.xml
+C:\Users\Public\Documents\Unity Projects\Thirang_s_Journey\Temp\bin\Debug\UnityEditor.HoloLens.xml
+C:\Users\Public\Documents\Unity Projects\Thirang_s_Journey\Temp\bin\Debug\UnityEngine.HoloLens.xml
+C:\Users\Public\Documents\Unity Projects\Thirang_s_Journey\Temp\bin\Debug\UnityEditor.SpatialTracking.xml
+C:\Users\Public\Documents\Unity Projects\Thirang_s_Journey\Temp\bin\Debug\UnityEngine.SpatialTracking.xml
+C:\Users\Public\Documents\Unity Projects\Thirang_s_Journey\Temp\bin\Debug\UnityEditor.VR.xml
+C:\Users\Public\Documents\Unity Projects\Thirang_s_Journey\Temp\bin\Debug\UnityEditor.iOS.Extensions.Xcode.xml
+C:\Users\Public\Documents\Unity Projects\Thirang_s_Journey\obj\Debug\Assembly-CSharp.csprojResolveAssemblyReference.cache
+C:\Users\Public\Documents\Unity Projects\Thirang_s_Journey\obj\Debug\Assembly-CSharp.dll
+C:\Users\Public\Documents\Unity Projects\Thirang_s_Journey\obj\Debug\Assembly-CSharp.pdb
