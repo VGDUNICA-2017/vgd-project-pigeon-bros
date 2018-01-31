@@ -53,6 +53,12 @@
   <ItemGroup>
      <Compile Include="Assets\Downloaded Assets\Water\Scripts\Water.cs" />
      <Compile Include="Assets\Downloaded Assets\Water\Scripts\WaterDetector.cs" />
+     <Compile Include="Assets\Scripts\Anim_and_CamMove.cs" />
+     <Compile Include="Assets\Scripts\DelayAnimation.cs" />
+     <Compile Include="Assets\Scripts\DelayTrap.cs" />
+     <Compile Include="Assets\Scripts\MoveCameraLvl01Boss.cs" />
+     <Compile Include="Assets\Scripts\MovingGroundX.cs" />
+     <None Include="Assets\Downloaded Assets\trap3\badfluid@gmail.com.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

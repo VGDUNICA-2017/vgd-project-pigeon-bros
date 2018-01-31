@@ -143,6 +143,6 @@ C:\Users\Public\Documents\Unity Projects\Thirang_s_Journey\Temp\bin\Debug\UnityE
 C:\Users\Public\Documents\Unity Projects\Thirang_s_Journey\Temp\bin\Debug\UnityEngine.SpatialTracking.xml
 C:\Users\Public\Documents\Unity Projects\Thirang_s_Journey\Temp\bin\Debug\UnityEditor.VR.xml
 C:\Users\Public\Documents\Unity Projects\Thirang_s_Journey\Temp\bin\Debug\UnityEditor.iOS.Extensions.Xcode.xml
-C:\Users\Public\Documents\Unity Projects\Thirang_s_Journey\obj\Debug\Assembly-CSharp.csprojResolveAssemblyReference.cache
 C:\Users\Public\Documents\Unity Projects\Thirang_s_Journey\obj\Debug\Assembly-CSharp.dll
 C:\Users\Public\Documents\Unity Projects\Thirang_s_Journey\obj\Debug\Assembly-CSharp.pdb
+C:\Users\Public\Documents\Unity Projects\Thirang_s_Journey\obj\Debug\Assembly-CSharp.csprojResolveAssemblyReference.cache
