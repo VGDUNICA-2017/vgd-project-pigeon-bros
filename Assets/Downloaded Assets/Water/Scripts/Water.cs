@@ -30,7 +30,7 @@ public class Water : MonoBehaviour {
 	const float springconstant = 0.02f;
 	const float damping = 0.04f;
 	const float spread = 0.05f;
-	const float z = -1f;
+	const float z = 0;
 
 	//The properties of our water
 	float baseheight;
