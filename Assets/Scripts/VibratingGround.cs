@@ -103,8 +103,8 @@ public class VibratingGround : MonoBehaviour {
 		}
 	}
 
-	void OnTriggerEnter(Collider other) {
-		if (other.tag == "Player") {
+	void OnCollisionEnter(Collision coll) {
+		if (coll.gameObject.tag == "Player") {
 			toVibrate = true;
 		}
 	}
