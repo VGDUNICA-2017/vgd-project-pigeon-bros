@@ -53,7 +53,7 @@ public class FadeGroundBoss : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider other) {
-		if (other.tag == "Boss") {
+		if (other.CompareTag ("Boss")) {
 			toFade = true;
 		}
 	}

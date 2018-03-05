@@ -104,7 +104,7 @@ public class VibratingGround : MonoBehaviour {
 	}
 
 	void OnCollisionEnter(Collision coll) {
-		if (coll.gameObject.tag == "Player") {
+		if (coll.gameObject.CompareTag ("Player")) {
 			toVibrate = true;
 		}
 	}
