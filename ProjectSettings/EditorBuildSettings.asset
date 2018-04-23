@@ -4,4 +4,28 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/LivelloCielo.unity
+    guid: bc310af79db1bc74fb009eff2eee3d6b
+  - enabled: 1
+    path: Assets/Scenes/LivelloCieloBoss.unity
+    guid: 0d4090b457b0749479c1e099721df6e0
+  - enabled: 1
+    path: Assets/Scenes/LivelloTerra.unity
+    guid: edaf122200ec5354a9be2136aee95e0f
+  - enabled: 1
+    path: Assets/Scenes/LivelloTerraBoss.unity
+    guid: 9c3516146c3b80e48ab5513e453e7854
+  - enabled: 1
+    path: Assets/Scenes/LivelloMare.unity
+    guid: 49afe6adfa06def49848275d92546a46
+  - enabled: 1
+    path: Assets/Scenes/LivelloMareBoss.unity
+    guid: da2bf008fb13ef84792b5acf135f9c61
+  - enabled: 1
+    path: Assets/Scenes/LivelloFinale.unity
+    guid: 8d113d3d4f56e034aac491e5fa6580a0
+  - enabled: 1
+    path: Assets/Scenes/LivelloFinaleBoss.unity
+    guid: cefb6f0ca4545154e899d07935de9b34

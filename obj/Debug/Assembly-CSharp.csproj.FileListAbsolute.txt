@@ -83,7 +83,6 @@ C:\Users\Public\Documents\Unity Projects\Thirang_s_Journey\Temp\bin\Debug\Assemb
 C:\Users\Public\Documents\Unity Projects\Thirang_s_Journey\Temp\bin\Debug\nunit.framework.dll
 C:\Users\Public\Documents\Unity Projects\Thirang_s_Journey\Temp\bin\Debug\UnityEditor.Advertisements.dll
 C:\Users\Public\Documents\Unity Projects\Thirang_s_Journey\Temp\bin\Debug\UnityEditor.Analytics.dll
-C:\Users\Public\Documents\Unity Projects\Thirang_s_Journey\Temp\bin\Debug\UnityEditor.Android.Extensions.dll
 C:\Users\Public\Documents\Unity Projects\Thirang_s_Journey\Temp\bin\Debug\UnityEditor.dll
 C:\Users\Public\Documents\Unity Projects\Thirang_s_Journey\Temp\bin\Debug\UnityEditor.GoogleAudioSpatializer.dll
 C:\Users\Public\Documents\Unity Projects\Thirang_s_Journey\Temp\bin\Debug\UnityEditor.Graphs.dll
@@ -145,4 +144,3 @@ C:\Users\Public\Documents\Unity Projects\Thirang_s_Journey\Temp\bin\Debug\UnityE
 C:\Users\Public\Documents\Unity Projects\Thirang_s_Journey\Temp\bin\Debug\UnityEditor.iOS.Extensions.Xcode.xml
 C:\Users\Public\Documents\Unity Projects\Thirang_s_Journey\obj\Debug\Assembly-CSharp.dll
 C:\Users\Public\Documents\Unity Projects\Thirang_s_Journey\obj\Debug\Assembly-CSharp.pdb
-C:\Users\Public\Documents\Unity Projects\Thirang_s_Journey\obj\Debug\Assembly-CSharp.csprojResolveAssemblyReference.cache

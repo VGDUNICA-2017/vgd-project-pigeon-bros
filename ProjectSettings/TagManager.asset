@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Trap
   - FireBall
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -20,7 +21,7 @@ TagManager:
   - GroundLava1
   - GroundLava2
   - GroundLava3
-  - 
+  - MovingGround
   - 
   - 
   - 
