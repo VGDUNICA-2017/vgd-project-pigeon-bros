@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class OnCollisionShield : MonoBehaviour {
 
-	void OnCollisionEnter (Collision other) {
+	void OnTriggerEnter (Collider other) {
 		GetComponentInParent<Thirang> ().OnCollisionShield (other);
 	}
 }

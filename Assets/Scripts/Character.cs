@@ -4,11 +4,10 @@ using UnityEngine;
 
 public class Character : MonoBehaviour {
 
-	protected int health;
-	protected int mana;
-	protected int attackDamage;
-	protected int armor;
-	protected int magicResist;
+	public int health { get; set; }
+	public int attackDamage { get; set; }
+	public int armor { get; set; }
+	public int magicResist { get; set; }
 
 	public enum DamageType { physical, magic };
 
@@ -22,33 +21,23 @@ public class Character : MonoBehaviour {
 		}
 	}
 
-	public Character(int health, int mana, int attackDamage, int armor, int magicResist) {
-		this.health = health;
-		this.mana = mana;
-		this.attackDamage = attackDamage;
-		this.armor = armor;
-		this.magicResist = magicResist;
-	}
-
 	protected void OnDamage (GameObject hit, Ability a) {
 		Character ch = null;
 		if (hit.CompareTag ("Player")) {
-			ch = GetComponent <Thirang> () as Character;
+			ch = hit.GetComponent <Thirang> () as Character;
 		} else {	//GetAllComponents of "hit" to find the "enemy" and control which is not null (i.e. assignable to Character class)
-			foreach (Character c in hit.GetComponents <Component> ()) {
-				ch = (Character) c;
-				if (ch != null) {
-					break;
-				}
-			}
+			ch = hit.GetComponent <Enemy> () as Character;
 		}
 
+		print (hit.tag + " " + ch.health + " " + ch.armor + " " + a.damage + " " + ch);
 		if (ch != null) {
-			if (a.damageType == DamageType.physical)
-				ch.health = a.damage * armor;
+			if (ch.health > 0) {
+				if (a.damageType == DamageType.physical)
+					ch.health -= a.damage * ch.armor / 100;
 
-			if (a.damageType == DamageType.magic)
-				ch.health = a.damage * magicResist;
+				if (a.damageType == DamageType.magic)
+					ch.health -= a.damage * ch.magicResist / 100;
+			}
 		} else {
 			throw new System.NullReferenceException ();
 		}

@@ -6,7 +6,6 @@ public class JumpOverride : MonoBehaviour {
 	Animator anim;
 	Rigidbody ThirangRb;
 	GroundRaycast[] rayManager;
-	StatesAndTransitions SaT;
 
 	bool launched;
 	float jumpTime;
@@ -18,7 +17,6 @@ public class JumpOverride : MonoBehaviour {
 		anim = GetComponent <Animator> ();
 		ThirangRb = GetComponent <Rigidbody> ();
 		rayManager = GetComponentsInChildren <GroundRaycast> ();
-		SaT = new StatesAndTransitions ();
 
 		lengthJump = 155f;
 		heightJump = 6000f;
@@ -28,15 +26,15 @@ public class JumpOverride : MonoBehaviour {
 		AnimatorStateInfo stateInfo = anim.GetCurrentAnimatorStateInfo (0);
 		AnimatorStateInfo nextState = anim.GetNextAnimatorStateInfo (0);
 
-		if ((stateInfo.fullPathHash == SaT.runStateHash && nextState.fullPathHash == SaT.jumpStart) ||
-			(stateInfo.fullPathHash == SaT.runBackStateHash && nextState.fullPathHash == SaT.jumpBackStart)) 
+		if ((stateInfo.fullPathHash == ThirangSaT.runStateHash && nextState.fullPathHash == ThirangSaT.jumpStart) ||
+			(stateInfo.fullPathHash == ThirangSaT.runBackStateHash && nextState.fullPathHash == ThirangSaT.jumpBackStart)) 
 		{
 			lengthJump = 190f;
 			anim.applyRootMotion = false;
 		}
 
 		//Emergency exit from jumpIdle animation, caused by "collision" error with ground
-		if (stateInfo.fullPathHash == SaT.jumpIdle || stateInfo.fullPathHash == SaT.jumpBackIdle) {
+		if (stateInfo.fullPathHash == ThirangSaT.jumpIdle || stateInfo.fullPathHash == ThirangSaT.jumpBackIdle) {
 
 			jumpTime += Time.deltaTime;
 			if (jumpTime >= 20f) {
@@ -47,7 +45,7 @@ public class JumpOverride : MonoBehaviour {
 			jumpTime = 0f;
 		}
 
-		if (stateInfo.fullPathHash == SaT.jumpDown || stateInfo.fullPathHash == SaT.jumpBackDown) {
+		if (stateInfo.fullPathHash == ThirangSaT.jumpDown || stateInfo.fullPathHash == ThirangSaT.jumpBackDown) {
 			launched = false;
 			anim.ResetTrigger ("JumpDown");
 			lengthJump = 155f;
@@ -57,7 +55,7 @@ public class JumpOverride : MonoBehaviour {
 			}
 		}
 
-		if (stateInfo.fullPathHash == SaT.jumpStart) {
+		if (stateInfo.fullPathHash == ThirangSaT.jumpStart) {
 			anim.applyRootMotion = false;
 			if (!launched) {
 				Vector3 forceDir = new Vector3 (lengthJump, heightJump);
@@ -66,7 +64,7 @@ public class JumpOverride : MonoBehaviour {
 			}
 		}
 
-		if (stateInfo.fullPathHash == SaT.jumpBackStart) {
+		if (stateInfo.fullPathHash == ThirangSaT.jumpBackStart) {
 			anim.applyRootMotion = false;
 			if (!launched) {
 				Vector3 forceDir = new Vector3 (-lengthJump, heightJump);

@@ -7,15 +7,12 @@ public class OtherAnimations : MonoBehaviour {
 	bool godBlessed;
 	float timeGodBlessed;
 	GameObject godLight;
-	StatesAndTransitions SaT;
 
 	// Use this for initialization
 	void Start () {
 		anim = GetComponent<Animator> ();
 		timeGodBlessed = 0;
 		godLight = GameObject.Find ("Goddess' Blessing Light");
-
-		SaT = new StatesAndTransitions ();
 	}
 	
 	// Update is called once per frame
@@ -37,13 +34,15 @@ public class OtherAnimations : MonoBehaviour {
 			anim.SetTrigger ("Magic Arrow");
 		}
 
-		foreach (KeyValuePair <string, int> key in SaT.abilitiesStates) {
-			if (stateInfo.fullPathHash != key.Value) {
-				int index = key.Key.IndexOf ("Back");
-				if(index < 0)
-					anim.ResetTrigger (key.Key);
-				else
-					anim.ResetTrigger (key.Key.Remove(index, 4));
+		if (ThirangSaT.abilitiesStates.ContainsValue (stateInfo.fullPathHash)) {
+			foreach (KeyValuePair <string, int> key in ThirangSaT.abilitiesStates) {
+				if (stateInfo.fullPathHash != key.Value) {
+					int index = key.Key.IndexOf ("Back");
+					if(index < 0)
+						anim.ResetTrigger (key.Key);
+					else
+						anim.ResetTrigger (key.Key.Remove(index, 4));
+				}
 			}
 		}
 

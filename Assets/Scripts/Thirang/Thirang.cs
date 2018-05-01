@@ -5,12 +5,13 @@ using UnityEngine;
 public class Thirang : Character {
 	Animator anim;
 
+	int mana { get; set; }
 	int level;
 	int gold;
 	int exp;
 	const int TO_LEVEL_2 = 10000;
 	const int TO_LEVEL_3 = 80000;
-	public enum ThirangConstructor { def }; 
+	public enum ThirangConstructor { _default , _save }; 
 
 	Ability autoAttack;
 	Ability berserk;
@@ -44,38 +45,45 @@ public class Thirang : Character {
 	int berserkTime;
 	float timer;
 	bool berserkIsActive;
+	public bool newAttack { get; set; }
 
-	public Thirang () : base (0, 0, 0, 0, 0) {}
+	public void Init(ThirangConstructor init) {
+		switch (init) {
+			case ThirangConstructor._default:
+				health = 1200;
+				mana = 300;
+				attackDamage = 50;
+				armor = 20;
+				magicResist = 15;
+				level = 1;
+				autoAttack = new Ability (attackDamage, DamageType.physical);
+				berserk = new Ability (attackDamage * 110 / 100, DamageType.physical);
+				cycloneSpin = new Ability (attackDamage * 120 / 100, DamageType.magic);
+				magicArrow = new Ability (attackDamage * 200 / 100, DamageType.magic);
+				berserkTime = 3 * level;
+				break;
+			case ThirangConstructor._save:
+				break;
+			default:
+				throw new System.ArgumentException ("Error initializing Thirang");
+		}
+	}
 
-	public void Init(ThirangConstructor def) {
-		health = 1200;
-		mana = 300;
-		attackDamage = 50;
-		armor = 20;
-		magicResist = 15;
-		level = 1;
-		autoAttack = new Ability (attackDamage, DamageType.physical);
-		berserk = new Ability (attackDamage * 110 / 100, DamageType.physical);
-		cycloneSpin = new Ability (attackDamage * 120 / 100, DamageType.magic);
-		magicArrow = new Ability (attackDamage * 200 / 100, DamageType.magic);
-
-		berserkTime = 3 * level;
+	void Awake() {
+		//if !save
+			Init (ThirangConstructor._default);
+		//else
+			Init (ThirangConstructor._save);
 	}
 
 	// Use this for initialization
 	void Start () {
 		anim = GetComponent <Animator> ();
 		timer = 0;
-
-		//if(!save)
-			Init (ThirangConstructor.def);
-
-		print (typeof(Orc));
 	}
 	
 	// Update is called once per frame
 	void Update () {
-
 		if (berserkIsActive) {
 			timer += Time.deltaTime;
 			if (timer >= berserkTime) {
@@ -94,13 +102,18 @@ public class Thirang : Character {
 		//
 	}
 
-	public void OnCollisionShield (Collision other) {
+	public void OnCollisionShield (Collider other) {
 		
 	}
 
 	public void OnCollisionSword (Collider other) {
-		if (other.gameObject.CompareTag ("Enemy") && anim.GetBool ("IsFighting")) {
-			OnDamage (other.gameObject, currAbility);
+		if (other.gameObject.CompareTag ("Enemy") && anim.GetBool ("IsFighting"))
+		{
+			if (newAttack) {
+				other.gameObject.SendMessage ("Hit");
+				OnDamage (other.gameObject, currAbility);
+				newAttack = false;
+			}
 		}
 	}
 

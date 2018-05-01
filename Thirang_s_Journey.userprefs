@@ -1,14 +1,13 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj" RefactoringSettings.EnableRefactorings="True">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Enemy.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Orc\OrcController.cs">
     <Files>
-      <File FileName="Assets\Scripts\Character.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Enemy.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Orc\Orc.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Thirang\Thirang.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Thirang\ThirangController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Orc\OrcController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Thirang\OnCollisionSword.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Character.cs" Line="32" Column="72" />
+      <File FileName="Assets\Scripts\Enemy.cs" Line="35" Column="20" />
+      <File FileName="Assets\Scripts\Orc\Orc.cs" Line="32" Column="18" />
+      <File FileName="Assets\Scripts\Thirang\Thirang.cs" Line="86" Column="18" />
+      <File FileName="Assets\Scripts\Thirang\ThirangController.cs" Line="128" Column="35" />
+      <File FileName="Assets\Scripts\Orc\OrcController.cs" Line="27" Column="95" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

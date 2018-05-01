@@ -106,6 +106,7 @@
      <Compile Include="Assets\Downloaded Assets\Water\Scripts\WaterDetector.cs" />
      <Compile Include="Assets\Scripts\Character.cs" />
      <Compile Include="Assets\Scripts\Enemy.cs" />
+     <Compile Include="Assets\Scripts\EnemySaT.cs" />
      <Compile Include="Assets\Scripts\LevelsBehaviours\BreakCube.cs" />
      <Compile Include="Assets\Scripts\LevelsBehaviours\Camera\Anim_and_CamMove.cs" />
      <Compile Include="Assets\Scripts\LevelsBehaviours\Camera\LookAt.cs" />
@@ -120,6 +121,7 @@
      <Compile Include="Assets\Scripts\LevelsBehaviours\Trap\DelayAnimation.cs" />
      <Compile Include="Assets\Scripts\LevelsBehaviours\Trap\DelayTrap.cs" />
      <Compile Include="Assets\Scripts\LevelsBehaviours\VibratingGround.cs" />
+     <Compile Include="Assets\Scripts\Orc\OnCollisionArmAttack.cs" />
      <Compile Include="Assets\Scripts\Orc\Orc.cs" />
      <Compile Include="Assets\Scripts\Orc\OrcController.cs" />
      <Compile Include="Assets\Scripts\Thirang\GroundRaycast.cs" />
@@ -127,9 +129,9 @@
      <Compile Include="Assets\Scripts\Thirang\OnCollisionShield.cs" />
      <Compile Include="Assets\Scripts\Thirang\OnCollisionSword.cs" />
      <Compile Include="Assets\Scripts\Thirang\OtherAnimations.cs" />
-     <Compile Include="Assets\Scripts\Thirang\StatesAndTransitions.cs" />
      <Compile Include="Assets\Scripts\Thirang\Thirang.cs" />
      <Compile Include="Assets\Scripts\Thirang\ThirangController.cs" />
+     <Compile Include="Assets\Scripts\Thirang\ThirangSaT.cs" />
      <None Include="Assets\Downloaded Assets\PostProcessing\Resources\Shaders\DepthOfField.shader" />
      <None Include="Assets\Downloaded Assets\PostProcessing\Resources\Shaders\MotionBlur.cginc" />
      <None Include="Assets\Downloaded Assets\PostProcessing\Resources\Shaders\Fog.shader" />
