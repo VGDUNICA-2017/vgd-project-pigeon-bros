@@ -7,12 +7,15 @@ public class OtherAnimations : MonoBehaviour {
 	bool godBlessed;
 	float timeGodBlessed;
 	GameObject godLight;
+	private Thirang th;
 
 	// Use this for initialization
 	void Start () {
 		anim = GetComponent<Animator> ();
 		timeGodBlessed = 0;
 		godLight = GameObject.Find ("Goddess' Blessing Light");
+
+		th = GetComponent<Thirang> ();
 	}
 	
 	// Update is called once per frame
@@ -22,16 +25,19 @@ public class OtherAnimations : MonoBehaviour {
 		//Berserk
 		if (Input.GetButtonDown ("Berserk")) {
 			anim.SetTrigger ("Berserk");
+			th.currentAbility = "berserk";
 		}
 
 		//Cyclone Spin
 		if (Input.GetButtonDown ("Cyclone Spin")) {
 			anim.SetTrigger ("Cyclone Spin");
+			th.currentAbility = "cycloneSpin";
 		}
 
 		//Magic Arrow
 		if (Input.GetButtonDown ("Magic Arrow")) {
 			anim.SetTrigger ("Magic Arrow");
+			th.currentAbility = "magicArrow";
 		}
 
 		if (ThirangSaT.abilitiesStates.ContainsValue (stateInfo.fullPathHash)) {

@@ -5,17 +5,29 @@ using UnityEngine.SceneManagement;
 
 public class TeleportBehaviour : MonoBehaviour {
 	Bounds teleportBounds;
-	public Transform thirangT;
+
+	bool loaded;
 
 	void Start() {
 		teleportBounds = GetComponent <Collider> ().bounds;
 	}
 		
 	void OnTriggerStay (Collider other) {
-		if (other.gameObject.CompareTag ("Player")) {
-			if (thirangT.position.x > teleportBounds.min.x && thirangT.position.x < teleportBounds.max.x) {
-				SceneManager.LoadScene ("LivelloMare");
+		if (other.transform.root.gameObject.CompareTag ("Player")) {
+			Transform thirang = other.transform.root;
+			if (thirang.position.x > teleportBounds.min.x && thirang.position.x < teleportBounds.max.x && !loaded) {
+				StartCoroutine (LoadScene());
+				loaded = true;
 			}
+		}
+	}
+
+	IEnumerator LoadScene() {
+		AsyncOperation sceneLoad = SceneManager.LoadSceneAsync ("LivelloMare");
+
+		while (!sceneLoad.isDone) {
+			yield return null;
+
 		}
 	}
 }

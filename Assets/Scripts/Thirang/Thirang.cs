@@ -7,8 +7,8 @@ public class Thirang : Character {
 
 	int mana { get; set; }
 	int level;
-	int gold;
-	int exp;
+	public int gold { get; set; }
+	public int exp { get; set; }
 	const int TO_LEVEL_2 = 10000;
 	const int TO_LEVEL_3 = 80000;
 	public enum ThirangConstructor { _default , _save }; 
@@ -90,6 +90,8 @@ public class Thirang : Character {
 				stopBerserk ();
 			}
 		}
+
+		print (gold + " " + exp);
 	}
 
 	void Berserk() {
@@ -110,8 +112,8 @@ public class Thirang : Character {
 		if (other.gameObject.CompareTag ("Enemy") && anim.GetBool ("IsFighting"))
 		{
 			if (newAttack) {
-				other.gameObject.SendMessage ("Hit");
 				OnDamage (other.gameObject, currAbility);
+				other.gameObject.SendMessage ("Hit");
 				newAttack = false;
 			}
 		}

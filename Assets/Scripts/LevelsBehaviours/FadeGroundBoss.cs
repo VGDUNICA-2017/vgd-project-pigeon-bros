@@ -7,7 +7,7 @@ public class FadeGroundBoss : MonoBehaviour {
 	bool toUn_Fade = false;
 	bool startCount = false;
 	float timer = 0f;
-	Color baseColor,color, newColor;
+	Color baseColor, color, newColor;
 
 	void Start() {
 		baseColor = gameObject.GetComponent<Renderer> ().material.color;

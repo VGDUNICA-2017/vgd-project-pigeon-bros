@@ -19,7 +19,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4953480039616618}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: mixamorig:RightHand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -35,7 +35,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4371991519806598}
   - component: {fileID: 137080520603704026}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: cadnav00
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -54,7 +54,7 @@ GameObject:
   - component: {fileID: 114793056184971390}
   - component: {fileID: 114710915423611658}
   - component: {fileID: 136490678521317088}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Orc
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -71,7 +71,7 @@ GameObject:
   - component: {fileID: 4308551365940416}
   - component: {fileID: 136059142551449654}
   - component: {fileID: 114553626171863776}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: AttackCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -87,7 +87,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4505324692629032}
   - component: {fileID: 137100007540769856}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: cadnav02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -103,7 +103,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4705807500075096}
   - component: {fileID: 137864906913678578}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: cadnav01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -143,7 +143,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1227006474715940}
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: 31.8, y: 5, z: 0}
   m_LocalScale: {x: 90, y: 90, z: 90}
   m_Children:
   - {fileID: 4371991519806598}
@@ -245,7 +245,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3b975797d7f32940a23a74e59bf5d8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distOrcPlayer: 4.5
+  distOrcPlayer: 6
 --- !u!136 &136059142551449654
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -253,7 +253,7 @@ CapsuleCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1351738956302382}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.0035
   m_Height: 0.02
@@ -266,7 +266,7 @@ CapsuleCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1227006474715940}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.009
   m_Height: 0.06

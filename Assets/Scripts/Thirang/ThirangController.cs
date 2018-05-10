@@ -6,6 +6,7 @@ public class ThirangController : MonoBehaviour {
 	private Animator anim;
 	public GameObject LeftFoot, RightFoot;
 	GroundRaycast rayManagerLeft, rayManagerRight;
+	JumpOverride jumpOverride;
 	private Thirang th;
 
 	float timerSpecIdle;
@@ -22,6 +23,7 @@ public class ThirangController : MonoBehaviour {
 		anim = GetComponent <Animator> ();
 		rayManagerLeft = LeftFoot.GetComponent <GroundRaycast> ();
 		rayManagerRight = RightFoot.GetComponent <GroundRaycast> ();
+		jumpOverride = GetComponent <JumpOverride> ();
 
 		th = GetComponent <Thirang> ();
 	}
@@ -34,13 +36,10 @@ public class ThirangController : MonoBehaviour {
 
 		AnimatorTransitionInfo transInfo = anim.GetAnimatorTransitionInfo (0);
 
-		if (rayManagerLeft.onGround || rayManagerRight.onGround) {
-			anim.applyRootMotion = true;
-		} else {
-			if (stateInfo.fullPathHash != ThirangSaT.jumpStart && stateInfo.fullPathHash != ThirangSaT.jumpIdle && 
-				stateInfo.fullPathHash != ThirangSaT.jumpDown && stateInfo.fullPathHash != ThirangSaT.jumpBackStart && 
-				stateInfo.fullPathHash != ThirangSaT.jumpBackIdle && stateInfo.fullPathHash != ThirangSaT.jumpBackDown) 
-			{
+		if (!jumpOverride.jumpDownEnd) {
+			if ((rayManagerLeft.onGround || rayManagerRight.onGround)) {
+				anim.applyRootMotion = true;
+			} else {
 				anim.applyRootMotion = false;
 			}
 		}
@@ -178,13 +177,15 @@ public class ThirangController : MonoBehaviour {
 		}
 
 		//Jump
-		if (Input.GetButtonDown ("Jump") && !anim.GetBool ("IsShielding") && !anim.GetBool ("IsFighting") &&
-			stateInfo.fullPathHash != ThirangSaT.jumpStart && stateInfo.fullPathHash != ThirangSaT.jumpIdle && 
-			stateInfo.fullPathHash != ThirangSaT.jumpDown && stateInfo.fullPathHash != ThirangSaT.jumpBackStart && 
-			stateInfo.fullPathHash != ThirangSaT.jumpBackIdle && stateInfo.fullPathHash != ThirangSaT.jumpBackDown) 
-		{
-			anim.SetTrigger ("Jump");
-			anim.SetBool ("IsJumping", true);
+		if (rayManagerLeft.onGround || rayManagerRight.onGround) {
+			if (Input.GetButtonDown ("Jump") && !anim.GetBool ("IsShielding") && !anim.GetBool ("IsFighting") &&
+			    stateInfo.fullPathHash != ThirangSaT.jumpStart && stateInfo.fullPathHash != ThirangSaT.jumpIdle &&
+			    stateInfo.fullPathHash != ThirangSaT.jumpDown && stateInfo.fullPathHash != ThirangSaT.jumpBackStart &&
+			    stateInfo.fullPathHash != ThirangSaT.jumpBackIdle && stateInfo.fullPathHash != ThirangSaT.jumpBackDown) 
+			{
+				anim.SetTrigger ("Jump");
+				anim.SetBool ("IsJumping", true);
+			}
 		}
 
 		if (stateInfo.fullPathHash == ThirangSaT.jumpStart || stateInfo.fullPathHash == ThirangSaT.jumpIdle || 

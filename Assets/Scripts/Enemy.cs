@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Enemy : Character {
 
-	[SerializeField]
+	[SerializeField] 
 	private GameObject orc;
-	[SerializeField]
+	[SerializeField] 
 	private GameObject mage;
 
 	private static GameObject _orc;

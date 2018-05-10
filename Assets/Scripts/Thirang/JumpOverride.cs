@@ -8,6 +8,7 @@ public class JumpOverride : MonoBehaviour {
 	GroundRaycast[] rayManager;
 
 	bool launched;
+	public bool jumpDownEnd { get; set; }
 	float jumpTime;
 	float heightJump, lengthJump;
 	public LayerMask maskLayer;
@@ -51,8 +52,13 @@ public class JumpOverride : MonoBehaviour {
 			lengthJump = 155f;
 			anim.SetBool ("IsJumping", false);
 			foreach (GroundRaycast gR in rayManager) {
-				gR.Landing ();
+				gR.Landed ();
 			}
+			jumpDownEnd = true;
+
+		} else if (jumpDownEnd) {	//Called only once at the end of "JumpDown" animation
+			jumpDownEnd = false;
+			anim.applyRootMotion = true;
 		}
 
 		if (stateInfo.fullPathHash == ThirangSaT.jumpStart) {

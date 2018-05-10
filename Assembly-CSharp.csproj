@@ -113,6 +113,7 @@
      <Compile Include="Assets\Scripts\LevelsBehaviours\Camera\MoveCameraLvl01Boss.cs" />
      <Compile Include="Assets\Scripts\LevelsBehaviours\Camera\StopMoveCamera.cs" />
      <Compile Include="Assets\Scripts\LevelsBehaviours\FadeGroundBoss.cs" />
+     <Compile Include="Assets\Scripts\LevelsBehaviours\FightZone.cs" />
      <Compile Include="Assets\Scripts\LevelsBehaviours\MovingGround.cs" />
      <Compile Include="Assets\Scripts\LevelsBehaviours\Rain.cs" />
      <Compile Include="Assets\Scripts\LevelsBehaviours\Sign\PointingSign.cs" />

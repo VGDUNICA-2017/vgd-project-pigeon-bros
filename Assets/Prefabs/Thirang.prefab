@@ -131,9 +131,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4981202692014648}
   - component: {fileID: 136428283303476732}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: RightForeArmCollider
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -148,7 +148,7 @@ GameObject:
   - component: {fileID: 4072540666899754}
   - component: {fileID: 65185357304867684}
   - component: {fileID: 114671779429334708}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: LeftFootCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -164,9 +164,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4807628068982954}
   - component: {fileID: 65780804704144504}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: BodyCollider
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -180,9 +180,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4806161430963584}
   - component: {fileID: 136452155480064742}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: RightArmCollider
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -214,7 +214,7 @@ GameObject:
   - component: {fileID: 4886567653021542}
   - component: {fileID: 65538894089321644}
   - component: {fileID: 114553033809613574}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: RightFootCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -230,9 +230,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4943909575194574}
   - component: {fileID: 135598366270654786}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: HeadCollider
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -344,7 +344,7 @@ GameObject:
   - component: {fileID: 114925833809404274}
   - component: {fileID: 114696534930777290}
   - component: {fileID: 54252310922850840}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Thirang
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -390,9 +390,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4601591081459738}
   - component: {fileID: 136452883561034244}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: LeftUpLegCollider
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -482,9 +482,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4111954418343548}
   - component: {fileID: 136744312308091846}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: RightUpLegCollider
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -498,9 +498,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4622333638663434}
   - component: {fileID: 136282346260772260}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: LeftLegCollider
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -548,9 +548,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4199482694744460}
   - component: {fileID: 136324592483472934}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: RightLegCollider
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -902,7 +902,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1436957273724020}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8, y: 3.6, z: 0}
+  m_LocalPosition: {x: 23.8, y: 7.799999, z: 0}
   m_LocalScale: {x: 2.8, y: 2.8, z: 2.8}
   m_Children:
   - {fileID: 4123393701536052}

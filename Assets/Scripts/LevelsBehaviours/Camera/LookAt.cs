@@ -7,7 +7,16 @@ public class LookAt : MonoBehaviour {
 	float xOffset, yOffset;
 
 	void Start () {
-		xOffset = Mathf.Abs(target.position.x - transform.position.x);
+		Vector3 th = target.position;
+		Vector3 resetPos = transform.position;
+		resetPos.x = th.x;
+		resetPos.y = th.y;
+
+		resetPos.x += 2f;
+		resetPos.y += 2f;
+		transform.position = resetPos;
+
+		xOffset = Mathf.Abs (target.position.x - transform.position.x);
 		yOffset = Mathf.Abs (target.position.y - transform.position.y);
 	}
 

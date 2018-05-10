@@ -28,8 +28,7 @@ public class Character : MonoBehaviour {
 		} else {	//GetAllComponents of "hit" to find the "enemy" and control which is not null (i.e. assignable to Character class)
 			ch = hit.GetComponent <Enemy> () as Character;
 		}
-
-		print (hit.tag + " " + ch.health + " " + ch.armor + " " + a.damage + " " + ch);
+			
 		if (ch != null) {
 			if (ch.health > 0) {
 				if (a.damageType == DamageType.physical)

@@ -31,7 +31,6 @@ public class GroundRaycast : MonoBehaviour {
 				    (hit.collider.gameObject.layer == LayerMask.NameToLayer ("Ground") ||
 				    hit.collider.gameObject.layer == LayerMask.NameToLayer ("MovingGround"))) 
 				{
-					anim.applyRootMotion = true;
 					anim.SetTrigger ("JumpDown");
 					isLanding = true;
 				}
@@ -58,10 +57,10 @@ public class GroundRaycast : MonoBehaviour {
 			if (timeFalling >= 2f) {
 				//Animation Falling
 			}
-		}	
+		}
 	}
 
-	public void Landing () {
+	public void Landed () {
 		isLanding = false;
 	}
 }
