@@ -16,7 +16,11 @@ public class ThirangController : MonoBehaviour {
 
 	float speedAdjRot = 0.24f;
 	float speedBackAdjRot = 0.17f;
-	bool slash2Hit;
+
+	public bool isFighting { get; set; }
+	public bool changingState { get; set; }
+
+	public bool onSlash2;
 
 	// Use this for initialization
 	void Start () {
@@ -35,6 +39,8 @@ public class ThirangController : MonoBehaviour {
 		AnimatorStateInfo specIdleInfo = anim.GetCurrentAnimatorStateInfo (2);
 
 		AnimatorTransitionInfo transInfo = anim.GetAnimatorTransitionInfo (0);
+
+		changingState = anim.IsInTransition (0);
 
 		if (!jumpOverride.jumpDownEnd) {
 			if ((rayManagerLeft.onGround || rayManagerRight.onGround)) {
@@ -132,8 +138,13 @@ public class ThirangController : MonoBehaviour {
 			}
 			anim.SetBool ("IsFighting", true);
 		} else {
-			anim.SetBool ("IsFighting", false);
-			slash2Hit = false;
+			onSlash2 = false;
+
+			if (stateInfo.fullPathHash != ThirangSaT.abilitiesStates ["Cyclone Spin"] &&
+			    stateInfo.fullPathHash != ThirangSaT.abilitiesStates ["Cyclone SpinBack"]) 
+			{
+				anim.SetBool ("IsFighting", false);
+			}
 		}
 		
 		if (Input.GetButtonDown ("Slash") && !anim.GetBool ("IsShielding") &&
@@ -145,22 +156,17 @@ public class ThirangController : MonoBehaviour {
 			anim.SetBool ("IsFighting", true);
 			fightStarted = true;
 
-			th.newAttack = true;
-			th.currentAbility = "autoAttack";
+			th.SetCurrentAbility ("autoAttack");
 		}
 		if (Input.GetButtonDown ("Slash") &&
 			(stateInfo.fullPathHash == ThirangSaT.slash1StateHash || stateInfo.fullPathHash == ThirangSaT.slash1BackStateHash)) {
 			anim.SetTrigger ("Slash 2");
 
-			th.currentAbility = "autoAttack";
+			onSlash2 = true;
+			th.SetCurrentAbility ("autoAttack");
 		}
 
-		if (stateInfo.fullPathHash == ThirangSaT.slash2StateHash || stateInfo.fullPathHash == ThirangSaT.slash2BackStateHash) {
-			if (stateInfo.normalizedTime > 0.38f && !slash2Hit) {
-				th.newAttack = true;
-				slash2Hit = true;
-			}
-		}
+		isFighting = anim.GetBool ("IsFighting");
 
 		//Adjusting slash animation rotation
 		if (stateInfo.fullPathHash == ThirangSaT.slash1StateHash || stateInfo.fullPathHash == ThirangSaT.slash1BackStateHash) {
@@ -194,5 +200,6 @@ public class ThirangController : MonoBehaviour {
 		{
 			anim.ResetTrigger ("Jump");
 		}
+	
 	}
 }

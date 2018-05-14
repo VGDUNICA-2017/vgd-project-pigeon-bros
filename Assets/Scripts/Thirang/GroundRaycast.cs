@@ -35,7 +35,7 @@ public class GroundRaycast : MonoBehaviour {
 					isLanding = true;
 				}
 
-				if (hit.collider.gameObject.layer == LayerMask.NameToLayer ("MovingGround")) {
+				if (hit.collider.gameObject.layer == LayerMask.NameToLayer ("MovingGround") && hit.distance <= 1f) {
 					transform.root.SetParent (hit.collider.gameObject.transform);
 				} else {
 					transform.root.SetParent (null);

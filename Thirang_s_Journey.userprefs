@@ -1,14 +1,17 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj" RefactoringSettings.EnableRefactorings="True">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Orc\Orc.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Thirang\OtherAnimations.cs">
     <Files>
       <File FileName="Assets\Scripts\Character.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Enemy.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Orc\Orc.cs" Line="79" Column="2" />
-      <File FileName="Assets\Scripts\Thirang\Thirang.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Thirang\ThirangController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Orc\OrcController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\LevelsBehaviours\FadeGroundBoss.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Enemy.cs" Line="39" Column="32" />
+      <File FileName="Assets\Scripts\Orc\Orc.cs" Line="43" Column="20" />
+      <File FileName="Assets\Scripts\Thirang\Thirang.cs" Line="93" Column="29" />
+      <File FileName="Assets\Scripts\Thirang\ThirangController.cs" Line="23" Column="22" />
+      <File FileName="Assets\Scripts\Orc\OrcController.cs" Line="68" Column="4" />
+      <File FileName="Assets\Scripts\Thirang\OtherAnimations.cs" Line="40" Column="37" />
+      <File FileName="Assets\Scripts\Thirang\Abilities\MagicArrow.cs" Line="12" Column="3" />
+      <File FileName="Assets\Scripts\Thirang\OnCollisionShield.cs" Line="8" Column="5" />
+      <File FileName="Assets\Scripts\Thirang\OnCollisionSword.cs" Line="8" Column="5" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

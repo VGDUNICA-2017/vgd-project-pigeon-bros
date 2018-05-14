@@ -4,10 +4,16 @@ using UnityEngine;
 
 public class OtherAnimations : MonoBehaviour {
 	private Animator anim;
+	private Thirang th;
+
+	bool onCycloneSpin;
+
+	public GameObject magicArrow;
+	bool arrowSpawned;
+
 	bool godBlessed;
 	float timeGodBlessed;
-	GameObject godLight;
-	private Thirang th;
+	public GameObject godLight;
 
 	// Use this for initialization
 	void Start () {
@@ -25,19 +31,41 @@ public class OtherAnimations : MonoBehaviour {
 		//Berserk
 		if (Input.GetButtonDown ("Berserk")) {
 			anim.SetTrigger ("Berserk");
-			th.currentAbility = "berserk";
+			th.SetCurrentAbility ("berserk");
+			th.Berserk ();
 		}
 
 		//Cyclone Spin
 		if (Input.GetButtonDown ("Cyclone Spin")) {
 			anim.SetTrigger ("Cyclone Spin");
-			th.currentAbility = "cycloneSpin";
+			th.SetCurrentAbility ("cycloneSpin");
+		}
+
+		if (stateInfo.fullPathHash == ThirangSaT.abilitiesStates ["Cyclone Spin"] ||
+		    stateInfo.fullPathHash == ThirangSaT.abilitiesStates ["Cyclone SpinBack"]) 
+		{
+			anim.SetBool ("IsFighting", true);
+			onCycloneSpin = true;
+		} else if (onCycloneSpin) {
+			anim.SetBool ("IsFighting", false);
+			onCycloneSpin = false;
 		}
 
 		//Magic Arrow
 		if (Input.GetButtonDown ("Magic Arrow")) {
 			anim.SetTrigger ("Magic Arrow");
-			th.currentAbility = "magicArrow";
+			th.SetCurrentAbility ("magicArrow");
+		}
+
+		if (stateInfo.fullPathHash == ThirangSaT.abilitiesStates ["Magic Arrow"] ||
+		    stateInfo.fullPathHash == ThirangSaT.abilitiesStates ["Magic ArrowBack"]) {
+			if (stateInfo.normalizedTime >= 0.56f && !arrowSpawned) 
+			{
+				SpawnMagicArrow ();
+				arrowSpawned = true;
+			}	
+		} else {
+			arrowSpawned = false;
 		}
 
 		if (ThirangSaT.abilitiesStates.ContainsValue (stateInfo.fullPathHash)) {
@@ -66,5 +94,14 @@ public class OtherAnimations : MonoBehaviour {
 				timeGodBlessed = 0;
 			}
 		}
+	}
+
+	void SpawnMagicArrow() {
+		Vector3 arrowPos = th.transform.position;
+		arrowPos.y += 3f;
+		arrowPos.x += 3.8f;
+
+		//Instantiate new Arrow and set who is the caster of it (only thirang; it useful to control damage dealt by the arrow)
+		Instantiate (magicArrow, arrowPos, th.transform.rotation).GetComponent<MagicArrow> ().SetArrowCaster (this.gameObject);
 	}
 }

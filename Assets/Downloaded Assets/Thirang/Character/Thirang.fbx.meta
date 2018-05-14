@@ -96,7 +96,27 @@ ModelImporter:
     13700002: 2c360b90.obj
     13700004: 2c36c500.obj
     13700006: 2c379ae0.obj
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: 'Material #240'
+    second: {fileID: 2100000, guid: 199205373740cf7478d1c676c14f375c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: 'Material #241'
+    second: {fileID: 2100000, guid: 15b2382c75c79814b9e66b2e20867a8c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: 'Material #242'
+    second: {fileID: 2100000, guid: 44880d8477fdf75429a1678d0ac2e785, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: 'Material #246'
+    second: {fileID: 2100000, guid: e4a696a8663805b43b829c6ecb0510d9, type: 2}
   materials:
     importMaterials: 1
     materialName: 2

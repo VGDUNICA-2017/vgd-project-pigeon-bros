@@ -12,8 +12,8 @@ public class LookAt : MonoBehaviour {
 		resetPos.x = th.x;
 		resetPos.y = th.y;
 
-		resetPos.x += 2f;
-		resetPos.y += 2f;
+		resetPos.x += 5f;
+		resetPos.y += 3f;
 		transform.position = resetPos;
 
 		xOffset = Mathf.Abs (target.position.x - transform.position.x);

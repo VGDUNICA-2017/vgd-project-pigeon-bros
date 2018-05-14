@@ -78,15 +78,5 @@ public class OrcController : MonoBehaviour {
 			}
 		}
 
-		//Reaction Hit
-		if (stateInfo.fullPathHash == EnemySaT.reactionHitStateHash || stateInfo.fullPathHash == EnemySaT.reactionHitBackStateHash) {
-			orc.startHit = false;
-			Vector3 newPos = transform.position;
-			//Push a bit back the enemy to permit Thirang second slash to hit him
-			if (stateInfo.length - stateInfo.normalizedTime < 1) {
-				newPos.x += anim.GetBool ("IsFacingLeft") ? 0.01f : -0.01f;
-			}
-			transform.position = newPos;
-		}
 	}
 }

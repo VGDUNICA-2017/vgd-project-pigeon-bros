@@ -532,6 +532,8 @@ GameObject:
   - component: {fileID: 4241581750185888}
   - component: {fileID: 33614006320748922}
   - component: {fileID: 23872802857103718}
+  - component: {fileID: 64883972044432042}
+  - component: {fileID: 114895949260113288}
   m_Layer: 0
   m_Name: 2c3faf38.obj
   m_TagString: Untagged
@@ -902,8 +904,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1436957273724020}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 23.8, y: 7.799999, z: 0}
-  m_LocalScale: {x: 2.8, y: 2.8, z: 2.8}
+  m_LocalPosition: {x: 23.8, y: 9.03, z: 0}
+  m_LocalScale: {x: 2.4, y: 2.4, z: 2.4}
   m_Children:
   - {fileID: 4123393701536052}
   - {fileID: 4933497205821082}
@@ -1223,6 +1225,20 @@ MeshCollider:
   m_CookingOptions: 14
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: 92486338ee5837848a3da8775eb7ad90, type: 3}
+--- !u!64 &64883972044432042
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1982034659191152}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 1
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300002, guid: 92486338ee5837848a3da8775eb7ad90, type: 3}
 --- !u!65 &65185357304867684
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -1370,6 +1386,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3ac59b685536584db862af756cb080f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114895949260113288
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1982034659191152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3ac59b685536584db862af756cb080f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114925833809404274
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1381,6 +1408,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e467fc3cffaf4314ca013575d1ff105f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BerserkScaleMultiplier: 0.02
 --- !u!135 &135598366270654786
 SphereCollider:
   m_ObjectHideFlags: 1

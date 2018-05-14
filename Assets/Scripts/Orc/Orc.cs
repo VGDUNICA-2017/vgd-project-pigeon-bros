@@ -13,12 +13,13 @@ public class Orc : Enemy {
 
 	public bool fadingDeath { get; set; }
 	float deathTimer;
+	Renderer[] gosRends;
 
 	void Awake() {
 		this.health = 20;
 		this.attackDamage = 1;
 		this.armor = 10;
-		this.magicResist = 1;
+		this.magicResist = 10;
 		this.expAssigned = 100;
 		this.goldAssigned = 50;
 		this.enemyType = EnemyType.Orc;
@@ -28,6 +29,9 @@ public class Orc : Enemy {
 	// Use this for initialization
 	void Start () {
 		orcCtrl = GetComponent<OrcController> ();
+		gosRends = GetComponentsInChildren<Renderer> ();
+
+		thirang = FindObjectOfType<Thirang> ();
 	}
 	
 	// Update is called once per frame
@@ -35,11 +39,29 @@ public class Orc : Enemy {
 		if (!orcCtrl.isAttacking)
 			attacked = false;
 
-		FadeDeathOrc ();
+		if (fadingDeath)
+			FadeDeathOrc ();
+
+		if (thirang.ChangingState())
+			hit = false;	//Thirang's animation state changed, so a new attack can be ready to hit the enemy
 	}
 
 	void OnTriggerEnter (Collider other) {
-		
+		if (!hit &&
+			( (other.CompareTag ("Sword") && thirang.Fighting()) || other.CompareTag ("Arrow")) ) 
+		{
+			if (thirang.OnSlash2 ())
+				StartCoroutine(DamagedWithWait ());
+			else
+				Damaged (this.gameObject);
+			
+			hit = true;
+		}
+	}
+
+	IEnumerator DamagedWithWait() {
+		yield return new WaitForSeconds (0.5f);
+		Damaged (this.gameObject);
 	}
 
 	public void OnAttack (Collider other) {
@@ -56,24 +78,39 @@ public class Orc : Enemy {
 	}
 
 	public void OnDeath() {
-		Thirang th = FindObjectOfType<Thirang> ();
-		th.gold = goldAssigned;
-		th.exp = expAssigned;
+		thirang.gold = goldAssigned;
+		thirang.exp = expAssigned;
 	}
 
 	public void FadeDeathOrc() {
-		if (fadingDeath) {
-			deathTimer += Time.deltaTime;
-			if (deathTimer >= 2f) {
-				Renderer[] gosRends = GetComponentsInChildren<Renderer> ();
-				foreach (Renderer r in gosRends) {
-					print (r);
+		if (deathTimer <= 0f) {
+			foreach (Renderer r in gosRends) {
+				changeRenderingMode (r.material);
+			}
+		}
+		deathTimer += Time.deltaTime;
+		if (deathTimer >= 2f) {
+			foreach (Renderer r in gosRends) {
+				if (r.material.color.a >= 0f) {
 					Color newColor = r.material.color;
-					print (r.material.color.a);
-					newColor.a -= 20f;
+					newColor.a -= 0.01f;
 					r.material.SetColor ("_Color", newColor);
+				} else {
+					Destroy (this.gameObject);
 				}
 			}
 		}
+
+	}
+
+	//https://answers.unity.com/questions/1004666/change-material-rendering-mode-in-runtime.html
+	void changeRenderingMode (Material m) {
+		m.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
+		m.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
+		m.SetInt("_ZWrite", 0);
+		m.DisableKeyword("_ALPHATEST_ON");
+		m.EnableKeyword("_ALPHABLEND_ON");
+		m.DisableKeyword("_ALPHAPREMULTIPLY_ON");
+		m.renderQueue = 3000;
 	}
 }

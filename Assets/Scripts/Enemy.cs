@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class Enemy : Character {
 
-	[SerializeField] 
-	private GameObject orc;
-	[SerializeField] 
-	private GameObject mage;
+	protected Thirang thirang;
+
+	[SerializeField] private GameObject orc;
+	[SerializeField] private GameObject mage;
 
 	private static GameObject _orc;
 	public enum EnemyType { Orc };
 
 	protected EnemyType enemyType;
-	public bool startHit { get; set; }
+	protected bool hit;
 
 	void Start() {
 		_orc = orc;
@@ -32,7 +32,11 @@ public class Enemy : Character {
 	public void Hit() {
 		if (this.health > 0) {
 			this.gameObject.GetComponent<Animator> ().SetTrigger ("Hit");
-			startHit = true;
 		}
+	}
+
+	protected void Damaged(GameObject g) {
+		OnDamage (g, thirang.GetCurrentAbility());
+		Hit ();
 	}
 }

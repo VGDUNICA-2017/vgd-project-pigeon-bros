@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Thirang : Character {
-	Animator anim;
+	ThirangController thCtrl;
 
 	int mana { get; set; }
 	int level;
@@ -18,34 +18,13 @@ public class Thirang : Character {
 	Ability cycloneSpin;
 	Ability magicArrow;
 	private Ability currAbility;
-
-	public string currentAbility 
-	{
-		set {
-			switch (value) 
-			{
-				case "autoAttack": 
-					currAbility = autoAttack;
-					break;
-				case "berserk":
-					currAbility = berserk;
-					break;
-				case "cycloneSpin":
-					currAbility = cycloneSpin;
-					break;
-				case "magicArrow":
-					currAbility = magicArrow;
-					break;
-				default:
-					throw new System.ArgumentException ("Cannot find ability with this name");
-			}
-		}
-	}
-
 	int berserkTime;
+		
 	float timer;
-	bool berserkIsActive;
-	public bool newAttack { get; set; }
+	bool berserk_ON, toBerserk, toUnberserk;
+	float defaultScale = 2.4f;
+	float berserkScale = 3.2f;
+	public float BerserkScaleMultiplier;
 
 	public void Init(ThirangConstructor init) {
 		switch (init) {
@@ -58,9 +37,9 @@ public class Thirang : Character {
 				level = 1;
 				autoAttack = new Ability (attackDamage, DamageType.physical);
 				berserk = new Ability (attackDamage * 110 / 100, DamageType.physical);
-				cycloneSpin = new Ability (attackDamage * 120 / 100, DamageType.magic);
+				cycloneSpin = new Ability (attackDamage * 140 / 100, DamageType.physical);
 				magicArrow = new Ability (attackDamage * 200 / 100, DamageType.magic);
-				berserkTime = 3 * level;
+				berserkTime = 4 + (3 * level);
 				break;
 			case ThirangConstructor._save:
 				break;
@@ -78,45 +57,50 @@ public class Thirang : Character {
 
 	// Use this for initialization
 	void Start () {
-		anim = GetComponent <Animator> ();
+		thCtrl = GetComponent<ThirangController> ();
 		timer = 0;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (berserkIsActive) {
+		if (berserk_ON) {
 			timer += Time.deltaTime;
 			if (timer >= berserkTime) {
 				stopBerserk ();
 			}
 		}
-
-		print (gold + " " + exp);
 	}
 
-	void Berserk() {
-		berserkIsActive = true;
-		//AnimationBerserk();
+	void LateUpdate() {
+		if (toBerserk)
+			BerserkAnimation (1);
+
+		if (toUnberserk)
+			BerserkAnimation (-1);
+	}
+
+	public void Berserk() {
+		berserk_ON = true;
+		toBerserk = true;
+	}
+
+	void BerserkAnimation (int speed) {
+		if (transform.localScale.x >= defaultScale && transform.localScale.x <= berserkScale) {
+			transform.localScale += speed * new Vector3 (BerserkScaleMultiplier, BerserkScaleMultiplier, BerserkScaleMultiplier);
+		} else if (transform.localScale.x < defaultScale) {
+			transform.localScale = new Vector3 (defaultScale, defaultScale, defaultScale);
+			toUnberserk = false;
+			currAbility = autoAttack;
+		} else {
+			transform.localScale = new Vector3 (berserkScale, berserkScale, berserkScale);
+			toBerserk = false;
+		}
 	}
 
 	void stopBerserk() {
-		berserkIsActive = false;
-		//
-	}
-
-	public void OnCollisionShield (Collider other) {
-		
-	}
-
-	public void OnCollisionSword (Collider other) {
-		if (other.gameObject.CompareTag ("Enemy") && anim.GetBool ("IsFighting"))
-		{
-			if (newAttack) {
-				OnDamage (other.gameObject, currAbility);
-				other.gameObject.SendMessage ("Hit");
-				newAttack = false;
-			}
-		}
+		berserk_ON = false;
+		timer = 0;
+		toUnberserk = true;
 	}
 
 	public void UpdateValues () {
@@ -124,6 +108,43 @@ public class Thirang : Character {
 		berserk.damage = attackDamage * 110 / 100;
 		cycloneSpin.damage = attackDamage * 140 / 100;
 		magicArrow.damage = attackDamage * 200 / 100;
-		berserkTime = 3 * level;
+		berserkTime = 4 + (3 * level);
+	}
+
+	public Ability GetCurrentAbility() {
+		return currAbility;
+	}
+
+	public void SetCurrentAbility(string ability) {
+		switch (ability) 
+		{
+			case "autoAttack": 
+				if (currAbility.damage != berserk.damage)	//if Thirang is on Berserk State currAbility remains = berserk
+					currAbility = autoAttack;
+				break;
+			case "berserk":
+				currAbility = berserk;
+				break;
+			case "cycloneSpin":
+				currAbility = cycloneSpin;
+				break;
+			case "magicArrow":
+				currAbility = magicArrow;
+				break;
+			default:
+				throw new System.ArgumentException ("Cannot find ability with this name");
+		}
+	}
+
+	public bool Fighting () {
+		return thCtrl.isFighting;
+	}
+
+	public bool ChangingState() {
+		return thCtrl.changingState;
+	}
+
+	public bool OnSlash2() {
+		return thCtrl.onSlash2;
 	}
 }

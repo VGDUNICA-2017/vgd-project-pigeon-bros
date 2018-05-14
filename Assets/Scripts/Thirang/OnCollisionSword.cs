@@ -5,6 +5,6 @@ using UnityEngine;
 public class OnCollisionSword : MonoBehaviour {
 
 	void OnTriggerEnter (Collider other) {
-		GetComponentInParent<Thirang> ().OnCollisionSword (other);
+		//GetComponentInParent<Thirang> ().OnCollisionSword (other);
 	}
 }
