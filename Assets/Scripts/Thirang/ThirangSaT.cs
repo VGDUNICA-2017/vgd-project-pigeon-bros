@@ -35,6 +35,10 @@ public class ThirangSaT {
 	public static readonly int jumpBackIdle = Animator.StringToHash ("Base Layer.Back.Jump Back.Jump Idle");
 	public static readonly int jumpBackDown = Animator.StringToHash ("Base Layer.Back.Jump Back.Jump Down");
 
+	//Jump Transitions
+	public static readonly int runTransJumpStart = Animator.StringToHash ("Base Layer.Run -> Base Layer.Jump.Jump Start");
+	public static readonly int runBackTransJumpStartBack = Animator.StringToHash ("Base Layer.Back.Run -> Base Layer.Back.Jump Back.Jump Start");
+
 	//Special Idles States
 	public static readonly int specIdle = Animator.StringToHash ("Special Idles.Idle");
 	public static readonly int specIdleBack = Animator.StringToHash ("Special Idles.Idle Back");

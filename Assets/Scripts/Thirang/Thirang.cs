@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Thirang : Character {
 	ThirangController thCtrl;
+	AbilitiesController thAbilCtrl;
 
 	int mana { get; set; }
 	int level;
@@ -17,6 +18,7 @@ public class Thirang : Character {
 	Ability berserk;
 	Ability cycloneSpin;
 	Ability magicArrow;
+	Ability goddessBlessing;
 	private Ability currAbility;
 	int berserkTime;
 		
@@ -25,6 +27,8 @@ public class Thirang : Character {
 	float defaultScale = 2.4f;
 	float berserkScale = 3.2f;
 	public float BerserkScaleMultiplier;
+
+	public bool isDead { get; set; }
 
 	public void Init(ThirangConstructor init) {
 		switch (init) {
@@ -39,6 +43,7 @@ public class Thirang : Character {
 				berserk = new Ability (attackDamage * 110 / 100, DamageType.physical);
 				cycloneSpin = new Ability (attackDamage * 140 / 100, DamageType.physical);
 				magicArrow = new Ability (attackDamage * 200 / 100, DamageType.magic);
+				goddessBlessing = new Ability (0, DamageType.invulnerable);
 				berserkTime = 4 + (3 * level);
 				break;
 			case ThirangConstructor._save:
@@ -49,6 +54,8 @@ public class Thirang : Character {
 	}
 
 	void Awake() {
+		Enemy.LoadEnemies ();
+
 		//if !save
 			Init (ThirangConstructor._default);
 		//else
@@ -58,6 +65,7 @@ public class Thirang : Character {
 	// Use this for initialization
 	void Start () {
 		thCtrl = GetComponent<ThirangController> ();
+		thAbilCtrl = GetComponent<AbilitiesController> ();
 		timer = 0;
 	}
 	
@@ -131,9 +139,18 @@ public class Thirang : Character {
 			case "magicArrow":
 				currAbility = magicArrow;
 				break;
+			case "goddessBlessing":
+				currAbility = goddessBlessing;
+				break;
 			default:
 				throw new System.ArgumentException ("Cannot find ability with this name");
 		}
+	}
+
+	public void TrapDamage () {
+		Ability pinchos = new Ability (this.health, DamageType._true);
+		thCtrl.deathTrap = true;
+		OnDamage (this.gameObject, pinchos);
 	}
 
 	public bool Fighting () {
@@ -146,5 +163,13 @@ public class Thirang : Character {
 
 	public bool OnSlash2() {
 		return thCtrl.onSlash2;
+	}
+	
+	public bool OnCycloneSpin() {
+		return thAbilCtrl.onCycloneSpin;
+	}
+	
+	public bool FacingRight() {
+		return thCtrl.isFacingRight;
 	}
 }

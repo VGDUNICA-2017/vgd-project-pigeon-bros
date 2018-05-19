@@ -10,10 +10,12 @@ public class GroundRaycast : MonoBehaviour {
 
 	public bool onGround { get; set; }
 	float timeFalling;
+	Transform thTransform;
 
 	// Use this for initialization
 	void Start () {
 		anim = GetComponentInParent <Animator> ();
+		thTransform = transform.root;
 	}
 
 	void FixedUpdate () {
@@ -34,12 +36,13 @@ public class GroundRaycast : MonoBehaviour {
 					anim.SetTrigger ("JumpDown");
 					isLanding = true;
 				}
+					
+			}
 
-				if (hit.collider.gameObject.layer == LayerMask.NameToLayer ("MovingGround") && hit.distance <= 1f) {
-					transform.root.SetParent (hit.collider.gameObject.transform);
-				} else {
-					transform.root.SetParent (null);
-				}
+			if (hit.collider.gameObject.layer == LayerMask.NameToLayer ("MovingGround") && hit.distance <= 1f) {
+				thTransform.SetParent (hit.collider.gameObject.transform);
+			} else {
+				thTransform.SetParent (null);
 			}
 
 			if (hit.distance <= 1.2f && 

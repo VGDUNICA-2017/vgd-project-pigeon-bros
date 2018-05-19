@@ -19,24 +19,32 @@ public class JumpOverride : MonoBehaviour {
 		ThirangRb = GetComponent <Rigidbody> ();
 		rayManager = GetComponentsInChildren <GroundRaycast> ();
 
-		lengthJump = 155f;
-		heightJump = 6000f;
+		lengthJump = 40f;
+		heightJump = 120f;
 	}
 
 	void FixedUpdate () {
 		AnimatorStateInfo stateInfo = anim.GetCurrentAnimatorStateInfo (0);
-		AnimatorStateInfo nextState = anim.GetNextAnimatorStateInfo (0);
+		AnimatorStateInfo nextInfo = anim.GetNextAnimatorStateInfo (0);
 
-		if ((stateInfo.fullPathHash == ThirangSaT.runStateHash && nextState.fullPathHash == ThirangSaT.jumpStart) ||
-			(stateInfo.fullPathHash == ThirangSaT.runBackStateHash && nextState.fullPathHash == ThirangSaT.jumpBackStart)) 
+		if ((stateInfo.fullPathHash == ThirangSaT.runStateHash && nextInfo.fullPathHash == ThirangSaT.jumpStart) ||
+			(stateInfo.fullPathHash == ThirangSaT.runBackStateHash && nextInfo.fullPathHash == ThirangSaT.jumpBackStart)) 
 		{
-			lengthJump = 190f;
+			lengthJump = 32f;
+			anim.applyRootMotion = false;
+		}
+
+		if (((stateInfo.fullPathHash == ThirangSaT.idleStateHash || stateInfo.fullPathHash == ThirangSaT.walkStateHash) &&
+		    	nextInfo.fullPathHash == ThirangSaT.jumpStart) ||
+		    ((stateInfo.fullPathHash == ThirangSaT.idleBackStateHash || stateInfo.fullPathHash == ThirangSaT.walkBackStateHash) &&
+				nextInfo.fullPathHash == ThirangSaT.jumpBackStart)) 
+		{
+			lengthJump = 40f;
 			anim.applyRootMotion = false;
 		}
 
 		//Emergency exit from jumpIdle animation, caused by "collision" error with ground
 		if (stateInfo.fullPathHash == ThirangSaT.jumpIdle || stateInfo.fullPathHash == ThirangSaT.jumpBackIdle) {
-
 			jumpTime += Time.deltaTime;
 			if (jumpTime >= 20f) {
 				anim.applyRootMotion = true;
@@ -49,13 +57,12 @@ public class JumpOverride : MonoBehaviour {
 		if (stateInfo.fullPathHash == ThirangSaT.jumpDown || stateInfo.fullPathHash == ThirangSaT.jumpBackDown) {
 			launched = false;
 			anim.ResetTrigger ("JumpDown");
-			lengthJump = 155f;
+			lengthJump = 20f;
 			anim.SetBool ("IsJumping", false);
 			foreach (GroundRaycast gR in rayManager) {
 				gR.Landed ();
 			}
 			jumpDownEnd = true;
-
 		} else if (jumpDownEnd) {	//Called only once at the end of "JumpDown" animation
 			jumpDownEnd = false;
 			anim.applyRootMotion = true;
@@ -65,7 +72,7 @@ public class JumpOverride : MonoBehaviour {
 			anim.applyRootMotion = false;
 			if (!launched) {
 				Vector3 forceDir = new Vector3 (lengthJump, heightJump);
-				ThirangRb.AddForce (forceDir);
+				ThirangRb.AddForce (forceDir, ForceMode.Impulse);
 				launched = true;
 			}
 		}
@@ -74,9 +81,10 @@ public class JumpOverride : MonoBehaviour {
 			anim.applyRootMotion = false;
 			if (!launched) {
 				Vector3 forceDir = new Vector3 (-lengthJump, heightJump);
-				ThirangRb.AddForce (forceDir);
+				ThirangRb.AddForce (forceDir, ForceMode.Impulse);
 				launched = true;
 			}
 		}
+
 	}
 }	

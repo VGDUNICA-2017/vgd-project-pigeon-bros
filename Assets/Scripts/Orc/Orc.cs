@@ -9,7 +9,6 @@ public class Orc : Enemy {
 
 	int expAssigned;
 	int goldAssigned;
-	bool attacked = false;
 
 	public bool fadingDeath { get; set; }
 	float deathTimer;
@@ -37,7 +36,7 @@ public class Orc : Enemy {
 	// Update is called once per frame
 	void Update () {
 		if (!orcCtrl.isAttacking)
-			attacked = false;
+			justAttacked = false;
 
 		if (fadingDeath)
 			FadeDeathOrc ();
@@ -65,15 +64,13 @@ public class Orc : Enemy {
 	}
 
 	public void OnAttack (Collider other) {
-		if (other.transform.root.CompareTag ("Player")) {
-			if (orcCtrl.isAttacking) {
-				if (!attacked) {	
-					OnDamage (other.transform.root.gameObject, autoAttack);
-					attacked = true;
-				}
-			} else {
-				attacked = false;
+		if (orcCtrl.isAttacking) {
+			if (CanDealDamage (other)) {
+				OnDamage (other.transform.root.gameObject, autoAttack);
+				justAttacked = true;
 			}
+		} else {
+			justAttacked = false;
 		}
 	}
 
@@ -112,5 +109,13 @@ public class Orc : Enemy {
 		m.EnableKeyword("_ALPHABLEND_ON");
 		m.DisableKeyword("_ALPHAPREMULTIPLY_ON");
 		m.renderQueue = 3000;
+	}
+	
+	public bool ThirangOnCycloneSpin() {
+		return thirang.OnCycloneSpin();
+	}
+	
+	protected override bool ThirangFacingEnemy () {
+		return (thirang.FacingRight() && orcCtrl.isFacingLeft) || (!thirang.FacingRight() && !orcCtrl.isFacingLeft);
 	}
 }

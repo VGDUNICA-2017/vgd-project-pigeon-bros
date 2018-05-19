@@ -24,10 +24,7 @@ public class LookAt : MonoBehaviour {
 	void LateUpdate () {
 		Vector3 newPos = transform.position;
 		newPos.x = target.position.x + xOffset;
+		newPos.y = target.position.y + yOffset;
 		transform.position = newPos;
-
-		Vector3 newHeight = transform.position;
-		newHeight.y = target.position.y + yOffset;
-		transform.position = newHeight;
 	}
 }

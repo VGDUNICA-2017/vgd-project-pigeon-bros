@@ -9,7 +9,7 @@ public class Character : MonoBehaviour {
 	public int armor { get; set; }
 	public int magicResist { get; set; }
 
-	public enum DamageType { physical, magic };
+	public enum DamageType { physical, magic, invulnerable, _true };
 
 	public struct Ability {
 		public int damage;
@@ -36,6 +36,9 @@ public class Character : MonoBehaviour {
 
 				if (a.damageType == DamageType.magic)
 					ch.health -= a.damage * ch.magicResist / 100;
+
+				if (a.damageType == DamageType._true)
+					ch.health -= a.damage;
 			}
 		} else {
 			throw new System.NullReferenceException ();

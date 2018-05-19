@@ -10,7 +10,10 @@ public class OrcController : MonoBehaviour {
 	public float distOrcPlayer;
 
 	public bool isAttacking { get; set; }
+
 	bool deathStart;
+
+	public bool isFacingLeft { get; set; }
 
 	// Use this for initialization
 	void Start () {
@@ -21,10 +24,14 @@ public class OrcController : MonoBehaviour {
 
 		float dist = transform.position.x - thirang.transform.position.x;
 
-		if (dist >= 0)
+		if (dist >= 0) {
 			anim.SetBool ("IsFacingLeft", true);
-		if (dist < 0)
+			isFacingLeft = true;
+		}
+		if (dist < 0) {
 			anim.SetBool ("IsFacingLeft", false);
+			isFacingLeft = false;
+		}
 	}
 	
 	// Update is called once per frame
@@ -36,11 +43,17 @@ public class OrcController : MonoBehaviour {
 		//Adjust Orc position and rotation
 		transform.position = new Vector3 (transform.position.x, transform.position.y);
 		transform.eulerAngles = new Vector3 (transform.eulerAngles.x, -90, transform.eulerAngles.z);
-
-		if (dist >= 0)
-			anim.SetBool ("IsFacingLeft", true);
-		if (dist < 0)
-			anim.SetBool ("IsFacingLeft", false);
+		
+		if (!orc.ThirangOnCycloneSpin()) {			//Prevents a bug: during Thirang's Cyclone Spin the enemy turns around because Thirang moves back of him
+			if (dist >= 0) {
+				anim.SetBool ("IsFacingLeft", true);
+				isFacingLeft = true;
+			}
+			if (dist < 0) {
+				anim.SetBool ("IsFacingLeft", false);
+				isFacingLeft = false;
+			}
+		}
 
 		//Attack
 		//Attack-Run state switching control

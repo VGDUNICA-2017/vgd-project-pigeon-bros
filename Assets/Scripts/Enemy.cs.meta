@@ -6,7 +6,9 @@ MonoImporter:
   externalObjects: {}
   serializedVersion: 2
   defaultReferences:
-  - orc: {fileID: 1215646570930822, guid: 020f69b7d1187b7468775fd7f7a93ca7, type: 2}
+  - orc: {fileID: 1227006474715940, guid: 020f69b7d1187b7468775fd7f7a93ca7, type: 2}
+  - mage: {instanceID: 0}
+  - cube: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
