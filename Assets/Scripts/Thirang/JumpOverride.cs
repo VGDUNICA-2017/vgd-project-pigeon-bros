@@ -6,12 +6,12 @@ public class JumpOverride : MonoBehaviour {
 	Animator anim;
 	Rigidbody ThirangRb;
 	GroundRaycast[] rayManager;
+	MovingGround mG;
 
-	bool launched;
+	bool launched, higherJump;	//higherJump: when it's true Thirang will jump higher to avoid moving up ground bug
 	public bool jumpDownEnd { get; set; }
 	float jumpTime;
 	float heightJump, lengthJump;
-	public LayerMask maskLayer;
 
 	// Use this for initialization
 	void Start () {
@@ -19,8 +19,8 @@ public class JumpOverride : MonoBehaviour {
 		ThirangRb = GetComponent <Rigidbody> ();
 		rayManager = GetComponentsInChildren <GroundRaycast> ();
 
-		lengthJump = 40f;
-		heightJump = 120f;
+		lengthJump = 5f;
+		heightJump = 12f;
 	}
 
 	void FixedUpdate () {
@@ -30,7 +30,8 @@ public class JumpOverride : MonoBehaviour {
 		if ((stateInfo.fullPathHash == ThirangSaT.runStateHash && nextInfo.fullPathHash == ThirangSaT.jumpStart) ||
 			(stateInfo.fullPathHash == ThirangSaT.runBackStateHash && nextInfo.fullPathHash == ThirangSaT.jumpBackStart)) 
 		{
-			lengthJump = 32f;
+			lengthJump = 3f;
+			heightJump = 12f;
 			anim.applyRootMotion = false;
 		}
 
@@ -39,8 +40,28 @@ public class JumpOverride : MonoBehaviour {
 		    ((stateInfo.fullPathHash == ThirangSaT.idleBackStateHash || stateInfo.fullPathHash == ThirangSaT.walkBackStateHash) &&
 				nextInfo.fullPathHash == ThirangSaT.jumpBackStart)) 
 		{
-			lengthJump = 40f;
+			lengthJump = 5f;
+			heightJump = 12f;
 			anim.applyRootMotion = false;
+		}
+
+		//Fixed a bug that made Thirang's jump really short and low
+		if (transform.parent) {
+			if (transform.parent.gameObject.CompareTag ("BuggedGround")) {
+				if (!mG)	//if it is null it will be assigned, in this way the assignement will be done just one time
+					mG = transform.parent.parent.GetComponent<MovingGround> ();
+
+				if (mG.state == MovingGround.State.MovingUp) {
+					higherJump = true;
+				} else {
+					higherJump = false;
+				}
+			}
+		} else {
+			mG = null;
+			if (!anim.GetBool ("IsJumping")) {
+				higherJump = false;
+			}
 		}
 
 		//Emergency exit from jumpIdle animation, caused by "collision" error with ground
@@ -57,7 +78,8 @@ public class JumpOverride : MonoBehaviour {
 		if (stateInfo.fullPathHash == ThirangSaT.jumpDown || stateInfo.fullPathHash == ThirangSaT.jumpBackDown) {
 			launched = false;
 			anim.ResetTrigger ("JumpDown");
-			lengthJump = 20f;
+			lengthJump = 5f;
+			heightJump = 12f;
 			anim.SetBool ("IsJumping", false);
 			foreach (GroundRaycast gR in rayManager) {
 				gR.Landed ();
@@ -71,18 +93,33 @@ public class JumpOverride : MonoBehaviour {
 		if (stateInfo.fullPathHash == ThirangSaT.jumpStart) {
 			anim.applyRootMotion = false;
 			if (!launched) {
+
+				if (higherJump) {
+					lengthJump = 9f;
+					heightJump = 14f;
+				}
+
 				Vector3 forceDir = new Vector3 (lengthJump, heightJump);
-				ThirangRb.AddForce (forceDir, ForceMode.Impulse);
+				ThirangRb.AddForce (forceDir, ForceMode.VelocityChange);
 				launched = true;
+				higherJump = false;
+				print (lengthJump + " " + heightJump);
 			}
 		}
 
 		if (stateInfo.fullPathHash == ThirangSaT.jumpBackStart) {
+
+			if (higherJump) {
+				lengthJump = 12f;
+				heightJump = 20f;
+			}
+
 			anim.applyRootMotion = false;
 			if (!launched) {
 				Vector3 forceDir = new Vector3 (-lengthJump, heightJump);
-				ThirangRb.AddForce (forceDir, ForceMode.Impulse);
+				ThirangRb.AddForce (forceDir, ForceMode.VelocityChange);
 				launched = true;
+				higherJump = false;
 			}
 		}
 

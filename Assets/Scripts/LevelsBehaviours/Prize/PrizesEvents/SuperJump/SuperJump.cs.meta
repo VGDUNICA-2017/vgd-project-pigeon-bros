@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: a44aa7a3137e4064a910c5945bd7c9ad
+timeCreated: 1527522944
+licenseType: Free
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - movingGround: {instanceID: 0}
+  - animCtrl: {fileID: 9100000, guid: d71dffea7fd20964fad071c028724bb9, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

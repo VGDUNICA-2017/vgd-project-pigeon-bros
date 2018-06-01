@@ -16,7 +16,6 @@ public class ThirangController : MonoBehaviour {
 	float speedAdjRot = 0.24f;
 	float speedBackAdjRot = 0.17f;
 
-	bool dead;
 	public bool deathTrap { get; set; }
 
 	[HideInInspector] public bool isFighting;
@@ -35,12 +34,11 @@ public class ThirangController : MonoBehaviour {
 		th = GetComponent <Thirang> ();
 
 		isFacingRight = true;
-		dead = false;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (!th.isDead) {
+		if (anim && !th.isDead) {
 
 			AnimatorStateInfo stateInfo = anim.GetCurrentAnimatorStateInfo (0);
 			AnimatorStateInfo blockInfo = anim.GetCurrentAnimatorStateInfo (1);
@@ -54,9 +52,11 @@ public class ThirangController : MonoBehaviour {
 			if (!anim.GetBool ("IsFighting"))
 				transform.position = new Vector3 (transform.position.x, transform.position.y, 0);
 
+			//Special Idles
 			if ((stateInfo.fullPathHash == ThirangSaT.idleStateHash || stateInfo.fullPathHash == ThirangSaT.idleBackStateHash)
 			    && (specIdleInfo.fullPathHash == ThirangSaT.specIdle || specIdleInfo.fullPathHash == ThirangSaT.specIdleBack)
-			    && !anim.GetBool ("IsShielding")) {
+			    && !anim.GetBool ("IsShielding") && !th.BeenAttacked ()) 
+			{
 				timerSpecIdle += Time.deltaTime;
 				anim.SetFloat ("TimerSpecIdle", timerSpecIdle);
 			} else {
@@ -136,88 +136,106 @@ public class ThirangController : MonoBehaviour {
 			}
 
 			//Fight Input Control
-			if (fightStarted ||
-			    stateInfo.fullPathHash == ThirangSaT.slash1StateHash || stateInfo.fullPathHash == ThirangSaT.slash2StateHash ||
-			    stateInfo.fullPathHash == ThirangSaT.slash1BackStateHash || stateInfo.fullPathHash == ThirangSaT.slash2BackStateHash) {
-				if (stateInfo.fullPathHash == ThirangSaT.slash1StateHash || stateInfo.fullPathHash == ThirangSaT.slash1BackStateHash) {
-					fightStarted = false;
-					anim.ResetTrigger ("Slash 1");
-				}
-				if (stateInfo.fullPathHash == ThirangSaT.slash2StateHash || stateInfo.fullPathHash == ThirangSaT.slash2BackStateHash) {
-					fightStarted = false;
-					anim.ResetTrigger ("Slash 2");
-				}
-				anim.SetBool ("IsFighting", true);
-			} else {
-				onSlash2 = false;
 
-				if (stateInfo.fullPathHash != ThirangSaT.abilitiesStates ["Cyclone Spin"] &&
-				    stateInfo.fullPathHash != ThirangSaT.abilitiesStates ["Cyclone SpinBack"]) {
-					anim.SetBool ("IsFighting", false);
+			/*Being son of ground make fight animation movements buggy*/
+			if (!rayManagerLeft.onMovingGround && !rayManagerRight.onMovingGround) {
+				if (fightStarted ||
+				   stateInfo.fullPathHash == ThirangSaT.slash1StateHash || stateInfo.fullPathHash == ThirangSaT.slash2StateHash ||
+				   stateInfo.fullPathHash == ThirangSaT.slash1BackStateHash || stateInfo.fullPathHash == ThirangSaT.slash2BackStateHash) {
+					if (stateInfo.fullPathHash == ThirangSaT.slash1StateHash || stateInfo.fullPathHash == ThirangSaT.slash1BackStateHash) {
+						fightStarted = false;
+						anim.ResetTrigger ("Slash 1");
+					}
+					if (stateInfo.fullPathHash == ThirangSaT.slash2StateHash || stateInfo.fullPathHash == ThirangSaT.slash2BackStateHash) {
+						fightStarted = false;
+						anim.ResetTrigger ("Slash 2");
+					}
+					anim.SetBool ("IsFighting", true);
+				} else {
+					onSlash2 = false;
+
+					if (stateInfo.fullPathHash != ThirangSaT.abilitiesStates ["Cyclone Spin"] &&
+					   stateInfo.fullPathHash != ThirangSaT.abilitiesStates ["Cyclone SpinBack"]) {
+						anim.SetBool ("IsFighting", false);
+					}
 				}
-			}
 			
-			if (Input.GetButtonDown ("Slash") && !anim.GetBool ("IsShielding") &&
-			    (stateInfo.fullPathHash == ThirangSaT.idleStateHash || stateInfo.fullPathHash == ThirangSaT.idleBackStateHash ||
-			    stateInfo.fullPathHash == ThirangSaT.walkStateHash || stateInfo.fullPathHash == ThirangSaT.runStateHash ||
-			    stateInfo.fullPathHash == ThirangSaT.walkBackStateHash || stateInfo.fullPathHash == ThirangSaT.runBackStateHash)) {
-				anim.SetTrigger ("Slash 1");
-				anim.SetBool ("IsFighting", true);
-				fightStarted = true;
+				if (Input.GetButtonDown ("Slash") && !anim.GetBool ("IsShielding") &&
+				   (stateInfo.fullPathHash == ThirangSaT.idleStateHash || stateInfo.fullPathHash == ThirangSaT.idleBackStateHash ||
+				   stateInfo.fullPathHash == ThirangSaT.walkStateHash || stateInfo.fullPathHash == ThirangSaT.runStateHash ||
+				   stateInfo.fullPathHash == ThirangSaT.walkBackStateHash || stateInfo.fullPathHash == ThirangSaT.runBackStateHash)) {
+					anim.SetTrigger ("Slash 1");
+					anim.SetBool ("IsFighting", true);
+					fightStarted = true;
 
-				th.SetCurrentAbility ("autoAttack");
-			}
-			if (Input.GetButtonDown ("Slash") &&
-			    (stateInfo.fullPathHash == ThirangSaT.slash1StateHash || stateInfo.fullPathHash == ThirangSaT.slash1BackStateHash)) {
-				anim.SetTrigger ("Slash 2");
+					th.SetCurrentAbility ("autoAttack");
+				}
+				if (Input.GetButtonDown ("Slash") &&
+				   (stateInfo.fullPathHash == ThirangSaT.slash1StateHash || stateInfo.fullPathHash == ThirangSaT.slash1BackStateHash)) {
+					anim.SetTrigger ("Slash 2");
 
-				onSlash2 = true;
-				th.SetCurrentAbility ("autoAttack");
-			}
+					onSlash2 = true;
+					th.SetCurrentAbility ("autoAttack");
+				}
 
-			isFighting = anim.GetBool ("IsFighting");
+				isFighting = anim.GetBool ("IsFighting");
 
-			//Adjusting slash animation rotation
-			if (stateInfo.fullPathHash == ThirangSaT.slash1StateHash || stateInfo.fullPathHash == ThirangSaT.slash1BackStateHash) {
-				Vector3 adjustRot = transform.eulerAngles;
-				adjustRot.y += speedAdjRot;
-				transform.eulerAngles = adjustRot;
-				transform.position = new Vector3 (transform.position.x, transform.position.y); //Lock z position
-			}
+				//Adjusting slash animation rotation
+				if (stateInfo.fullPathHash == ThirangSaT.slash1StateHash || stateInfo.fullPathHash == ThirangSaT.slash1BackStateHash) {
+					Vector3 adjustRot = transform.eulerAngles;
+					adjustRot.y += speedAdjRot;
+					transform.localEulerAngles = adjustRot;
+					transform.position = new Vector3 (transform.position.x, transform.position.y); //Lock z position
+				}
 
-			if (stateInfo.fullPathHash == ThirangSaT.slash2StateHash || stateInfo.fullPathHash == ThirangSaT.slash2BackStateHash) {
-				Vector3 adjustRot = transform.eulerAngles;
-				adjustRot.y -= speedBackAdjRot;
-				transform.eulerAngles = adjustRot;
-			}
-
-			//Jump
-			if (rayManagerLeft.onGround || rayManagerRight.onGround) {
-				if (Input.GetButtonDown ("Jump") && !anim.GetBool ("IsShielding") && !anim.GetBool ("IsFighting") &&
-				    stateInfo.fullPathHash != ThirangSaT.jumpStart && stateInfo.fullPathHash != ThirangSaT.jumpIdle &&
-				    stateInfo.fullPathHash != ThirangSaT.jumpDown && stateInfo.fullPathHash != ThirangSaT.jumpBackStart &&
-				    stateInfo.fullPathHash != ThirangSaT.jumpBackIdle && stateInfo.fullPathHash != ThirangSaT.jumpBackDown) {
-					anim.SetTrigger ("Jump");
-					anim.SetBool ("IsJumping", true);
+				if (stateInfo.fullPathHash == ThirangSaT.slash2StateHash || stateInfo.fullPathHash == ThirangSaT.slash2BackStateHash) {
+					Vector3 adjustRot = transform.eulerAngles;
+					adjustRot.y -= speedBackAdjRot;
+					transform.eulerAngles = adjustRot;
 				}
 			}
+			//Jump
+			if (th.berserkEnd) {
+				if (rayManagerLeft.onGround || rayManagerRight.onGround) {
+					if (Input.GetButtonDown ("Jump") && !anim.GetBool ("IsShielding") && !anim.GetBool ("IsFighting") &&
+					    stateInfo.fullPathHash != ThirangSaT.jumpStart && stateInfo.fullPathHash != ThirangSaT.jumpIdle &&
+					    stateInfo.fullPathHash != ThirangSaT.jumpDown && stateInfo.fullPathHash != ThirangSaT.jumpBackStart &&
+					    stateInfo.fullPathHash != ThirangSaT.jumpBackIdle && stateInfo.fullPathHash != ThirangSaT.jumpBackDown) 
+					{
+						anim.SetTrigger ("Jump");
+						anim.SetBool ("IsJumping", true);
+					}
+				}
 
-			if (stateInfo.fullPathHash == ThirangSaT.jumpStart || stateInfo.fullPathHash == ThirangSaT.jumpIdle ||
-			    stateInfo.fullPathHash == ThirangSaT.jumpDown || stateInfo.fullPathHash == ThirangSaT.jumpBackStart ||
-			    stateInfo.fullPathHash == ThirangSaT.jumpBackIdle || stateInfo.fullPathHash == ThirangSaT.jumpBackDown) {
-				anim.ResetTrigger ("Jump");
+				if (stateInfo.fullPathHash == ThirangSaT.jumpStart || stateInfo.fullPathHash == ThirangSaT.jumpIdle ||
+				    stateInfo.fullPathHash == ThirangSaT.jumpDown || stateInfo.fullPathHash == ThirangSaT.jumpBackStart ||
+				    stateInfo.fullPathHash == ThirangSaT.jumpBackIdle || stateInfo.fullPathHash == ThirangSaT.jumpBackDown) {
+					anim.ResetTrigger ("Jump");
+				}
+
+			} else {
+				print ("Not possible to jump while Berserk is active");
 			}
-
 
 			//Death
-			if (th.health <= 0 && !dead) {
+			if (th.health <= 0) {
 				th.isDead = true;
+				string deathType;
+
 				if (deathTrap)
-					anim.SetTrigger ("Death Trap");
+					deathType = "Death Trap";
 				else
-					anim.SetTrigger ("Death");
-				dead = true;
+					deathType = "Death";
+
+				anim.SetTrigger (deathType);
+
+				this.enabled = false;
 			}
 		}
+	}
+
+	void FireBallDamageController() {
+		anim.SetTrigger ("Hit");
+		th.FireBallDamage ();
 	}
 }

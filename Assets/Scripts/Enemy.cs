@@ -13,6 +13,7 @@ public abstract class Enemy : Character {
 	protected EnemyType enemyType;
 	protected bool hit;
 	protected bool justAttacked;
+	protected bool isAttacking;
 
 	public static void LoadEnemies() {
 		_orc = Resources.Load<GameObject> ("Orc");
@@ -38,10 +39,31 @@ public abstract class Enemy : Character {
 		}
 	}
 
+	protected void OnDeath(int gold, int exp) {
+		thirang.gold = gold;
+		thirang.exp = exp;
+	}
+
 	public void Hit() {
 		if (this.health > 0) {
 			this.gameObject.GetComponent<Animator> ().SetTrigger ("Hit");
 		}
+	}
+
+	protected void TriggerEnter (Collider other) {
+		if (!hit && (other.CompareTag ("Sword") && thirang.Fighting ()) || other.CompareTag ("Arrow")) {
+			if (thirang.OnSlash2 ())
+				StartCoroutine (DamagedWithWait ());
+			else
+				Damaged (this.gameObject);
+
+			hit = true;
+		}
+	}
+
+	IEnumerator DamagedWithWait() {
+		yield return new WaitForSeconds (0.5f);
+		Damaged (this.gameObject);
 	}
 
 	protected void Damaged(GameObject g) {
@@ -62,6 +84,26 @@ public abstract class Enemy : Character {
 
 		return false;
 	}
+
+	protected void DealDamage (Collider other, Ability ability) {
+		if (isAttacking) {
+			if (CanDealDamage (other)) {
+				OnDamage (other.transform.root.gameObject, ability);
+				justAttacked = true;
+			}
+		} else {
+			justAttacked = false;
+		}
+	}
+
+	protected void ReadyNewAttack() {
+		if (thirang.ChangingState())
+			hit = false;	//Thirang's animation state changed, so a new attack can be ready to hit the enemy
+	}
 	
 	protected abstract bool ThirangFacingEnemy ();
+
+	public bool ThirangOnCycloneSpin() {
+		return thirang.OnCycloneSpin();
+	}
 }

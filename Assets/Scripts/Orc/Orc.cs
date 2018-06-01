@@ -7,9 +7,6 @@ public class Orc : Enemy {
 
 	Ability autoAttack;
 
-	int expAssigned;
-	int goldAssigned;
-
 	public bool fadingDeath { get; set; }
 	float deathTimer;
 	Renderer[] gosRends;
@@ -19,8 +16,6 @@ public class Orc : Enemy {
 		this.attackDamage = 1;
 		this.armor = 10;
 		this.magicResist = 10;
-		this.expAssigned = 100;
-		this.goldAssigned = 50;
 		this.enemyType = EnemyType.Orc;
 		this.autoAttack = new Ability (25, DamageType.physical);
 	}
@@ -35,48 +30,28 @@ public class Orc : Enemy {
 	
 	// Update is called once per frame
 	void Update () {
-		if (!orcCtrl.isAttacking)
-			justAttacked = false;
+		this.isAttacking = orcCtrl.isAttacking;
+
+		if (!this.isAttacking)
+			this.justAttacked = false;
 
 		if (fadingDeath)
 			FadeDeathOrc ();
 
-		if (thirang.ChangingState())
-			hit = false;	//Thirang's animation state changed, so a new attack can be ready to hit the enemy
+		ReadyNewAttack ();
 	}
 
 	void OnTriggerEnter (Collider other) {
-		if (!hit &&
-			( (other.CompareTag ("Sword") && thirang.Fighting()) || other.CompareTag ("Arrow")) ) 
-		{
-			if (thirang.OnSlash2 ())
-				StartCoroutine(DamagedWithWait ());
-			else
-				Damaged (this.gameObject);
-			
-			hit = true;
-		}
+		TriggerEnter (other);
 	}
-
-	IEnumerator DamagedWithWait() {
-		yield return new WaitForSeconds (0.5f);
-		Damaged (this.gameObject);
-	}
+	
 
 	public void OnAttack (Collider other) {
-		if (orcCtrl.isAttacking) {
-			if (CanDealDamage (other)) {
-				OnDamage (other.transform.root.gameObject, autoAttack);
-				justAttacked = true;
-			}
-		} else {
-			justAttacked = false;
-		}
+		DealDamage (other, autoAttack);
 	}
 
 	public void OnDeath() {
-		thirang.gold = goldAssigned;
-		thirang.exp = expAssigned;
+		base.OnDeath (gold: 50, exp: 100);
 	}
 
 	public void FadeDeathOrc() {
@@ -109,10 +84,6 @@ public class Orc : Enemy {
 		m.EnableKeyword("_ALPHABLEND_ON");
 		m.DisableKeyword("_ALPHAPREMULTIPLY_ON");
 		m.renderQueue = 3000;
-	}
-	
-	public bool ThirangOnCycloneSpin() {
-		return thirang.OnCycloneSpin();
 	}
 	
 	protected override bool ThirangFacingEnemy () {

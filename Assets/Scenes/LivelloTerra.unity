@@ -934,7 +934,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d9d1fbfcf69364ffd8f9c6ade9ce90fe, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 4.5776
+      value: 1.19
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d9d1fbfcf69364ffd8f9c6ade9ce90fe, type: 2}
       propertyPath: m_LocalRotation.x
@@ -4531,6 +4531,11 @@ Prefab:
     - target: {fileID: 4347439508542126, guid: 10a8e891011c7834ca91b96360604761, type: 2}
       propertyPath: m_RootOrder
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 114499385879361846, guid: 10a8e891011c7834ca91b96360604761,
+        type: 2}
+      propertyPath: SceneToLoad
+      value: LivelloTerraBoss
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 10a8e891011c7834ca91b96360604761, type: 2}
@@ -12697,7 +12702,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -1337612817
+  randomSeed: -978048290
   InitialModule:
     serializedVersion: 3
     enabled: 1

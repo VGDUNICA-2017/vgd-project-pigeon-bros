@@ -39,6 +39,12 @@ public class ThirangSaT {
 	public static readonly int runTransJumpStart = Animator.StringToHash ("Base Layer.Run -> Base Layer.Jump.Jump Start");
 	public static readonly int runBackTransJumpStartBack = Animator.StringToHash ("Base Layer.Back.Run -> Base Layer.Back.Jump Back.Jump Start");
 
+	//Death States
+	public static readonly int deathStateHash = Animator.StringToHash ("Base Layer.Death");
+	public static readonly int deathBackStateHash = Animator.StringToHash ("Base Layer.Death Back");
+	public static readonly int deathTrapStateHash = Animator.StringToHash ("Base Layer.Death Trap");
+	public static readonly int deathTrapBackStateHash = Animator.StringToHash ("Base Layer.Death Trap Back");
+
 	//Special Idles States
 	public static readonly int specIdle = Animator.StringToHash ("Special Idles.Idle");
 	public static readonly int specIdleBack = Animator.StringToHash ("Special Idles.Idle Back");

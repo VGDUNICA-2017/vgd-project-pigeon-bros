@@ -10,6 +10,7 @@ TagManager:
   - Boss
   - Sword
   - Arrow
+  - BuggedGround
   layers:
   - Default
   - TransparentFX

@@ -5,6 +5,7 @@ using UnityEngine;
 public class AbilitiesController : MonoBehaviour {
 	private Animator anim;
 	private Thirang th;
+	private GroundRaycast rayManagerLeft, rayManagerRight;
 
 	public bool onCycloneSpin { get; set; }
 
@@ -22,6 +23,10 @@ public class AbilitiesController : MonoBehaviour {
 		godLight = GetComponentInChildren<Light> ();
 
 		th = GetComponent<Thirang> ();
+
+		ThirangController thCtrl = GetComponent<ThirangController> ();
+		rayManagerLeft = thCtrl.LeftFoot.GetComponent<GroundRaycast> ();
+		rayManagerRight = thCtrl.RightFoot.GetComponent<GroundRaycast> ();
 	}
 	
 	// Update is called once per frame
@@ -31,12 +36,15 @@ public class AbilitiesController : MonoBehaviour {
 			AnimatorStateInfo stateInfo = anim.GetCurrentAnimatorStateInfo (0);
 
 			//Berserk
-			if (Input.GetButtonDown ("Berserk")) {
-				if (stateInfo.fullPathHash != ThirangSaT.abilitiesStates ["Berserk"] &&
-				    stateInfo.fullPathHash != ThirangSaT.abilitiesStates ["BerserkBack"]) {
-					anim.SetTrigger ("Berserk");
-					th.SetCurrentAbility ("berserk");
-					th.Berserk ();
+			/*Being child of MovingGround makes berserk animation buggy because of scale animation*/
+			if (!rayManagerLeft.onMovingGround && !rayManagerRight.onMovingGround) {
+				if (Input.GetButtonDown ("Berserk")) {
+					if (stateInfo.fullPathHash != ThirangSaT.abilitiesStates ["Berserk"] &&
+					   stateInfo.fullPathHash != ThirangSaT.abilitiesStates ["BerserkBack"]) {
+						anim.SetTrigger ("Berserk");
+						th.SetCurrentAbility ("berserk");
+						th.Berserk ();
+					}
 				}
 			}
 
@@ -114,7 +122,7 @@ public class AbilitiesController : MonoBehaviour {
 		arrowPos.y += 3f;
 		arrowPos.x += 3.8f * direction;
 
-		//Instantiate new Arrow and set who is the caster of it (only thirang; it useful to control damage dealt by the arrow)
+		//Instantiates new Arrow and sets the direction where it must travel
 		Instantiate (magicArrow, arrowPos, Quaternion.Euler(th.transform.eulerAngles * direction)).GetComponent<MagicArrow>().Direction(direction);
 	}
 }

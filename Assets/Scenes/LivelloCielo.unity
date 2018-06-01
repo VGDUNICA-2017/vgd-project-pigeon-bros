@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 1254626457}
-  m_IndirectSpecularColor: {r: 0.5357524, g: 0.5955404, b: 0.8397229, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -847,7 +847,7 @@ Transform:
   m_LocalScale: {x: 0.50000024, y: 0.50000024, z: 1}
   m_Children: []
   m_Father: {fileID: 1551295424}
-  m_RootOrder: 30
+  m_RootOrder: 29
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!1001 &124043941
 Prefab:
@@ -2208,7 +2208,7 @@ Transform:
   m_LocalScale: {x: 0.50000024, y: 0.50000024, z: 1}
   m_Children: []
   m_Father: {fileID: 1551295424}
-  m_RootOrder: 31
+  m_RootOrder: 30
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!1001 &289983473
 Prefab:
@@ -3389,6 +3389,11 @@ Prefab:
     - target: {fileID: 4347439508542126, guid: 10a8e891011c7834ca91b96360604761, type: 2}
       propertyPath: m_RootOrder
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114499385879361846, guid: 10a8e891011c7834ca91b96360604761,
+        type: 2}
+      propertyPath: SceneToLoad
+      value: LivelloMare
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 10a8e891011c7834ca91b96360604761, type: 2}
@@ -5047,7 +5052,7 @@ Transform:
   m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 1551295424}
-  m_RootOrder: 29
+  m_RootOrder: 28
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!1 &575873227
 GameObject:
@@ -6713,34 +6718,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 769796781}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &775181629 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1411032856841246, guid: 10a8e891011c7834ca91b96360604761,
-    type: 2}
-  m_PrefabInternal: {fileID: 415967108}
---- !u!114 &775181630
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 775181629}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65ab3ce8f0e767a47bf41d48dda72e0f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!65 &775181631
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 775181629}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 4.7306824, y: 16.00046, z: 4}
-  m_Center: {x: -0.22746277, y: 8.137176, z: 0}
 --- !u!1 &786186937
 GameObject:
   m_ObjectHideFlags: 0
@@ -15777,18 +15754,18 @@ Transform:
   - {fileID: 587213981}
   - {fileID: 1962170773}
   - {fileID: 1026650495}
-  - {fileID: 488120809}
   - {fileID: 569876016}
   - {fileID: 120031949}
   - {fileID: 280076766}
+  - {fileID: 488120809}
   - {fileID: 360767934}
+  - {fileID: 856951462}
   - {fileID: 244601403}
   - {fileID: 308806350}
   - {fileID: 1377662913}
-  - {fileID: 127713942}
-  - {fileID: 856951462}
   - {fileID: 1144621881}
   - {fileID: 2083368709}
+  - {fileID: 127713942}
   - {fileID: 385894946}
   - {fileID: 1996495690}
   m_Father: {fileID: 0}

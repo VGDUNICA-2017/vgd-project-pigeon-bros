@@ -7,6 +7,7 @@ public class TeleportBehaviour : MonoBehaviour {
 	Bounds teleportBounds;
 
 	bool loaded;
+	public string SceneToLoad;
 
 	void Start() {
 		teleportBounds = GetComponent <Collider> ().bounds;
@@ -23,7 +24,7 @@ public class TeleportBehaviour : MonoBehaviour {
 	}
 
 	IEnumerator LoadScene() {
-		AsyncOperation sceneLoad = SceneManager.LoadSceneAsync ("LivelloMare");
+		AsyncOperation sceneLoad = SceneManager.LoadSceneAsync (SceneToLoad);
 
 		while (!sceneLoad.isDone) {
 			yield return null;

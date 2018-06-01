@@ -24,11 +24,13 @@ public class Thirang : Character {
 		
 	float timer;
 	bool berserk_ON, toBerserk, toUnberserk;
+	public bool berserkEnd { get; set; }
 	float defaultScale = 2.4f;
 	float berserkScale = 3.2f;
 	public float BerserkScaleMultiplier;
 
 	public bool isDead { get; set; }
+	int lastHealthValue;
 
 	public void Init(ThirangConstructor init) {
 		switch (init) {
@@ -67,6 +69,9 @@ public class Thirang : Character {
 		thCtrl = GetComponent<ThirangController> ();
 		thAbilCtrl = GetComponent<AbilitiesController> ();
 		timer = 0;
+
+		lastHealthValue = this.health;
+		berserkEnd = true;
 	}
 	
 	// Update is called once per frame
@@ -77,6 +82,8 @@ public class Thirang : Character {
 				stopBerserk ();
 			}
 		}
+
+		print (health);
 	}
 
 	void LateUpdate() {
@@ -88,6 +95,7 @@ public class Thirang : Character {
 	}
 
 	public void Berserk() {
+		berserkEnd = false;
 		berserk_ON = true;
 		toBerserk = true;
 	}
@@ -99,6 +107,7 @@ public class Thirang : Character {
 			transform.localScale = new Vector3 (defaultScale, defaultScale, defaultScale);
 			toUnberserk = false;
 			currAbility = autoAttack;
+			berserkEnd = true;
 		} else {
 			transform.localScale = new Vector3 (berserkScale, berserkScale, berserkScale);
 			toBerserk = false;
@@ -147,10 +156,15 @@ public class Thirang : Character {
 		}
 	}
 
-	public void TrapDamage () {
-		Ability pinchos = new Ability (this.health, DamageType._true);
-		thCtrl.deathTrap = true;
-		OnDamage (this.gameObject, pinchos);
+	public void FatalDamage () {
+		Ability fatal = new Ability (this.health, DamageType._true);
+		thCtrl.deathTrap = true;	//death cause not only by traps
+		OnDamage (this.gameObject, fatal);
+	}
+
+	public void FireBallDamage() {
+		Ability fireBall = new Ability (this.health * 10 / 100, DamageType._true);
+		OnDamage (this.gameObject, fireBall);
 	}
 
 	public bool Fighting () {
@@ -171,5 +185,14 @@ public class Thirang : Character {
 	
 	public bool FacingRight() {
 		return thCtrl.isFacingRight;
+	}
+
+	public bool BeenAttacked() {
+		if (this.health != lastHealthValue) {
+			lastHealthValue = this.health;
+			return true;
+		}
+
+		return false;
 	}
 }
