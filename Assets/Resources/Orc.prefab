@@ -51,8 +51,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4477442768911496}
   - component: {fileID: 95894932722259976}
-  - component: {fileID: 114793056184971390}
   - component: {fileID: 114710915423611658}
+  - component: {fileID: 114793056184971390}
   - component: {fileID: 136490678521317088}
   m_Layer: 15
   m_Name: Orc
@@ -142,8 +142,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1227006474715940}
-  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 31.8, y: 5, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 90, y: 90, z: 90}
   m_Children:
   - {fileID: 4371991519806598}
@@ -152,7 +152,7 @@ Transform:
   - {fileID: 4953480039616618}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4505324692629032
 Transform:
   m_ObjectHideFlags: 1
@@ -232,6 +232,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f40fc5960d7e5c4f94f95bac413741a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hitAnimationProbability: 0.75
 --- !u!114 &114793056184971390
 MonoBehaviour:
   m_ObjectHideFlags: 1

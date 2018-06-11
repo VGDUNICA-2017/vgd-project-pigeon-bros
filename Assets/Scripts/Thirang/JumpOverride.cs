@@ -11,7 +11,12 @@ public class JumpOverride : MonoBehaviour {
 	bool launched, higherJump;	//higherJump: when it's true Thirang will jump higher to avoid moving up ground bug
 	public bool jumpDownEnd { get; set; }
 	float jumpTime;
-	float heightJump, lengthJump;
+	float _heightJump;
+	float _lengthJump;
+	public float heightJump = 12f;
+	public float lengthJump = 5f;
+	public float runHeightJump = 12f;
+	public float runLenghtJump = 3f;
 
 	// Use this for initialization
 	void Start () {
@@ -19,8 +24,8 @@ public class JumpOverride : MonoBehaviour {
 		ThirangRb = GetComponent <Rigidbody> ();
 		rayManager = GetComponentsInChildren <GroundRaycast> ();
 
-		lengthJump = 5f;
-		heightJump = 12f;
+		_heightJump = heightJump;
+		_lengthJump = lengthJump;
 	}
 
 	void FixedUpdate () {
@@ -30,8 +35,8 @@ public class JumpOverride : MonoBehaviour {
 		if ((stateInfo.fullPathHash == ThirangSaT.runStateHash && nextInfo.fullPathHash == ThirangSaT.jumpStart) ||
 			(stateInfo.fullPathHash == ThirangSaT.runBackStateHash && nextInfo.fullPathHash == ThirangSaT.jumpBackStart)) 
 		{
-			lengthJump = 3f;
-			heightJump = 12f;
+			_lengthJump = runLenghtJump;
+			_heightJump = runHeightJump;
 			anim.applyRootMotion = false;
 		}
 
@@ -40,8 +45,8 @@ public class JumpOverride : MonoBehaviour {
 		    ((stateInfo.fullPathHash == ThirangSaT.idleBackStateHash || stateInfo.fullPathHash == ThirangSaT.walkBackStateHash) &&
 				nextInfo.fullPathHash == ThirangSaT.jumpBackStart)) 
 		{
-			lengthJump = 5f;
-			heightJump = 12f;
+			_lengthJump = lengthJump;
+			_heightJump = heightJump;
 			anim.applyRootMotion = false;
 		}
 
@@ -78,8 +83,8 @@ public class JumpOverride : MonoBehaviour {
 		if (stateInfo.fullPathHash == ThirangSaT.jumpDown || stateInfo.fullPathHash == ThirangSaT.jumpBackDown) {
 			launched = false;
 			anim.ResetTrigger ("JumpDown");
-			lengthJump = 5f;
-			heightJump = 12f;
+			_lengthJump = lengthJump;
+			_heightJump = lengthJump;
 			anim.SetBool ("IsJumping", false);
 			foreach (GroundRaycast gR in rayManager) {
 				gR.Landed ();
@@ -95,28 +100,27 @@ public class JumpOverride : MonoBehaviour {
 			if (!launched) {
 
 				if (higherJump) {
-					lengthJump = 9f;
-					heightJump = 14f;
+					_lengthJump = 9f;
+					_heightJump = 14f;
 				}
 
-				Vector3 forceDir = new Vector3 (lengthJump, heightJump);
+				Vector3 forceDir = new Vector3 (_lengthJump, _heightJump);
 				ThirangRb.AddForce (forceDir, ForceMode.VelocityChange);
 				launched = true;
 				higherJump = false;
-				print (lengthJump + " " + heightJump);
 			}
 		}
 
 		if (stateInfo.fullPathHash == ThirangSaT.jumpBackStart) {
 
 			if (higherJump) {
-				lengthJump = 12f;
-				heightJump = 20f;
+				_lengthJump = 12f;
+				_heightJump = 20f;
 			}
 
 			anim.applyRootMotion = false;
 			if (!launched) {
-				Vector3 forceDir = new Vector3 (-lengthJump, heightJump);
+				Vector3 forceDir = new Vector3 (-_lengthJump, _heightJump);
 				ThirangRb.AddForce (forceDir, ForceMode.VelocityChange);
 				launched = true;
 				higherJump = false;

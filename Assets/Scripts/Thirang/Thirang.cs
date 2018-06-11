@@ -7,12 +7,11 @@ public class Thirang : Character {
 	AbilitiesController thAbilCtrl;
 
 	int mana { get; set; }
-	int level;
+	public int level { get; set; }
 	public int gold { get; set; }
 	public int exp { get; set; }
 	const int TO_LEVEL_2 = 10000;
 	const int TO_LEVEL_3 = 80000;
-	public enum ThirangConstructor { _default , _save }; 
 
 	Ability autoAttack;
 	Ability berserk;
@@ -20,48 +19,54 @@ public class Thirang : Character {
 	Ability magicArrow;
 	Ability goddessBlessing;
 	private Ability currAbility;
-	int berserkTime;
+	public Ability abilityState { get; set; }
+
 		
 	float timer;
+
+	int berserkTime;
 	bool berserk_ON, toBerserk, toUnberserk;
 	public bool berserkEnd { get; set; }
 	float defaultScale = 2.4f;
 	float berserkScale = 3.2f;
 	public float BerserkScaleMultiplier;
 
+	public int timeGodBlessed { get; set; }
+
 	public bool isDead { get; set; }
 	int lastHealthValue;
 
-	public void Init(ThirangConstructor init) {
-		switch (init) {
-			case ThirangConstructor._default:
-				health = 1200;
-				mana = 300;
-				attackDamage = 50;
-				armor = 20;
-				magicResist = 15;
-				level = 1;
-				autoAttack = new Ability (attackDamage, DamageType.physical);
-				berserk = new Ability (attackDamage * 110 / 100, DamageType.physical);
-				cycloneSpin = new Ability (attackDamage * 140 / 100, DamageType.physical);
-				magicArrow = new Ability (attackDamage * 200 / 100, DamageType.magic);
-				goddessBlessing = new Ability (0, DamageType.invulnerable);
-				berserkTime = 4 + (3 * level);
-				break;
-			case ThirangConstructor._save:
-				break;
-			default:
-				throw new System.ArgumentException ("Error initializing Thirang");
-		}
+	public void Init() {
+		Vector3 pos;
+		pos.x = PlayerPrefs.GetFloat ("xP", transform.position.x);
+		pos.y = PlayerPrefs.GetFloat ("yP", transform.position.y);
+		pos.z = PlayerPrefs.GetFloat ("zP", transform.position.z);
+		transform.position = pos;
+
+		health = PlayerPrefs.GetInt("health", 12000);
+		mana = PlayerPrefs.GetInt("mana", 300);
+		attackDamage = PlayerPrefs.GetInt("attackDamage", 100);
+		armor = PlayerPrefs.GetInt("armor", 25);
+		magicResist = PlayerPrefs.GetInt("magicResist", 24);
+		level = PlayerPrefs.GetInt("level", 1);
+
+		if (level == 1) {
+			autoAttack = new Ability (attackDamage, DamageType.physical);
+			berserk = new Ability (attackDamage * 110 / 100, DamageType.physical);
+			cycloneSpin = new Ability (attackDamage * 140 / 100, DamageType.physical);
+			magicArrow = new Ability (attackDamage * 200 / 100, DamageType.magic);
+			goddessBlessing = new Ability (0, DamageType.invulnerable);
+			berserkTime = 4 + (3 * level);
+			timeGodBlessed = 4;
+		} else
+			UpdateValues ();
+
 	}
 
 	void Awake() {
 		Enemy.LoadEnemies ();
 
-		//if !save
-			Init (ThirangConstructor._default);
-		//else
-			Init (ThirangConstructor._save);
+		Init ();
 	}
 
 	// Use this for initialization
@@ -83,6 +88,16 @@ public class Thirang : Character {
 			}
 		}
 
+		if (exp >= TO_LEVEL_2 && level < 2) {
+			level = 2;
+			UpdateValues ();
+		}
+
+		if (exp >= TO_LEVEL_3 && level < 3) {
+			level = 3;
+			UpdateValues ();
+		}
+
 		print (health);
 	}
 
@@ -92,6 +107,29 @@ public class Thirang : Character {
 
 		if (toUnberserk)
 			BerserkAnimation (-1);
+	}
+
+	public void SaveThirangData(bool savePosition) {
+		if (savePosition) {
+			PlayerPrefs.SetFloat ("xP", transform.position.x);
+			PlayerPrefs.SetFloat ("yP", transform.position.y);
+			PlayerPrefs.SetFloat ("zP", transform.position.z);
+		} else {
+			//Just one is necessary to know Thirang's position was been saved
+			if (PlayerPrefs.HasKey ("xP")) {
+				PlayerPrefs.DeleteKey ("xP");
+				PlayerPrefs.DeleteKey ("yP");
+				PlayerPrefs.DeleteKey ("zP");
+			}
+		}
+		PlayerPrefs.SetInt ("health", health);
+		PlayerPrefs.SetInt ("mana", mana);
+		PlayerPrefs.SetInt ("attackDamage", attackDamage);
+		PlayerPrefs.SetInt ("armor", armor);
+		PlayerPrefs.SetInt ("magicResist", magicResist);
+		PlayerPrefs.SetInt ("level", level);
+
+		PlayerPrefs.Save ();
 	}
 
 	public void Berserk() {
@@ -121,11 +159,17 @@ public class Thirang : Character {
 	}
 
 	public void UpdateValues () {
+		health = health * (10 * level + 100) / 100;
+		mana = mana * (10 * level + 100) / 100;
 		attackDamage = attackDamage * (10 * level + 100) / 100;
+		armor = armor * (10 * level + 100) / 100;
+		magicResist = magicResist * (10 * level + 100) / 100;
+
 		berserk.damage = attackDamage * 110 / 100;
 		cycloneSpin.damage = attackDamage * 140 / 100;
 		magicArrow.damage = attackDamage * 200 / 100;
 		berserkTime = 4 + (3 * level);
+		timeGodBlessed = timeGodBlessed + level;
 	}
 
 	public Ability GetCurrentAbility() {
@@ -149,7 +193,7 @@ public class Thirang : Character {
 				currAbility = magicArrow;
 				break;
 			case "goddessBlessing":
-				currAbility = goddessBlessing;
+				abilityState = goddessBlessing;
 				break;
 			default:
 				throw new System.ArgumentException ("Cannot find ability with this name");

@@ -13,7 +13,6 @@ public class FollowingLight : MonoBehaviour {
 
 	void LateUpdate () {
 		Vector3 newPos = transform.position;
-		print (transform.position);
 		newPos.x = transform.parent.position.x + xOffset;
 		newPos.y = transform.parent.position.y + yOffset;
 		newPos.z = zStart;

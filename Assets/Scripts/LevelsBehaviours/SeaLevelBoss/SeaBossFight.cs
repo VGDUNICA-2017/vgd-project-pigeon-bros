@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class SeaBossFight : MonoBehaviour {
+	public GameObject movingGround;
 	public GameObject vibratingGround;
 	VibratingGround[] vibratingCubes;
 
@@ -35,12 +36,15 @@ public class SeaBossFight : MonoBehaviour {
 	}
 
 	IEnumerator StartFight() {
-		print ("before wait");
 		yield return new WaitForSecondsRealtime (3.05f);
-		print ("after wait");
 
 		th.GetComponent<ThirangController> ().enabled = true;
-		print("thirangControllerEnabled");
+		Vector3 newPos = movingGround.transform.localPosition;
+		newPos.x -= 40f;
+		movingGround.transform.localPosition = newPos;
+		foreach (var m in FindObjectsOfType<MovingGround> ()) {
+			m.enabled = false;
+		}
 
 		ReactivateCubes ();
 

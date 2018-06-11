@@ -103,7 +103,8 @@ public class ThirangController : MonoBehaviour {
 			}
 
 			if (Input.GetButton ("Shield") && blockStarted && !anim.GetBool ("IsFighting") &&
-			    !anim.GetBool ("Run") && !anim.GetBool ("IsJumping")) {
+			    !anim.GetBool ("Run") && !anim.GetBool ("IsJumping")) 
+			{
 				anim.SetBool ("IsShielding", true);
 			} else if (blockInfo.fullPathHash == ThirangSaT.blockStateHash || blockInfo.fullPathHash == ThirangSaT.blockBackStateHash) {
 				blockStarted = false;
@@ -115,7 +116,7 @@ public class ThirangController : MonoBehaviour {
 					blockStarted = false;
 				}
 			} else {
-				anim.SetBool ("IsShielding", false);
+					anim.SetBool ("IsShielding", false);
 			}
 
 			//Adjusting the override of the animator block layer
@@ -229,7 +230,7 @@ public class ThirangController : MonoBehaviour {
 
 				anim.SetTrigger (deathType);
 
-				this.enabled = false;
+				StartCoroutine (BugDeath (deathType));
 			}
 		}
 	}
@@ -237,5 +238,14 @@ public class ThirangController : MonoBehaviour {
 	void FireBallDamageController() {
 		anim.SetTrigger ("Hit");
 		th.FireBallDamage ();
+	}
+
+	IEnumerator BugDeath(string deathType) {
+		AnimatorStateInfo stateInfo = anim.GetCurrentAnimatorStateInfo (0);
+		yield return new WaitForSeconds (1f);
+		if (stateInfo.fullPathHash != EnemySaT.deathStateHash || stateInfo.fullPathHash != EnemySaT.deathBackStateHash) {
+			anim.SetTrigger (deathType);
+			this.enabled = false;
+		}
 	}
 }

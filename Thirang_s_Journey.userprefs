@@ -1,15 +1,24 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj" RefactoringSettings.EnableRefactorings="True">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Thirang\ThirangController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Other Characters\Archer\ArcherController.cs">
     <Files>
-      <File FileName="Assets\Scripts\Thirang\Thirang.cs" Line="165" Column="8" />
-      <File FileName="Assets\Scripts\Thirang\ThirangController.cs" Line="239" Column="24" />
-      <File FileName="Assets\Scripts\Thirang\JumpOverride.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Thirang\GroundRaycast.cs" Line="61" Column="82" />
-      <File FileName="Assets\Scripts\Thirang\AbilitiesController.cs" Line="124" Column="3" />
+      <File FileName="Assets\Scripts\Thirang\Thirang.cs" Line="118" Column="69" />
+      <File FileName="Assets\Scripts\Thirang\ThirangController.cs" Line="118" Column="12" />
+      <File FileName="Assets\Scripts\Thirang\AbilitiesController.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\LevelsBehaviours\Teleport\PrizesCollected.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\LevelsBehaviours\Ground\BreakCube.cs" Line="12" Column="3" />
-      <File FileName="Assets\Scripts\LevelsBehaviours\FinalLevelBoss\FireBallTrigger.cs" Line="11" Column="63" />
+      <File FileName="Assets\Scripts\LevelsBehaviours\SkyLevelBoss\GroundBoss.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Enemy.cs" Line="66" Column="45" />
+      <File FileName="Assets\Scripts\LevelsBehaviours\Teleport\TeleportBehaviour.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\LevelsBehaviours\DeathZone.cs" Line="10" Column="21" />
+      <File FileName="Assets\Scripts\LevelsBehaviours\SeaLevelBoss\SeaBossFight.cs" Line="46" Column="22" />
+      <File FileName="Assets\Scripts\Other Characters\GiantMutant\GiantMutant.cs" Line="42" Column="3" />
+      <File FileName="Assets\Scripts\Other Characters\Demon\Demon.cs" Line="19" Column="51" />
+      <File FileName="Assets\Scripts\Other Characters\Orc\Orc.cs" Line="21" Column="21" />
+      <File FileName="Assets\Scripts\Character.cs" Line="14" Column="10" />
+      <File FileName="Assets\Scripts\Other Characters\Archer\Archer.cs" Line="24" Column="25" />
+      <File FileName="Assets\Scripts\Other Characters\Archer\ArcherController.cs" Line="123" Column="41" />
+      <File FileName="Assets\Scripts\Thirang\DestroyOnShield.cs" Line="11" Column="4" />
+      <File FileName="Assets\Scripts\Other Characters\Archer\OnArrowHit.cs" Line="31" Column="28" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

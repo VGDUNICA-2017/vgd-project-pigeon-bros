@@ -16,6 +16,8 @@ public class AbilitiesController : MonoBehaviour {
 	float timeGodBlessed;
 	Light godLight;
 
+	int gameLevel;
+
 	// Use this for initialization
 	void Start () {
 		anim = GetComponent<Animator> ();
@@ -27,6 +29,12 @@ public class AbilitiesController : MonoBehaviour {
 		ThirangController thCtrl = GetComponent<ThirangController> ();
 		rayManagerLeft = thCtrl.LeftFoot.GetComponent<GroundRaycast> ();
 		rayManagerRight = thCtrl.RightFoot.GetComponent<GroundRaycast> ();
+
+		if (!PlayerPrefs.HasKey ("gameLevel")) {
+			PlayerPrefs.SetInt ("gameLevel", 1);
+		}
+
+		gameLevel = PlayerPrefs.GetInt ("gameLevel", 1);
 	}
 	
 	// Update is called once per frame
@@ -39,7 +47,7 @@ public class AbilitiesController : MonoBehaviour {
 			/*Being child of MovingGround makes berserk animation buggy because of scale animation*/
 			if (!rayManagerLeft.onMovingGround && !rayManagerRight.onMovingGround) {
 				if (Input.GetButtonDown ("Berserk")) {
-					if (stateInfo.fullPathHash != ThirangSaT.abilitiesStates ["Berserk"] &&
+					if (stateInfo.fullPathHash != ThirangSaT.abilitiesStates ["Berserk"] ||
 					   stateInfo.fullPathHash != ThirangSaT.abilitiesStates ["BerserkBack"]) {
 						anim.SetTrigger ("Berserk");
 						th.SetCurrentAbility ("berserk");
@@ -48,35 +56,61 @@ public class AbilitiesController : MonoBehaviour {
 				}
 			}
 
-			//Cyclone Spin
-			if (Input.GetButtonDown ("Cyclone Spin")) {
-				anim.SetTrigger ("Cyclone Spin");
-				th.SetCurrentAbility ("cycloneSpin");
-			}
+			if (gameLevel > 1) {
 
-			if (stateInfo.fullPathHash == ThirangSaT.abilitiesStates ["Cyclone Spin"] ||
-			    stateInfo.fullPathHash == ThirangSaT.abilitiesStates ["Cyclone SpinBack"]) {
-				anim.SetBool ("IsFighting", true);
-				onCycloneSpin = true;
-			} else if (onCycloneSpin) {
-				anim.SetBool ("IsFighting", false);
-				onCycloneSpin = false;
-			}
+				//Cyclone Spin
+				if (Input.GetButtonDown ("Cyclone Spin")) {
+					anim.SetTrigger ("Cyclone Spin");
+					th.SetCurrentAbility ("cycloneSpin");
+				}
 
-			//Magic Arrow
-			if (Input.GetButtonDown ("Magic Arrow")) {
-				anim.SetTrigger ("Magic Arrow");
-				th.SetCurrentAbility ("magicArrow");
-			}
+				if (stateInfo.fullPathHash == ThirangSaT.abilitiesStates ["Cyclone Spin"] ||
+				   stateInfo.fullPathHash == ThirangSaT.abilitiesStates ["Cyclone SpinBack"]) {
+					anim.SetBool ("IsFighting", true);
+					onCycloneSpin = true;
+				} else if (onCycloneSpin) {
+					anim.SetBool ("IsFighting", false);
+					onCycloneSpin = false;
+				}
 
-			if (stateInfo.fullPathHash == ThirangSaT.abilitiesStates ["Magic Arrow"] ||
-			    stateInfo.fullPathHash == ThirangSaT.abilitiesStates ["Magic ArrowBack"]) {
-				if (stateInfo.normalizedTime >= 0.56f && !arrowSpawned) {
-					SpawnMagicArrow ();
-					arrowSpawned = true;
-				}	
-			} else {
-				arrowSpawned = false;
+				if (gameLevel > 2) {
+
+					//Magic Arrow
+					if (Input.GetButtonDown ("Magic Arrow")) {
+						anim.SetTrigger ("Magic Arrow");
+						th.SetCurrentAbility ("magicArrow");
+					}
+
+					if (stateInfo.fullPathHash == ThirangSaT.abilitiesStates ["Magic Arrow"] ||
+					   stateInfo.fullPathHash == ThirangSaT.abilitiesStates ["Magic ArrowBack"]) {
+						if (stateInfo.normalizedTime >= 0.56f && !arrowSpawned) {
+							SpawnMagicArrow ();
+							arrowSpawned = true;
+						}	
+					} else {
+						arrowSpawned = false;
+					}
+
+					if (gameLevel > 3) {
+
+						//Goddess' Blessing
+						if (Input.GetButtonDown ("Goddess' Blessing")) {
+							godLight.enabled = true;
+							godBlessed = true;
+							th.SetCurrentAbility ("goddessBlessing");
+						}
+
+						if (godBlessed) {
+							timeGodBlessed += Time.deltaTime;
+							if (timeGodBlessed >= th.timeGodBlessed) {
+								godLight.GetComponent<Light> ().enabled = false;
+								godBlessed = false;
+								timeGodBlessed = 0;
+								th.abilityState = new Character.Ability (0, Character.DamageType.none);
+							}
+						}
+					}
+				}
 			}
 
 			if (ThirangSaT.abilitiesStates.ContainsValue (stateInfo.fullPathHash)) {
@@ -88,21 +122,6 @@ public class AbilitiesController : MonoBehaviour {
 						else
 							anim.ResetTrigger (key.Key.Remove (index, 4));
 					}
-				}
-			}
-
-			//Goddess' Blessing
-			if (Input.GetButtonDown ("Goddess' Blessing")) {
-				godLight.enabled = true;
-				godBlessed = true;
-			}
-
-			if (godBlessed) {
-				timeGodBlessed += Time.deltaTime;
-				if (timeGodBlessed >= 4f) {
-					godLight.GetComponent<Light> ().enabled = false;
-					godBlessed = false;
-					timeGodBlessed = 0;
 				}
 			}
 		}

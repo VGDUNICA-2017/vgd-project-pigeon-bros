@@ -11,6 +11,7 @@ TagManager:
   - Sword
   - Arrow
   - BuggedGround
+  - Destroyable
   layers:
   - Default
   - TransparentFX
