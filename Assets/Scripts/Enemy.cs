@@ -21,40 +21,44 @@ public abstract class Enemy : Character {
 	public bool fadingDeath { get; set; }
 	protected float deathTimer;
 
-	public static void LoadEnemies() { 
+	public static void LoadEnemies() {
 		_orc = Resources.Load<GameObject> ("Orc");
 		_archer = Resources.Load<GameObject> ("Archer");
 	}
 
-	public static void instantiateEnemy (EnemyType e) {
+	public static GameObject InstantiateEnemy (EnemyType e) {
 		switch (e) {
 			case EnemyType.Orc:
-				Instantiate (_orc);
-				break;
+				return Instantiate (_orc);
 			case EnemyType.Archer:
-				Instantiate (_archer);
-				break;
+				return Instantiate (_archer);
 			default:
 				throw new System.ArgumentException ("Cannot find enemy with this type");
 		}
 	}
 
-	public static void instantiateEnemy (EnemyType enemyType, Vector3 position, Quaternion rotation) {
+	public static GameObject InstantiateEnemy (EnemyType enemyType, Vector3 position, Quaternion rotation, bool isFacingLeft) {
+		GameObject g;
+
 		switch (enemyType) {
 			case EnemyType.Orc:
-				Instantiate (_orc, position, rotation);
-				break;
+				g = Instantiate (_orc, position, rotation);
+				g.GetComponent<OrcController> ().isFacingLeft = isFacingLeft;
+				return g;
 			case EnemyType.Archer:
-				Instantiate (_archer, position, rotation);
-				break;
+				g = Instantiate (_archer, position, rotation);
+				g.GetComponent<ArcherController> ().isFacingLeft = isFacingLeft;
+				return g;
 			default:
 				throw new System.ArgumentException ("Cannot find enemy with this type");
 		}
 	}
 
-	protected void OnDeath(int gold, int exp) {
+	protected void OnDeath(int gold, int exp, int health, int mana) {
 		thirang.gold += gold;
 		thirang.exp += exp;
+		thirang.health += health;
+		thirang.mana += mana;
 	}
 
 	public void Hit() {
@@ -91,7 +95,7 @@ public abstract class Enemy : Character {
 	}
 
 	protected void Damaged(GameObject g) {
-		if (ThirangFacingEnemy () || thirang.transform.position.x > this.transform.position.x) {
+		if (ThirangFacingEnemy ()) {
 			OnDamage (g, thirang.GetCurrentAbility ());
 
 			int rand = Random.Range (1, 101);
@@ -112,7 +116,7 @@ public abstract class Enemy : Character {
 	private bool CanDealDamageFighter (Collider other) {
 		if (other.transform.root.CompareTag ("Player")) {
 			if (!this.justAttacked) {
-				if ( !(thirang.GetComponent<Animator> ().GetBool ("IsShielding") && ThirangFacingEnemy ()) )
+				if ( !(thirang.GetComponent<Animator> ().GetBool ("IsShielding") && ThirangEnemyFacingEachOther ()) )
 					return true;
 				else
 					return false;
@@ -135,6 +139,19 @@ public abstract class Enemy : Character {
 		}
 	}
 
+	protected void DealDamageFighter (Collider other, Ability[] abilities) {
+		if (isAttacking) {
+			if (CanDealDamageFighter (other)) {
+				foreach (var a in abilities) {
+					OnDamage (other.transform.root.gameObject, a);
+				}
+				justAttacked = true;
+			}
+		} else {
+			justAttacked = false;
+		}
+	}
+
 	protected void DealDamageCaster (Collider other, Ability ability) {
 		if (CanDealDamageCaster (other)) {
 			OnDamage (other.transform.root.gameObject, ability);
@@ -142,18 +159,31 @@ public abstract class Enemy : Character {
 	}
 
 	private bool CanDealDamageCaster (Collider other) {
-		if ( !(thirang.GetComponent<Animator> ().GetBool ("IsShielding") && ThirangFacingEnemy ()) )
+		if ( !(thirang.GetComponent<Animator> ().GetBool ("IsShielding") && ThirangEnemyFacingEachOther ()) )
 			return true;
 		else
 			return false;
 	}
 
-	protected void ReadyNewAttack() {
+	protected void ReadyNewAttack_ThirangAlive() {
 		if (thirang.ChangingState())
 			hit = false;	//Thirang's animation state changed, so a new attack can be ready to hit the enemy
+
+		if (thirang.isDead) {
+			EnemyController e = this.GetComponent<EnemyController> ();
+			e.enabled = false;
+			this.GetComponent<Animator> ().Play (e.isFacingLeft == true ? EnemySaT.idleStateHash : EnemySaT.idleBackStateHash);
+		}
 	}
 	
-	protected abstract bool ThirangFacingEnemy ();
+	protected abstract bool ThirangEnemyFacingEachOther ();
+
+	bool ThirangFacingEnemy() {
+		ThirangController thCtrl = thirang.GetComponent<ThirangController> ();
+
+		return (thCtrl.isFacingRight && this.transform.position.x > thirang.transform.position.x) || 
+			   (!thCtrl.isFacingRight && this.transform.position.x < thirang.transform.position.x);
+	}
 
 	public bool ThirangOnCycloneSpin() {
 		return thirang.OnCycloneSpin();

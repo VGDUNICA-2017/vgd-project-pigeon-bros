@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GotPrize : MonoBehaviour {
-	public GameObject movingGround;
+	public GameObject movingGround1;
+	public GameObject movingGround2;
 	public GameObject sign;
+	public GameObject deathZone;
+	public GameObject movingGroundToDestroy;
 
 	bool eventTriggered;
 
@@ -12,9 +15,11 @@ public class GotPrize : MonoBehaviour {
 		if (other.transform.root.CompareTag ("Player") && !eventTriggered) {
 			eventTriggered = true;
 
-			movingGround.SetActive (true);
+			movingGround1.SetActive (true);
+			movingGround2.SetActive (true);
 			sign.SetActive (true);
-			Destroy (this.gameObject);
+			deathZone.SetActive (true);
+			Destroy (movingGroundToDestroy);
 		}
 	}
 }

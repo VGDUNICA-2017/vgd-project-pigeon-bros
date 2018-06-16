@@ -244,7 +244,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3b975797d7f32940a23a74e59bf5d8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distOrcPlayer: 5
+  distanceThreshold: 5
 --- !u!136 &136059142551449654
 CapsuleCollider:
   m_ObjectHideFlags: 1

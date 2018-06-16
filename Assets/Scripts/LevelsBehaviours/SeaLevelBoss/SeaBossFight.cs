@@ -5,6 +5,7 @@ using UnityEngine;
 public class SeaBossFight : MonoBehaviour {
 	public GameObject movingGround;
 	public GameObject vibratingGround;
+	public GameObject giantMutant;
 	VibratingGround[] vibratingCubes;
 
 	bool eventTriggered;
@@ -25,6 +26,7 @@ public class SeaBossFight : MonoBehaviour {
 			th = other.transform.root.gameObject;
 
 			th.GetComponent<ThirangController> ().enabled = false;
+			th.GetComponent<AbilitiesController> ().enabled = false;
 			th.GetComponent<Animator> ().SetFloat ("Speed", 0);
 			StartCoroutine (ThirangToIdle ());
 
@@ -39,12 +41,11 @@ public class SeaBossFight : MonoBehaviour {
 		yield return new WaitForSecondsRealtime (3.05f);
 
 		th.GetComponent<ThirangController> ().enabled = true;
-		Vector3 newPos = movingGround.transform.localPosition;
-		newPos.x -= 40f;
-		movingGround.transform.localPosition = newPos;
-		foreach (var m in FindObjectsOfType<MovingGround> ()) {
-			m.enabled = false;
-		}
+		th.GetComponent<AbilitiesController> ().enabled = true;
+		giantMutant.GetComponent<GiantMutantController> ().enabled = true;
+		giantMutant.GetComponent<Animator> ().Play (GiantMutantController.startStateHash);
+
+		Destroy (movingGround);
 
 		ReactivateCubes ();
 

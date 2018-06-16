@@ -11,6 +11,7 @@ public class SkyBossFight : MonoBehaviour {
 	void Awake() {
 		thirang = GameObject.FindGameObjectWithTag ("Player");
 		thirang.GetComponent<ThirangController> ().enabled = false;
+		thirang.GetComponent<AbilitiesController> ().enabled = false;
 		Vector3 rot = thirang.transform.eulerAngles;
 		rot.y = 90f;
 		thirang.transform.eulerAngles = rot;
@@ -32,6 +33,7 @@ public class SkyBossFight : MonoBehaviour {
 		anim.SetTrigger ("OnLevel");
 		yield return new WaitForSecondsRealtime (3.5f);
 		thirang.GetComponent<ThirangController> ().enabled = true;
+		thirang.GetComponent<AbilitiesController> ().enabled = true;
 		boss.GetComponent<MageController> ().enabled = true;
 		bossGround.GetComponent<GroundBoss> ().enabled = true;
 	}

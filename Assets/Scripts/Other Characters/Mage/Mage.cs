@@ -34,7 +34,7 @@ public class Mage : Enemy {
 		if (fadingDeath)
 			FadeDeath (gosRends);
 
-		ReadyNewAttack ();
+		ReadyNewAttack_ThirangAlive ();
 
 		print (health);
 	}
@@ -51,10 +51,10 @@ public class Mage : Enemy {
 	}
 
 	public void OnDeath() {
-		base.OnDeath (gold: 200, exp: 400);
+		base.OnDeath (gold: 200, exp: 400, health: thirang.maxHealth, mana: thirang.maxMana);
 	}
 
-	protected override bool ThirangFacingEnemy() {
+	protected override bool ThirangEnemyFacingEachOther() {
 		return (thirang.FacingRight() && mageCtrl.isFacingLeft) || (!thirang.FacingRight() && !mageCtrl.isFacingLeft);
 	}
 }

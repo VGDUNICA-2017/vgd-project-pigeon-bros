@@ -2,28 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MageController : MonoBehaviour {
-	Animator anim;
-	Thirang th;
-	Mage mage;
+public class MageController : EnemyController {
 	public GameObject magicBall;
 	public GameObject ground;
 
 	GroundBoss groundBoss;
 
-	bool deathStart;
 	bool magicAttackSpawned;
-
-	public bool isFacingLeft { get; set; }
-
-	bool newLevelSet;
 
 	// Use this for initialization
 	void Start () {
 		anim = GetComponent <Animator> ();
-		mage = this.gameObject.GetComponent<Mage> ();
+		enemy = this.gameObject.GetComponent<Mage> ();
 		groundBoss = ground.GetComponent<GroundBoss> ();
-		th = GameObject.FindGameObjectWithTag ("Player").GetComponent<Thirang> ();
 
 		anim.SetBool ("IsFacingLeft", true);
 		isFacingLeft = true;
@@ -31,11 +22,8 @@ public class MageController : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+		distanceThreshold = float.PositiveInfinity;
 		AnimatorStateInfo stateInfo = anim.GetCurrentAnimatorStateInfo (0);
-
-		//Adjust Mage position and rotation
-		transform.position = new Vector3 (transform.position.x, transform.position.y);
-		transform.eulerAngles = new Vector3 (transform.eulerAngles.x, -90, transform.eulerAngles.z);
 
 		//Attack
 		if (stateInfo.fullPathHash == EnemySaT.attackStateHash || stateInfo.fullPathHash == EnemySaT.attackBackStateHash) {
@@ -47,22 +35,20 @@ public class MageController : MonoBehaviour {
 		} else {
 			magicAttackSpawned = false;
 
-			if (groundBoss.attackState && !th.isDead)
+			if (groundBoss.attackState)
 				anim.SetTrigger ("Attack");
 		}
 
 		//Death
-		if (mage.health <= 0 && !deathStart) 
+		if (!deathStart) 
 		{
-			anim.SetTrigger ("Death");
-			deathStart = true;
-			mage.OnDeath ();
+			EnemyDead ();
 		}
 
 		if (stateInfo.fullPathHash == EnemySaT.deathStateHash || stateInfo.fullPathHash == EnemySaT.deathBackStateHash) {
 			if (stateInfo.normalizedTime > 1f) {
 				anim.enabled = false;	//Executed when Death animation will finish
-				mage.fadingDeath = true;
+				enemy.fadingDeath = true;
 				if (!newLevelSet) {
 					this.gameObject.AddComponent<TeleportBehaviour> ().BossKilled ("LivelloTerra");
 					newLevelSet = true;
@@ -102,7 +88,7 @@ public class MageController : MonoBehaviour {
 		OnMagicBallHit _magicBall = Instantiate (magicBall, p, 
 			Quaternion.identity, null).GetComponent<OnMagicBallHit> ();
 
-		_magicBall.mage = mage;
+		_magicBall.mage = enemy as Mage;
 		_magicBall.Direction (direction);
 	}
 }

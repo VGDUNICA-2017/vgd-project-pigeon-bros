@@ -138,7 +138,7 @@ GameObject:
   - component: {fileID: 136978765652918000}
   m_Layer: 15
   m_Name: Demon
-  m_TagString: Enemy
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -305,7 +305,7 @@ Transform:
   m_GameObject: {fileID: 1710520014801838}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2.2, y: 2.2, z: 2.2}
   m_Children:
   - {fileID: 4578775320765182}
   - {fileID: 4750003115355700}
@@ -342,13 +342,13 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1710520014801838}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3d893bab019a12a45a6de4acfff2c3ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  distanceThreshold: 4.5
   magicBall: {fileID: 1374915849717314, guid: b61c0b6fa6e2c8c40ae40dc8ceb92101, type: 2}
-  distDemonPlayerAttack: 5
   distDemonPlayerSpell: 20
 --- !u!114 &114277660808873650
 MonoBehaviour:
@@ -362,6 +362,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitAnimationProbability: 0.4
+  spawn: {fileID: 198194264460796190, guid: 27c56ab0085001e4f919bf614b24226a, type: 2}
 --- !u!114 &114531505949526770
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -383,8 +384,8 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.14
-  m_Center: {x: 0.16, y: 0, z: 0}
+  m_Radius: 0.3
+  m_Center: {x: 0.2, y: 0, z: 0}
 --- !u!136 &136978765652918000
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -392,12 +393,12 @@ CapsuleCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1710520014801838}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.31
   m_Height: 2.2
   m_Direction: 1
-  m_Center: {x: 0, y: 1.1, z: 0}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!137 &137029457055090330
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

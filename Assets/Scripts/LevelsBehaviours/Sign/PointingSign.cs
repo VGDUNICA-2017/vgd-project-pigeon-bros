@@ -17,11 +17,15 @@ public class PointingSign : MonoBehaviour {
 	public Direction pointingDirection;
 	public Way way;
 	public GameObject pointed;
-	public float defSignZ;
+
+	float defSignZ;
 	Transform trsParent;
 	Vector3 diff;
 	float angle;
 
+	void Awake () {
+		defSignZ = transform.eulerAngles.z;
+	}
 
 	// Use this for initialization
 	void Start () {

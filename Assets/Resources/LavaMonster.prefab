@@ -244,7 +244,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad4459043d076c5459b633e8c9b9f27e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distLavaMonsterPlayerAttack: 6
+  distanceThreshold: 6
   distJumpAttack: 12.5
 --- !u!114 &114928763170340002
 MonoBehaviour:
@@ -290,7 +290,7 @@ CapsuleCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1455764443051348}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 25
   m_Height: 100

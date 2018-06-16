@@ -12,6 +12,8 @@ TagManager:
   - Arrow
   - BuggedGround
   - Destroyable
+  - ThirangFadeTrigger
+  - Prize
   layers:
   - Default
   - TransparentFX
@@ -29,8 +31,8 @@ TagManager:
   - MovingGround
   - Controllable
   - AI
-  - 
-  - 
+  - DemonCollider
+  - DemonUpperGround
   - 
   - 
   - 

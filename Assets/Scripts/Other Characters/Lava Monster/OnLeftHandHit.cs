@@ -12,7 +12,7 @@ public class OnLeftHandHit : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider other) {
-		if (lavaMonsterCtrl.OnFrameToHit())
+		if (lavaMonsterCtrl.OnFrameToHit ())
 			lavaMonster.OnAttack (other, "left");
 	}
 }

@@ -2,77 +2,48 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GiantMutantController : MonoBehaviour {
-	Animator anim;
-	GameObject thirang;
-	Thirang th;
-	GiantMutant giantMutant;
-
-	public float distGiantMutantPlayerAttack;
-
-	bool deathStart;
+public class GiantMutantController : EnemyController {
 	bool isChangedAttack;
-
-	public bool isFacingLeft { get; set; }
-	public bool isAttacking { get; set; }
 
 	private readonly int mirrorAttackStateHash = Animator.StringToHash ("Base Layer.Mirror Attack");
 	private readonly int mirrorAttackBackStateHash = Animator.StringToHash ("Base Layer.Back.Mirror Attack Back");
 
+	public static readonly int startStateHash = Animator.StringToHash ("Base Layer.Start");
+
+	void Awake() {
+		transform.eulerAngles = new Vector3 (transform.eulerAngles.x, -90, transform.eulerAngles.z);
+	}
+
 	// Use this for initialization
 	void Start () {
 		anim = GetComponent<Animator> ();
-		giantMutant = GetComponent<GiantMutant> ();
+		enemy = GetComponent<GiantMutant> ();
 		thirang = GameObject.FindGameObjectWithTag ("Player");
 		th = thirang.GetComponent<Thirang> ();
 
-		float dist = transform.position.x - thirang.transform.position.x;
-
-		if (dist >= 0) {
-			anim.SetBool ("IsFacingLeft", true);
-			isFacingLeft = true;
-		}
-		if (dist < 0) {
-			anim.SetBool ("IsFacingLeft", false);
-			isFacingLeft = false;
-		}
+		UpdatePosition ();
 	}
 
 	// Update is called once per frame
 	void Update () {
 		AnimatorStateInfo stateInfo = anim.GetCurrentAnimatorStateInfo (0);
-		float dist = transform.position.x - thirang.transform.position.x;
-		float offset = Mathf.Abs(dist);
 
-		//Adjust Archer position and rotation
-		transform.position = new Vector3 (transform.position.x, transform.position.y);
-		transform.eulerAngles = new Vector3 (transform.eulerAngles.x, -90, transform.eulerAngles.z);
-
-		if (!giantMutant.ThirangOnCycloneSpin()) {			//Prevents a bug: during Thirang's Cyclone Spin the enemy turns around because Thirang moves back of him
-			if (dist >= 0) {
-				anim.SetBool ("IsFacingLeft", true);
-				isFacingLeft = true;
-			}
-			if (dist < 0) {
-				anim.SetBool ("IsFacingLeft", false);
-				isFacingLeft = false;
-			}
+		if (!enemy.ThirangOnCycloneSpin()) {			//Prevents a bug: during Thirang's Cyclone Spin the enemy turns around because Thirang moves back of him
+			UpdatePosition();
 		}
 
 		//Attack
 		//Attack-Run state switching control
-		if (!th.isDead) {
-			if (offset < distGiantMutantPlayerAttack &&
-			   stateInfo.fullPathHash != EnemySaT.attackStateHash && stateInfo.fullPathHash != EnemySaT.attackBackStateHash &&
-			   stateInfo.fullPathHash != EnemySaT.reactionHitStateHash && stateInfo.fullPathHash != EnemySaT.reactionHitBackStateHash) 
-			{
-				anim.SetBool ("Run", false);
-				anim.SetTrigger ("Attack");
-			} else {
-				if (offset > distGiantMutantPlayerAttack) {
-					anim.SetBool ("Run", true);
-					anim.ResetTrigger ("Attack");
-				}
+		if (thirangDistance < distanceThreshold &&
+		   stateInfo.fullPathHash != EnemySaT.attackStateHash && stateInfo.fullPathHash != EnemySaT.attackBackStateHash &&
+		   stateInfo.fullPathHash != EnemySaT.reactionHitStateHash && stateInfo.fullPathHash != EnemySaT.reactionHitBackStateHash) 
+		{
+			anim.SetBool ("Run", false);
+			anim.SetTrigger ("Attack");
+		} else {
+			if (thirangDistance > distanceThreshold) {
+				anim.SetBool ("Run", true);
+				anim.ResetTrigger ("Attack");
 			}
 		}
 
@@ -82,7 +53,7 @@ public class GiantMutantController : MonoBehaviour {
 			if (!isChangedAttack && 
 				(stateInfo.fullPathHash == mirrorAttackStateHash || stateInfo.fullPathHash == mirrorAttackBackStateHash)) {
 				isChangedAttack = true;
-				giantMutant.OnMirrorAttack ();
+				((GiantMutant)enemy).OnMirrorAttack ();
 			}
 
 			isAttacking = true;
@@ -92,19 +63,12 @@ public class GiantMutantController : MonoBehaviour {
 		}
 
 		//Death
-		if (giantMutant.health <= 0 && !deathStart) 
+		if (!deathStart) 
 		{
-			anim.SetTrigger ("Death");
-			deathStart = true;
-			giantMutant.OnDeath ();
+			EnemyDead ();
 		}
 
-		if (stateInfo.fullPathHash == EnemySaT.deathStateHash || stateInfo.fullPathHash == EnemySaT.deathBackStateHash) {
-			if (stateInfo.normalizedTime > 1f) {
-				anim.enabled = false;	//Executed when Death animation will finish
-				giantMutant.fadingDeath = true;
-			}
-		}
+		DeathAnimation (stateInfo, "LivelloFinale");
 
 	}
 

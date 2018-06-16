@@ -2,22 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LavaMonsterController : MonoBehaviour {
-	Animator anim;
-	GameObject thirang;
-	Thirang th;
-	LavaMonster lavaMonster;
-
-	public float distLavaMonsterPlayerAttack;
+public class LavaMonsterController : EnemyController {
 	public float distJumpAttack;
 
-	bool deathStart;
 	bool isChangedAttack;
 	bool jumpAttackLock;
 	bool canJumpAttack;
-
-	public bool isFacingLeft { get; set; }
-	public bool isAttacking { get; set; }
 
 	private readonly int mirrorAttackStateHash = Animator.StringToHash ("Base Layer.Mirror Attack");
 	private readonly int mirrorAttackBackStateHash = Animator.StringToHash ("Base Layer.Back.Mirror Attack Back");
@@ -27,65 +17,41 @@ public class LavaMonsterController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		anim = GetComponent<Animator> ();
-		lavaMonster = GetComponent<LavaMonster> ();
+		enemy = GetComponent<LavaMonster> ();
 		thirang = GameObject.FindGameObjectWithTag ("Player");
 		th = thirang.GetComponent<Thirang> ();
 
-		float dist = transform.position.x - thirang.transform.position.x;
-
-		if (dist >= 0) {
-			anim.SetBool ("IsFacingLeft", true);
-			isFacingLeft = true;
-		}
-		if (dist < 0) {
-			anim.SetBool ("IsFacingLeft", false);
-			isFacingLeft = false;
-		}
+		UpdatePosition ();
 	}
 
 	// Update is called once per frame
 	void Update () {
 		AnimatorStateInfo stateInfo = anim.GetCurrentAnimatorStateInfo (0);
-		float dist = transform.position.x - thirang.transform.position.x;
-		float offset = Mathf.Abs(dist);
 
-		//Adjust Archer position and rotation
-		transform.position = new Vector3 (transform.position.x, transform.position.y);
-		transform.eulerAngles = new Vector3 (transform.eulerAngles.x, -90, transform.eulerAngles.z);
-
-		if (!lavaMonster.ThirangOnCycloneSpin()) {			//Prevents a bug: during Thirang's Cyclone Spin the enemy turns around because Thirang moves back of him
-			if (dist >= 0) {
-				anim.SetBool ("IsFacingLeft", true);
-				isFacingLeft = true;
-			}
-			if (dist < 0) {
-				anim.SetBool ("IsFacingLeft", false);
-				isFacingLeft = false;
-			}
+		if (!enemy.ThirangOnCycloneSpin()) {			//Prevents a bug: during Thirang's Cyclone Spin the enemy turns around because Thirang moves back of him
+			UpdatePosition();
 		}
 
 		//Attack
 		//Attack-Run state switching control
-		if (!th.isDead) {
-			if (offset < distLavaMonsterPlayerAttack &&
-			   stateInfo.fullPathHash != EnemySaT.attackStateHash && stateInfo.fullPathHash != EnemySaT.attackBackStateHash &&
-			   stateInfo.fullPathHash != EnemySaT.reactionHitStateHash && stateInfo.fullPathHash != EnemySaT.reactionHitBackStateHash) 
-			{
-				anim.SetBool ("Run", false);
-				anim.SetTrigger ("Attack");
+		if (thirangDistance < distanceThreshold &&
+		   stateInfo.fullPathHash != EnemySaT.attackStateHash && stateInfo.fullPathHash != EnemySaT.attackBackStateHash &&
+		   stateInfo.fullPathHash != EnemySaT.reactionHitStateHash && stateInfo.fullPathHash != EnemySaT.reactionHitBackStateHash) 
+		{
+			anim.SetBool ("Run", false);
+			anim.SetTrigger ("Attack");
+		} else {
+			if (thirangDistance < distJumpAttack && canJumpAttack &&
+			   (stateInfo.fullPathHash == EnemySaT.runStateHash || stateInfo.fullPathHash == EnemySaT.runBackStateHash)) {
+				canJumpAttack = false;
+				anim.SetTrigger ("JumpAttack");
 			} else {
-				if (offset < distJumpAttack && canJumpAttack &&
-				   (stateInfo.fullPathHash == EnemySaT.runStateHash || stateInfo.fullPathHash == EnemySaT.runBackStateHash)) {
-					canJumpAttack = false;
-					anim.SetTrigger ("JumpAttack");
-				} else {
-					if (offset > distJumpAttack)
-						canJumpAttack = true;
-				
-					if (offset > distLavaMonsterPlayerAttack) {
-						anim.SetBool ("Run", true);
-						anim.ResetTrigger ("Attack");
-					}
+				if (thirangDistance > distJumpAttack)
+					canJumpAttack = true;
+			
+				if (thirangDistance > distanceThreshold) {
+					anim.SetBool ("Run", true);
+					anim.ResetTrigger ("Attack");
 				}
 			}
 		}
@@ -97,7 +63,7 @@ public class LavaMonsterController : MonoBehaviour {
 			if (!isChangedAttack && 
 				(stateInfo.fullPathHash == mirrorAttackStateHash || stateInfo.fullPathHash == mirrorAttackBackStateHash)) {
 				isChangedAttack = true;
-				lavaMonster.OnMirrorAttack ();
+				((LavaMonster)enemy).OnMirrorAttack ();
 			}
 
 			isAttacking = true;
@@ -108,19 +74,12 @@ public class LavaMonsterController : MonoBehaviour {
 		}
 
 		//Death
-		if (lavaMonster.health <= 0 && !deathStart) 
+		if (!deathStart) 
 		{
-			anim.SetTrigger ("Death");
-			deathStart = true;
-			lavaMonster.OnDeath ();
+			EnemyDead ();
 		}
-
-		if (stateInfo.fullPathHash == EnemySaT.deathStateHash || stateInfo.fullPathHash == EnemySaT.deathBackStateHash) {
-			if (stateInfo.normalizedTime > 1f) {
-				anim.enabled = false;	//Executed when Death animation will finish
-				lavaMonster.fadingDeath = true;
-			}
-		}
+			
+		DeathAnimation (stateInfo);
 
 	}
 

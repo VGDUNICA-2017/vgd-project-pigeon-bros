@@ -9,6 +9,8 @@ public class AbilitiesController : MonoBehaviour {
 
 	public bool onCycloneSpin { get; set; }
 
+	private Dictionary<string, int> costs;
+
 	public GameObject magicArrow;
 	bool arrowSpawned;
 
@@ -35,6 +37,13 @@ public class AbilitiesController : MonoBehaviour {
 		}
 
 		gameLevel = PlayerPrefs.GetInt ("gameLevel", 1);
+
+		costs = new Dictionary<string, int> () {
+			{ "berserk", 35 },
+			{ "cycloneSpin", 60 },
+			{ "magicArrow", 100 },
+			{ "goddessBlessin", 150 }
+		};
 	}
 	
 	// Update is called once per frame
@@ -48,26 +57,39 @@ public class AbilitiesController : MonoBehaviour {
 			if (!rayManagerLeft.onMovingGround && !rayManagerRight.onMovingGround) {
 				if (Input.GetButtonDown ("Berserk")) {
 					if (stateInfo.fullPathHash != ThirangSaT.abilitiesStates ["Berserk"] ||
-					   stateInfo.fullPathHash != ThirangSaT.abilitiesStates ["BerserkBack"]) {
-						anim.SetTrigger ("Berserk");
-						th.SetCurrentAbility ("berserk");
-						th.Berserk ();
+					   stateInfo.fullPathHash != ThirangSaT.abilitiesStates ["BerserkBack"]) 
+					{
+						if (th.mana >= costs ["berserk"]) {
+							anim.SetTrigger ("Berserk");
+							th.SetCurrentAbility ("berserk");
+							th.Berserk ();
+						}
 					}
 				}
 			}
+
+			if (stateInfo.fullPathHash == ThirangSaT.abilitiesStates ["Berserk"] ||
+			    stateInfo.fullPathHash == ThirangSaT.abilitiesStates ["BerserkBack"]) 
+			{
+				th.mana -= costs ["berserk"];
+			} 
 
 			if (gameLevel > 1) {
 
 				//Cyclone Spin
 				if (Input.GetButtonDown ("Cyclone Spin")) {
-					anim.SetTrigger ("Cyclone Spin");
-					th.SetCurrentAbility ("cycloneSpin");
+					if (th.mana >= costs ["cycloneSpin"]) {
+						anim.SetTrigger ("Cyclone Spin");
+						th.SetCurrentAbility ("cycloneSpin");
+					}
 				}
 
 				if (stateInfo.fullPathHash == ThirangSaT.abilitiesStates ["Cyclone Spin"] ||
-				   stateInfo.fullPathHash == ThirangSaT.abilitiesStates ["Cyclone SpinBack"]) {
+				   stateInfo.fullPathHash == ThirangSaT.abilitiesStates ["Cyclone SpinBack"]) 
+				{
 					anim.SetBool ("IsFighting", true);
 					onCycloneSpin = true;
+					th.mana -= costs ["cycloneSpin"];
 				} else if (onCycloneSpin) {
 					anim.SetBool ("IsFighting", false);
 					onCycloneSpin = false;
@@ -77,16 +99,20 @@ public class AbilitiesController : MonoBehaviour {
 
 					//Magic Arrow
 					if (Input.GetButtonDown ("Magic Arrow")) {
-						anim.SetTrigger ("Magic Arrow");
-						th.SetCurrentAbility ("magicArrow");
+						if (th.mana >= costs ["magicArrow"]) {
+							anim.SetTrigger ("Magic Arrow");
+							th.SetCurrentAbility ("magicArrow");
+						}
 					}
 
 					if (stateInfo.fullPathHash == ThirangSaT.abilitiesStates ["Magic Arrow"] ||
-					   stateInfo.fullPathHash == ThirangSaT.abilitiesStates ["Magic ArrowBack"]) {
+					   stateInfo.fullPathHash == ThirangSaT.abilitiesStates ["Magic ArrowBack"]) 
+					{
 						if (stateInfo.normalizedTime >= 0.56f && !arrowSpawned) {
 							SpawnMagicArrow ();
 							arrowSpawned = true;
-						}	
+						}
+						th.mana -= costs ["magicArrow"];
 					} else {
 						arrowSpawned = false;
 					}
@@ -95,9 +121,11 @@ public class AbilitiesController : MonoBehaviour {
 
 						//Goddess' Blessing
 						if (Input.GetButtonDown ("Goddess' Blessing")) {
-							godLight.enabled = true;
-							godBlessed = true;
-							th.SetCurrentAbility ("goddessBlessing");
+							if (th.mana >= costs ["goddessBlessing"]) {
+								godLight.enabled = true;
+								godBlessed = true;
+								th.SetCurrentAbility ("goddessBlessing");
+							}
 						}
 
 						if (godBlessed) {
@@ -108,6 +136,8 @@ public class AbilitiesController : MonoBehaviour {
 								timeGodBlessed = 0;
 								th.abilityState = new Character.Ability (0, Character.DamageType.none);
 							}
+
+							th.mana -= costs ["goddessBlessing"];
 						}
 					}
 				}

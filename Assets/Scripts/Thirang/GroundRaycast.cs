@@ -11,12 +11,17 @@ public class GroundRaycast : MonoBehaviour {
 
 	public bool onGround { get; set; }
 	public bool onMovingGround { get; set; }
-	float timeFalling;
+	public bool onDemonUpperGround { get; set; }
+	public bool onDemonLowerGround { get; set; }
+
+	int layerMask;
 
 	// Use this for initialization
 	void Start () {
 		anim = GetComponentInParent <Animator> ();
 		thTransform = transform.root;
+
+		LayerMaskInit ();
 	}
 
 	void FixedUpdate () {
@@ -24,9 +29,9 @@ public class GroundRaycast : MonoBehaviour {
 
 		RaycastHit hit;
 
-		if (Physics.Raycast (transform.position, Vector3.down, out hit, Mathf.Infinity) ||
-		    Physics.Raycast (transform.position + new Vector3 (0.7f, 0, 0), Vector3.down, out hit, Mathf.Infinity) ||
-		    Physics.Raycast (transform.position - new Vector3 (0.7f, 0, 0), Vector3.down, out hit, Mathf.Infinity)) 
+		if (Physics.Raycast (transform.position + new Vector3 (0, 0.1f, 0), Vector3.down, out hit, Mathf.Infinity, layerMask) ||
+			Physics.Raycast (transform.position + new Vector3 (0.7f, 0.1f, 0), Vector3.down, out hit, Mathf.Infinity, layerMask) ||
+			Physics.Raycast (transform.position - new Vector3 (0.7f, 0.1f, 0), Vector3.down, out hit, Mathf.Infinity, layerMask)) 
 		{	
 			if (stateInfo.fullPathHash == ThirangSaT.jumpIdle || stateInfo.fullPathHash == ThirangSaT.jumpBackIdle) {
 
@@ -35,7 +40,8 @@ public class GroundRaycast : MonoBehaviour {
 				     hit.collider.gameObject.layer == LayerMask.NameToLayer ("MovingGround") ||
 					 hit.collider.gameObject.layer == LayerMask.NameToLayer ("GroundLava1") ||
 				 	 hit.collider.gameObject.layer == LayerMask.NameToLayer ("GroundLava2") ||
-					 hit.collider.gameObject.layer == LayerMask.NameToLayer ("GroundLava3"))) 
+					 hit.collider.gameObject.layer == LayerMask.NameToLayer ("GroundLava3") ||
+					 hit.collider.gameObject.layer == LayerMask.NameToLayer ("DemonUpperGround"))) 
 				{
 					anim.SetTrigger ("JumpDown");
 					isLanding = true;
@@ -44,7 +50,7 @@ public class GroundRaycast : MonoBehaviour {
 			}
 
 			//Moving Grund
-			if (hit.collider.gameObject.layer == LayerMask.NameToLayer ("MovingGround") && hit.distance <= 1.8f) {
+			if (hit.collider.gameObject.layer == LayerMask.NameToLayer ("MovingGround") && hit.distance <= 2f) {
 				thTransform.SetParent (hit.collider.gameObject.transform);
 				onMovingGround = true;
 			} else {
@@ -56,12 +62,13 @@ public class GroundRaycast : MonoBehaviour {
 				NotOnMovingGround ();
 			}
 
-			if (hit.distance <= 1.2f &&
+			if (hit.distance <= 1.5f &&
 			    (hit.collider.gameObject.layer == LayerMask.NameToLayer ("Ground") ||
 			    hit.collider.gameObject.layer == LayerMask.NameToLayer ("MovingGround") ||
 				hit.collider.gameObject.layer == LayerMask.NameToLayer ("GroundLava1") ||
 				hit.collider.gameObject.layer == LayerMask.NameToLayer ("GroundLava2") ||
-				hit.collider.gameObject.layer == LayerMask.NameToLayer ("GroundLava3"))) 
+				hit.collider.gameObject.layer == LayerMask.NameToLayer ("GroundLava3")) ||
+				hit.collider.gameObject.layer == LayerMask.NameToLayer ("DemonUpperGround")) 
 			{
 				onGround = true;
 			}
@@ -69,13 +76,8 @@ public class GroundRaycast : MonoBehaviour {
 				onGround = false;
 			}
 
-			timeFalling = 0;
 		} else {
 			onGround = false;
-			timeFalling += Time.deltaTime;
-			if (timeFalling >= 2f) {
-				//Animation Falling
-			}
 		}
 	}
 
@@ -86,5 +88,14 @@ public class GroundRaycast : MonoBehaviour {
 	void NotOnMovingGround() {
 		onMovingGround = false;
 		thTransform.SetParent (null);
+	}
+
+	void LayerMaskInit() {
+		layerMask = 1 << 8;
+		layerMask |= 1 << 10;
+		layerMask |= 1 << 11;
+		layerMask |= 1 << 12;
+		layerMask |= 1 << 13;
+		layerMask |= 1 << 17;
 	}
 }

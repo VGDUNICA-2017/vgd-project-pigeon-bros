@@ -5,29 +5,32 @@ using UnityEngine.Playables;
 
 public class Prize : MonoBehaviour {
 	public string powerUp;
-	public AudioClip audioClip;
+	//public AudioClip audioClip;
 
 	bool powerUpApplied;
 
 	void OnTriggerEnter(Collider other) {
 		if (other.transform.root.CompareTag ("Player") && !powerUpApplied) {
-			//AudioSource.PlayClipAtPoint (audioClip, transform.position);
 			powerUpApplied = true;
 			FindObjectOfType<PrizesCollected> ().SendMessage ("PrizeCollected");
 
-			PowerUp (other.transform.root.gameObject.GetComponent<Thirang> ());
+			PowerUp (other.transform.root.GetComponent<Thirang> ());
 
-			Destroy (this.gameObject);
+			foreach (Transform child in transform) {
+				Destroy (child.gameObject);
+			}
+
+			StartCoroutine (DestroyWait ());
 		}
 	}
 
 	public void PowerUp (Thirang th) {
 		switch (powerUp) {
 			case "health":
-				th.health += 400;
+				th.maxHealth += 400;
 				break;
-			case "attackDamage":
-				th.attackDamage += 40;
+			case "mana":
+				th.maxMana += 40;
 				break;
 			case "armor":
 				th.armor += 20;
@@ -38,5 +41,10 @@ public class Prize : MonoBehaviour {
 			default:
 				break;
 		}
+	}
+
+	IEnumerator DestroyWait() {
+		yield return new WaitForSecondsRealtime (25f);
+		Destroy (this.gameObject);
 	}
 }

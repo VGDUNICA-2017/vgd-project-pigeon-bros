@@ -9,6 +9,8 @@ public class Archer : Enemy {
 
 	Renderer[] gosRends;
 
+	int healthAtInit;
+
 	void Init() {
 		/*Thirang Level 1:
 		 * Archer killed by:
@@ -17,15 +19,17 @@ public class Archer : Enemy {
 		 	* 2 Cyclone Spin
 		 	* 1 MagicArrow
 		 	* 1 Cyclone Spin and 1 AutoAttack
-		 * Orc kills:
+		 * Thirang kills:
 		 	* 40 autoAttacks
 		 */ 
-		this.health = 800 * thirang.level;
-		this.attackDamage = 75 * thirang.level;
-		this.armor = 26 * thirang.level;
-		this.magicResist = 25 * thirang.level;
+		this.health = 800 + (this.health * ((thirang.level * 10) / 100));
+		this.attackDamage = 75 + (this.attackDamage * ((thirang.level * 10) / 100));
+		this.armor = 26 + (this.armor * ((thirang.level * 10) / 100));
+		this.magicResist = 25 + (this.magicResist * ((thirang.level * 10) / 100));
 		this.enemyType = EnemyType.Archer;
 		this.autoAttack = new Ability (attackDamage, DamageType.physical);
+
+		healthAtInit = health;
 	}
 
 	// Use this for initialization
@@ -43,7 +47,7 @@ public class Archer : Enemy {
 		if (fadingDeath)
 			FadeDeath (gosRends);
 
-		ReadyNewAttack ();
+		ReadyNewAttack_ThirangAlive ();
 	}
 
 	void OnTriggerEnter (Collider other) {
@@ -55,10 +59,10 @@ public class Archer : Enemy {
 	}
 
 	public void OnDeath() {
-		base.OnDeath (gold: 75, exp: 150);
+		base.OnDeath (gold: 75, exp: 150, health: healthAtInit / 10, mana: 15);
 	}
 
-	protected override bool ThirangFacingEnemy() {
+	protected override bool ThirangEnemyFacingEachOther() {
 		return (thirang.FacingRight() && arcCtrl.isFacingLeft) || (!thirang.FacingRight() && !arcCtrl.isFacingLeft);
 	}
 }

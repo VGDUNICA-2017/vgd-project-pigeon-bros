@@ -106,12 +106,16 @@
      <Compile Include="Assets\Downloaded Assets\Water\Scripts\WaterDetector.cs" />
      <Compile Include="Assets\Scripts\Character.cs" />
      <Compile Include="Assets\Scripts\Enemy.cs" />
+     <Compile Include="Assets\Scripts\EnemyController.cs" />
      <Compile Include="Assets\Scripts\EnemySaT.cs" />
      <Compile Include="Assets\Scripts\LevelsBehaviours\Camera\LookAt.cs" />
      <Compile Include="Assets\Scripts\LevelsBehaviours\DeathZone.cs" />
      <Compile Include="Assets\Scripts\LevelsBehaviours\EarthLevelBoss\EarthBossFight.cs" />
-     <Compile Include="Assets\Scripts\LevelsBehaviours\FightZone.cs" />
+     <Compile Include="Assets\Scripts\LevelsBehaviours\Fights\FightZone.cs" />
+     <Compile Include="Assets\Scripts\LevelsBehaviours\Fights\FinalFights.cs" />
+     <Compile Include="Assets\Scripts\LevelsBehaviours\FinalLevelBoss\FinalBossFight.cs" />
      <Compile Include="Assets\Scripts\LevelsBehaviours\FinalLevelBoss\FireBallTrigger.cs" />
+     <Compile Include="Assets\Scripts\LevelsBehaviours\Ground\ActiveGroundTrigger.cs" />
      <Compile Include="Assets\Scripts\LevelsBehaviours\Ground\BreakCube.cs" />
      <Compile Include="Assets\Scripts\LevelsBehaviours\Ground\FadeGroundBoss.cs" />
      <Compile Include="Assets\Scripts\LevelsBehaviours\Ground\MovingGround.cs" />
@@ -124,7 +128,6 @@
      <Compile Include="Assets\Scripts\LevelsBehaviours\Rain.cs" />
      <Compile Include="Assets\Scripts\LevelsBehaviours\SeaLevelBoss\SeaBossFight.cs" />
      <Compile Include="Assets\Scripts\LevelsBehaviours\Sign\PointingSign.cs" />
-     <Compile Include="Assets\Scripts\LevelsBehaviours\Sign\RotatingSign.cs" />
      <Compile Include="Assets\Scripts\LevelsBehaviours\SkyLevelBoss\GroundBoss.cs" />
      <Compile Include="Assets\Scripts\LevelsBehaviours\SkyLevelBoss\SkyBossFight.cs" />
      <Compile Include="Assets\Scripts\LevelsBehaviours\SpecialRock\DestoryRockFragments.cs" />

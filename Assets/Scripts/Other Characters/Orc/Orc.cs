@@ -9,6 +9,8 @@ public class Orc : Enemy {
 
 	Renderer[] gosRends;
 
+	int healthAtInit;
+
 	void Init() {
 		/*Thirang Level 1:
 		 * Orc killed by:
@@ -20,12 +22,14 @@ public class Orc : Enemy {
 		 * Orc kills:
 		 	* 60 autoAttacks
 		 */ 
-		this.health = 1000 * thirang.level;
-		this.attackDamage = 50 * thirang.level;
-		this.armor = 40 * thirang.level;
-		this.magicResist = 25 * thirang.level;
+		this.health = 1000 + (this.health * ((thirang.level * 10) / 100));
+		this.attackDamage = 50 + (this.attackDamage * ((thirang.level * 10) / 100));
+		this.armor = 40 + (this.armor * ((thirang.level * 10) / 100));
+		this.magicResist = 25 + (this.magicResist * ((thirang.level * 10) / 100));
 		this.enemyType = EnemyType.Orc;
 		this.autoAttack = new Ability (attackDamage, DamageType.physical);
+
+		healthAtInit = health;
 	}
 
 	// Use this for initialization
@@ -47,7 +51,7 @@ public class Orc : Enemy {
 		if (fadingDeath)
 			FadeDeath (gosRends);
 
-		ReadyNewAttack ();
+		ReadyNewAttack_ThirangAlive ();
 	}
 
 	void OnTriggerEnter (Collider other) {
@@ -60,10 +64,10 @@ public class Orc : Enemy {
 	}
 
 	public void OnDeath() {
-		base.OnDeath (gold: 50, exp: 100);
+		base.OnDeath (gold: 50, exp: 100, health: healthAtInit / 10, mana: 10);
 	}
 	
-	protected override bool ThirangFacingEnemy () {
+	protected override bool ThirangEnemyFacingEachOther () {
 		return (thirang.FacingRight() && orcCtrl.isFacingLeft) || (!thirang.FacingRight() && !orcCtrl.isFacingLeft);
 	}
 }

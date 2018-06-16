@@ -41,8 +41,6 @@ public class SuperJump : MonoBehaviour {
 		thirang.transform.SetParent (g.transform);
 		thirang.GetComponent<Rigidbody> ().isKinematic = true;
 
-		animG.SetTrigger ("Jump");
-
 		StartCoroutine (GetControlBack (g));
 	}
 

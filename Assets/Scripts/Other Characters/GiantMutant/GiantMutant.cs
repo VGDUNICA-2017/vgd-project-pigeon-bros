@@ -10,10 +10,19 @@ public class GiantMutant : Enemy {
 	Renderer[] gosRends;
 
 	void Awake() {
-		this.health = 25000;
-		this.attackDamage = 160;
-		this.armor = 100;
-		this.magicResist = 70;
+		/*Thirang Level 1:
+		 * Giant Mutant killed by:
+		 	* 91 autoAttacks
+		 	* 83 Berserk autoAttacks
+		 	* 65 Cyclone Spin
+		 	* 39 MagicArrow
+		 * Giant Mutant kills:
+		 	* 14 autoAttacks
+		 */ 
+		this.health = 14000;
+		this.attackDamage = 215;
+		this.armor = 65;
+		this.magicResist = 55;
 		this.autoAttack = new Ability (attackDamage, DamageType.physical);
 	}
 
@@ -35,7 +44,7 @@ public class GiantMutant : Enemy {
 		if (fadingDeath)
 			FadeDeath (gosRends);
 
-		ReadyNewAttack ();
+		ReadyNewAttack_ThirangAlive ();
 	}
 
 	void OnTriggerEnter (Collider other) {
@@ -51,10 +60,10 @@ public class GiantMutant : Enemy {
 	}
 
 	public void OnDeath() {
-		base.OnDeath (gold: 750, exp: 1500);
+		base.OnDeath (gold: 750, exp: 1500, health: thirang.maxHealth, mana: thirang.maxMana);
 	}
 
-	protected override bool ThirangFacingEnemy() {
+	protected override bool ThirangEnemyFacingEachOther() {
 		return (thirang.FacingRight() && giantMutantCtrl.isFacingLeft) || (!thirang.FacingRight() && !giantMutantCtrl.isFacingLeft);
 	}
 

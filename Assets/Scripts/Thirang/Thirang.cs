@@ -6,7 +6,9 @@ public class Thirang : Character {
 	ThirangController thCtrl;
 	AbilitiesController thAbilCtrl;
 
-	int mana { get; set; }
+	public int maxHealth { get; set; }
+	public int mana { get; set; }
+	public int maxMana { get; set; }
 	public int level { get; set; }
 	public int gold { get; set; }
 	public int exp { get; set; }
@@ -36,6 +38,9 @@ public class Thirang : Character {
 	public bool isDead { get; set; }
 	int lastHealthValue;
 
+	//Need to control the Raycast from body and not feet
+	public bool onEarthBossFight { get; set; }
+
 	public void Init() {
 		Vector3 pos;
 		pos.x = PlayerPrefs.GetFloat ("xP", transform.position.x);
@@ -43,23 +48,25 @@ public class Thirang : Character {
 		pos.z = PlayerPrefs.GetFloat ("zP", transform.position.z);
 		transform.position = pos;
 
-		health = PlayerPrefs.GetInt("health", 12000);
-		mana = PlayerPrefs.GetInt("mana", 300);
-		attackDamage = PlayerPrefs.GetInt("attackDamage", 100);
-		armor = PlayerPrefs.GetInt("armor", 25);
-		magicResist = PlayerPrefs.GetInt("magicResist", 24);
-		level = PlayerPrefs.GetInt("level", 1);
+		maxHealth = PlayerPrefs.GetInt ("maxHealth", 12000);
+		health = PlayerPrefs.GetInt ("health", 12000);
+		maxMana = PlayerPrefs.GetInt ("maxMana", 300);
+		mana = PlayerPrefs.GetInt ("mana", 300);
+		attackDamage = PlayerPrefs.GetInt ("attackDamage", 100);
+		armor = PlayerPrefs.GetInt ("armor", 25);
+		magicResist = PlayerPrefs.GetInt ("magicResist", 24);
+		level = PlayerPrefs.GetInt ("level", 1);
 
-		if (level == 1) {
-			autoAttack = new Ability (attackDamage, DamageType.physical);
-			berserk = new Ability (attackDamage * 110 / 100, DamageType.physical);
-			cycloneSpin = new Ability (attackDamage * 140 / 100, DamageType.physical);
-			magicArrow = new Ability (attackDamage * 200 / 100, DamageType.magic);
-			goddessBlessing = new Ability (0, DamageType.invulnerable);
-			berserkTime = 4 + (3 * level);
-			timeGodBlessed = 4;
-		} else
-			UpdateValues ();
+		gold = PlayerPrefs.GetInt ("gold", 0);
+		exp = PlayerPrefs.GetInt ("exp", 0);
+
+		autoAttack = new Ability (attackDamage, DamageType.physical);
+		berserk = new Ability (attackDamage * 110 / 100, DamageType.physical);
+		cycloneSpin = new Ability (attackDamage * 140 / 100, DamageType.physical);
+		magicArrow = new Ability (attackDamage * 200 / 100, DamageType.magic);
+		goddessBlessing = new Ability (0, DamageType.invulnerable);
+		berserkTime = 4 + (3 * level);
+		timeGodBlessed = 4 + level;
 
 	}
 
@@ -98,6 +105,19 @@ public class Thirang : Character {
 			UpdateValues ();
 		}
 
+		if (Input.GetKey (KeyCode.LeftControl) && Input.GetKey (KeyCode.LeftShift) && Input.GetKey (KeyCode.D)) {
+			PlayerPrefs.DeleteAll ();
+			print ("PlayerPrefs deleted");
+			Init ();
+			PlayerPrefs.SetInt ("gameLevel", 1);
+		}
+
+		if (health > maxHealth)
+			health = maxHealth;
+
+		if (mana > maxMana)
+			mana = maxMana;
+
 		print (health);
 	}
 
@@ -122,12 +142,16 @@ public class Thirang : Character {
 				PlayerPrefs.DeleteKey ("zP");
 			}
 		}
+		PlayerPrefs.SetInt ("maxHealth", maxHealth);
 		PlayerPrefs.SetInt ("health", health);
+		PlayerPrefs.SetInt ("maxMana", maxMana);
 		PlayerPrefs.SetInt ("mana", mana);
 		PlayerPrefs.SetInt ("attackDamage", attackDamage);
 		PlayerPrefs.SetInt ("armor", armor);
 		PlayerPrefs.SetInt ("magicResist", magicResist);
 		PlayerPrefs.SetInt ("level", level);
+		PlayerPrefs.SetInt ("gold", gold);
+		PlayerPrefs.SetInt ("exp", exp);
 
 		PlayerPrefs.Save ();
 	}
@@ -159,11 +183,11 @@ public class Thirang : Character {
 	}
 
 	public void UpdateValues () {
-		health = health * (10 * level + 100) / 100;
-		mana = mana * (10 * level + 100) / 100;
-		attackDamage = attackDamage * (10 * level + 100) / 100;
-		armor = armor * (10 * level + 100) / 100;
-		magicResist = magicResist * (10 * level + 100) / 100;
+		maxHealth += maxHealth * level / 100;
+		maxMana += maxMana * level / 100;
+		attackDamage += attackDamage * level / 100;
+		armor += armor * level / 100;
+		magicResist += magicResist * level / 100;
 
 		berserk.damage = attackDamage * 110 / 100;
 		cycloneSpin.damage = attackDamage * 140 / 100;
@@ -207,7 +231,7 @@ public class Thirang : Character {
 	}
 
 	public void FireBallDamage() {
-		Ability fireBall = new Ability (this.health * 10 / 100, DamageType._true);
+		Ability fireBall = new Ability (this.maxHealth * 10 / 100, DamageType._true);
 		OnDamage (this.gameObject, fireBall);
 	}
 

@@ -19,6 +19,15 @@ public class BackOnThirang : MonoBehaviour {
 			triggeredEvent = true;
 			camScript.enabled = true;
 			animCamera.SetTrigger ("Back on Thirang");
+			StartCoroutine (Wait ());
+			other.transform.root.GetComponent<JumpOverride> ().heightJump = 9f;
+			other.transform.root.GetComponent<JumpOverride> ().runHeightJump = 9f;
 		}
+	}
+
+	IEnumerator Wait() {
+		yield return new WaitForSecondsRealtime (3f);
+		Destroy (animCamera);
+		Destroy (this.gameObject);
 	}
 }

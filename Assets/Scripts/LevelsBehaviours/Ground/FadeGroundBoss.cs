@@ -9,12 +9,12 @@ public class FadeGroundBoss : MonoBehaviour {
 	bool notUn_Fade = false;
 	float timer = 0f;
 	Renderer[] rendCubes;
-	Collider[] colliderCubes;
+	Collider colliderCubes;
 	Color baseColor, color, newColor;
 
 	void Start() {
 		rendCubes = GetComponentsInChildren<Renderer> ();
-		colliderCubes = GetComponentsInChildren<Collider> ();
+		colliderCubes = GetComponent<Collider> ();
 		baseColor = rendCubes[0].material.color;
 		newColor = baseColor;
 	}
@@ -50,9 +50,7 @@ public class FadeGroundBoss : MonoBehaviour {
 		}
 
 		if (newColor.a <= baseColor.a / 2) {
-			foreach (var c in colliderCubes) {
-				c.isTrigger = true;
-			}
+			colliderCubes.isTrigger = true;
 		}
 
 		if (rendCubes[0].material.color.a <= 0f) {
@@ -72,9 +70,7 @@ public class FadeGroundBoss : MonoBehaviour {
 		}
 
 		if (newColor.a >= baseColor.a / 2) {
-			foreach (var c in colliderCubes) {
-				c.isTrigger = false;
-			}
+			colliderCubes.isTrigger = false;
 		}
 
 		if (newColor.a >= baseColor.a) {
@@ -85,31 +81,32 @@ public class FadeGroundBoss : MonoBehaviour {
 		}
 	}
 
-	void OnCollisionEnter(Collision other) {
-		if (other.gameObject.CompareTag ("Boss")) {
+	void OnTriggerEnter(Collider other) {
+		if (other.transform.CompareTag ("Enemy")) {
+			print ("collisionEnemy");
 			toFade = true;
 			toUn_Fade = false;
 			newColor = baseColor;
 		}
 
-		if (other.transform.root.CompareTag ("Player")) {
+		if (other.transform.CompareTag ("ThirangFadeTrigger")) {
 			notUn_Fade = true;
 			toUn_Fade = false;
 		}
 	}
 
-	void OnCollisionStay(Collision other) {
-		if (other.gameObject.CompareTag ("Boss")) {
+	void OnTriggerStay(Collider other) {
+		if (other.transform.CompareTag ("Enemy")) {
 			notUn_Fade = true;
 		}
 	}
 
-	void OnCollisionExit(Collision other) {
-		if (other.gameObject.CompareTag ("Boss")) {
+	void OnTriggerExit(Collider other) {
+		if (other.transform.CompareTag ("Enemy")) {
 			notUn_Fade = false;
 		}
 
-		if (other.transform.root.CompareTag ("Player")) {
+		if (other.transform.CompareTag ("ThirangFadeTrigger")) {
 			notUn_Fade = false;
 			if (newColor.a < baseColor.a)
 				toUn_Fade = true;

@@ -2,95 +2,74 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DemonController : MonoBehaviour {
-	Animator anim;
-	GameObject thirang;
-	Thirang th;
-	Demon demon;
+public class DemonController : EnemyController {
 	public GameObject magicBall;
+	GroundRaycast[] rays;
 
-	public float distDemonPlayerAttack;
 	public float distDemonPlayerSpell;
 
-	bool deathStart;
 	bool magicAttackSpawned;
 	bool isFar;
 
 	float timerAction;
 
-	public bool isFacingLeft { get; set; }
-	public bool isAttacking { get; set; }
-
 	private readonly int spellCastHash = Animator.StringToHash ("Base Layer.Spell");
 	private readonly int spellCastBackHash = Animator.StringToHash ("Base Layer.Back.Spell Back");
 
-	// Use this for initialization
+	public static readonly int startStateHash = Animator.StringToHash ("Base Layer.Start");
+
+	void Awake() {
+		transform.eulerAngles = new Vector3 (transform.eulerAngles.x, -90, transform.eulerAngles.z);
+	}
+
 	void Start () {
 		anim = GetComponent <Animator> ();
-		demon = this.gameObject.GetComponent<Demon> ();
+		enemy = this.gameObject.GetComponent<Demon> ();
 		thirang = GameObject.FindGameObjectWithTag ("Player");
 		th = thirang.GetComponent<Thirang> ();
 
-		float dist = transform.position.x - thirang.transform.position.x;
+		th.onEarthBossFight = true;
 
-		if (dist >= 0) {
-			anim.SetBool ("IsFacingLeft", true);
-			isFacingLeft = true;
-		}
-		if (dist < 0) {
-			anim.SetBool ("IsFacingLeft", false);
-			isFacingLeft = false;
-		}
+		rays = thirang.GetComponentsInChildren <GroundRaycast> ();
+
+		UpdatePosition ();
 	}
 
 	// Update is called once per frame
 	void Update () {
 		AnimatorStateInfo stateInfo = anim.GetCurrentAnimatorStateInfo (0);
-		float dist = transform.position.x - thirang.transform.position.x;
-		float offset = Mathf.Abs(dist);
 
 		timerAction -= Time.deltaTime;
 
-		//Adjust Archer position and rotation
-		transform.position = new Vector3 (transform.position.x, transform.position.y);
-		transform.eulerAngles = new Vector3 (transform.eulerAngles.x, -90, transform.eulerAngles.z);
-
-		if (!demon.ThirangOnCycloneSpin()) {			//Prevents a bug: during Thirang's Cyclone Spin the enemy turns around because Thirang moves back of him
-			if (dist >= 0) {
-				anim.SetBool ("IsFacingLeft", true);
-				isFacingLeft = true;
-			}
-			if (dist < 0) {
-				anim.SetBool ("IsFacingLeft", false);
-				isFacingLeft = false;
-			}
+		if (!enemy.ThirangOnCycloneSpin()) {			//Prevents a bug: during Thirang's Cyclone Spin the enemy turns around because Thirang moves back of him
+			UpdatePosition();
 		}
 
 		//Attack
 		//Attack-Run state switching control
-		if (!th.isDead) {
-			if (offset < distDemonPlayerAttack &&
-			   stateInfo.fullPathHash != EnemySaT.attackStateHash && stateInfo.fullPathHash != EnemySaT.attackBackStateHash &&
-			   stateInfo.fullPathHash != EnemySaT.reactionHitStateHash && stateInfo.fullPathHash != EnemySaT.reactionHitBackStateHash) 
+		if (!rays [0].onMovingGround || !rays [1].onMovingGround) {
+			if (thirangDistance < distanceThreshold &&
+			    stateInfo.fullPathHash != EnemySaT.attackStateHash && stateInfo.fullPathHash != EnemySaT.attackBackStateHash &&
+			    stateInfo.fullPathHash != EnemySaT.reactionHitStateHash && stateInfo.fullPathHash != EnemySaT.reactionHitBackStateHash) 
 			{
 				anim.SetBool ("Run", false);
 				anim.SetTrigger ("Attack");
 			} else {
-				if (offset >= distDemonPlayerAttack && offset <= distDemonPlayerSpell) {
+				if (thirangDistance >= distanceThreshold && thirangDistance <= distDemonPlayerSpell) {
 					anim.SetBool ("Run", true);
 					anim.ResetTrigger ("Attack");
 					anim.ResetTrigger ("Cast");
 					isFar = false;
 				} else if (!isFar && timerAction <= 1f) {
-					int rand = Random.Range (0, 2);
-					switch (rand) {
-						case 0:
+					int rand = Random.Range (1, 21);
+					switch (rand <= 10) {
+						case true:
 							anim.SetBool ("Run", true);
 							anim.ResetTrigger ("Attack");
 							anim.ResetTrigger ("Cast");
 							isFar = true;
 							break;
-						case 1:
+						case false:
 							anim.SetBool ("Run", false);
 							anim.SetTrigger ("Cast");
 							timerAction = 2f;
@@ -100,6 +79,9 @@ public class DemonController : MonoBehaviour {
 					}
 				}
 			}
+		} else {
+			anim.SetBool ("Run", false);
+			anim.SetTrigger ("Cast");
 		}
 
 		if (stateInfo.fullPathHash == EnemySaT.attackStateHash || stateInfo.fullPathHash == EnemySaT.attackBackStateHash) {
@@ -112,27 +94,19 @@ public class DemonController : MonoBehaviour {
 			if (stateInfo.normalizedTime > 0.51f && !magicAttackSpawned) {
 				SpellCast ();
 				magicAttackSpawned = true;
-				print ("pezzente");
 			}
 		} else {
 			magicAttackSpawned = false;
 		}
 
 		//Death
-		if (demon.health <= 0 && !deathStart) 
+		if (!deathStart) 
 		{
-			anim.SetTrigger ("Death");
-			deathStart = true;
-			demon.OnDeath ();
+			EnemyDead ();
 		}
-
-		if (stateInfo.fullPathHash == EnemySaT.deathStateHash || stateInfo.fullPathHash == EnemySaT.deathBackStateHash) {
-			if (stateInfo.normalizedTime > 1f) {
-				anim.enabled = false;	//Executed when Death animation will finish
-				demon.fadingDeath = true;
-			}
-		}
-
+		
+		//if dead
+		DeathAnimation (stateInfo, "LivelloMare");
 	}
 
 	void SpellCast() {
@@ -147,7 +121,7 @@ public class DemonController : MonoBehaviour {
 		OnMagicAttackHit _magicAttack = Instantiate (magicBall, transform.GetChild (transform.childCount - 1).position, 
 			Quaternion.identity, null).AddComponent<OnMagicAttackHit> ();
 
-		_magicAttack.demon = this.demon;
+		_magicAttack.demon = enemy as Demon;
 		_magicAttack.Direction (direction);
 	}
 
@@ -158,5 +132,9 @@ public class DemonController : MonoBehaviour {
 			return stateInfo.normalizedTime > 0.45f && stateInfo.normalizedTime < 0.65f;
 
 		return false;
+	}
+
+	public void Teleport(int plane) {
+		transform.position = new Vector3 (transform.position.x, transform.position.y + 11 * plane);
 	}
 }

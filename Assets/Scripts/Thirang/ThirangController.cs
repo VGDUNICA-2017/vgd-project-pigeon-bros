@@ -18,6 +18,9 @@ public class ThirangController : MonoBehaviour {
 
 	public bool deathTrap { get; set; }
 
+	public bool onDemonUpperGround { get; set; }
+	public bool onDemonLowerGround { get; set; }
+
 	[HideInInspector] public bool isFighting;
 	[HideInInspector] public bool changingState;
 
@@ -231,6 +234,37 @@ public class ThirangController : MonoBehaviour {
 				anim.SetTrigger (deathType);
 
 				StartCoroutine (BugDeath (deathType));
+			}
+		}
+	}
+
+	void FixedUpdate() {
+		if (th.onEarthBossFight) {
+			RaycastHit hit;
+
+			int layerMask = 1 << 8;
+			layerMask |= 1 << 17;
+
+			Vector3 rayPos = transform.position + new Vector3 (0, 3f, 0);
+			rayPos.z = 0;
+
+			if (Physics.Raycast (rayPos, Vector3.down, out hit, Mathf.Infinity, layerMask)) {
+				//DemonUpperGround ----> Demon Boss Fight
+				if (hit.collider.gameObject.layer == LayerMask.NameToLayer ("DemonUpperGround") && hit.distance <= 20f) {
+					onDemonUpperGround = true;
+					print ("onupper");
+				} else {
+					onDemonUpperGround = false;
+					print ("boh");
+				}
+
+				//DemonLowerGround ----> Demon Boss Fight
+				if (hit.collider.gameObject.layer == LayerMask.NameToLayer ("Ground") && hit.distance <= 20f) {
+					onDemonLowerGround = true;
+				} else {
+					onDemonLowerGround = false;
+					print ("tgz");
+				}
 			}
 		}
 	}

@@ -17,9 +17,6 @@ public class TeleportBehaviour : MonoBehaviour {
 		if (other.transform.root.gameObject.CompareTag ("Player")) {
 			Transform thirang = other.transform.root;
 			if (!loaded && thirang.position.x > teleportBounds.min.x && thirang.position.x < teleportBounds.max.x) {
-
-				if (!SceneToLoad.Contains ("Boss"))
-					PlayerPrefs.SetInt ("gameLevel", PlayerPrefs.GetInt ("gameLevel") + 1);
 				
 				thirang.GetComponent<Thirang> ().SaveThirangData (false);
 				StartCoroutine (LoadScene());

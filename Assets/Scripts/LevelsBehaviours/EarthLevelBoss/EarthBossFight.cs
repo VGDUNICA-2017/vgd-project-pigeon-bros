@@ -5,6 +5,7 @@ using UnityEngine;
 public class EarthBossFight : MonoBehaviour {
 	public GameObject upperPart;
 	public GameObject movingGroundBoss;
+	public GameObject demon;
 
 	bool eventTriggered;
 
@@ -15,6 +16,7 @@ public class EarthBossFight : MonoBehaviour {
 			GameObject thirang = other.transform.root.gameObject;
 
 			thirang.GetComponent<ThirangController> ().enabled = false;
+			thirang.GetComponent<AbilitiesController> ().enabled = false;
 			thirang.GetComponent<Animator> ().SetFloat ("Speed", 0);
 			StartCoroutine (ThirangToIdle (thirang));
 
@@ -33,6 +35,13 @@ public class EarthBossFight : MonoBehaviour {
 		movingGroundBoss.GetComponent<MovingGround> ().enabled = true;
 
 		th.GetComponent<ThirangController> ().enabled = true;
+		th.GetComponent<AbilitiesController> ().enabled = true;
+
+		demon.GetComponent<Animator> ().Play (DemonController.startStateHash);
+		demon.GetComponent<DemonController> ().enabled = true;
+
+		yield return new WaitForSecondsRealtime (1f);
+		demon.tag = "Enemy";
 
 		Destroy (this.gameObject);
 	}
