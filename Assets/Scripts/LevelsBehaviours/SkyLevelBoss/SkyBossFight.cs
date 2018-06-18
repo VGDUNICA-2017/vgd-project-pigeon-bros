@@ -32,8 +32,11 @@ public class SkyBossFight : MonoBehaviour {
 		yield return new WaitForSecondsRealtime (3.5f);
 		anim.SetTrigger ("OnLevel");
 		yield return new WaitForSecondsRealtime (3.5f);
+
+		thirang.GetComponent<Thirang> ().onFight = true;
 		thirang.GetComponent<ThirangController> ().enabled = true;
 		thirang.GetComponent<AbilitiesController> ().enabled = true;
+
 		boss.GetComponent<MageController> ().enabled = true;
 		bossGround.GetComponent<GroundBoss> ().enabled = true;
 	}

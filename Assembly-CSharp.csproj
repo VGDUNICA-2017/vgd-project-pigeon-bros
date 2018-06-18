@@ -108,6 +108,12 @@
      <Compile Include="Assets\Scripts\Enemy.cs" />
      <Compile Include="Assets\Scripts\EnemyController.cs" />
      <Compile Include="Assets\Scripts\EnemySaT.cs" />
+     <Compile Include="Assets\Scripts\GUI\Dialog.cs" />
+     <Compile Include="Assets\Scripts\GUI\DialogDispatcher.cs" />
+     <Compile Include="Assets\Scripts\GUI\MainMenu.cs" />
+     <Compile Include="Assets\Scripts\GUI\Merchant.cs" />
+     <Compile Include="Assets\Scripts\GUI\PauseMenu.cs" />
+     <Compile Include="Assets\Scripts\GUI\UI.cs" />
      <Compile Include="Assets\Scripts\LevelsBehaviours\Camera\LookAt.cs" />
      <Compile Include="Assets\Scripts\LevelsBehaviours\DeathZone.cs" />
      <Compile Include="Assets\Scripts\LevelsBehaviours\EarthLevelBoss\EarthBossFight.cs" />
@@ -155,6 +161,7 @@
      <Compile Include="Assets\Scripts\Other Characters\Mage\Mage.cs" />
      <Compile Include="Assets\Scripts\Other Characters\Mage\MageController.cs" />
      <Compile Include="Assets\Scripts\Other Characters\Mage\OnMagicBallHit.cs" />
+     <Compile Include="Assets\Scripts\Other Characters\Merchant\MerchantBehaviour.cs" />
      <Compile Include="Assets\Scripts\Other Characters\Orc\OnCollisionArmAttack.cs" />
      <Compile Include="Assets\Scripts\Other Characters\Orc\Orc.cs" />
      <Compile Include="Assets\Scripts\Other Characters\Orc\OrcController.cs" />
@@ -271,6 +278,9 @@
  </Reference>
  <Reference Include="UnityEditor.WindowsStandalone.Extensions">
  <HintPath>C:/Program Files/Unity/Editor/Data/PlaybackEngines/windowsstandalonesupport/UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEditor.OSXStandalone.Extensions">
+ <HintPath>C:/Program Files/Unity/Editor/Data/PlaybackEngines/MacStandaloneSupport/UnityEditor.OSXStandalone.Extensions.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Advertisements">
  <HintPath>C:/Users/Giacomo/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.ads@2.0.3/UnityEngine.Advertisements.dll</HintPath>

@@ -43,6 +43,7 @@ public class FightZone : MonoBehaviour {
 
 			if (allEnemiesKilled) {
 				Camera.main.GetComponent <LookAt> ().enabled = true;
+				Camera.main.GetComponent <LookAt> ().target.gameObject.GetComponent<Thirang> ().onFight = false;
 				Destroy (this.gameObject);
 			}
 		}
@@ -78,6 +79,8 @@ public class FightZone : MonoBehaviour {
 			g2.transform.parent = transform;
 
 			StartCoroutine (InstantiateEnemies ());
+
+			other.transform.root.GetComponent<Thirang> ().onFight = true;
 
 			Destroy (this.GetComponent<Collider> ());
 		}

@@ -52,6 +52,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4500391120523868}
   - component: {fileID: 95577182818675636}
+  - component: {fileID: 135169950235843254}
+  - component: {fileID: 114358369088386202}
   m_Layer: 0
   m_Name: Merchant
   m_TagString: Untagged
@@ -96,7 +98,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1284361376281840}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 444.04, y: 25.38, z: 0}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children:
   - {fileID: 4953029964037124}
@@ -150,6 +152,29 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 0
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114358369088386202
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1284361376281840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0c50f4f4a4550545b6f01b6cc918511, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!135 &135169950235843254
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1284361376281840}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 3
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!137 &137178812274797308
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

@@ -40,6 +40,8 @@ public class SeaBossFight : MonoBehaviour {
 	IEnumerator StartFight() {
 		yield return new WaitForSecondsRealtime (3.05f);
 
+		th.GetComponent<Thirang> ().onFight = true;
+
 		th.GetComponent<ThirangController> ().enabled = true;
 		th.GetComponent<AbilitiesController> ().enabled = true;
 		giantMutant.GetComponent<GiantMutantController> ().enabled = true;

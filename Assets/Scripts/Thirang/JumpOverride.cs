@@ -93,6 +93,7 @@ public class JumpOverride : MonoBehaviour {
 		} else if (jumpDownEnd) {	//Called only once at the end of "JumpDown" animation
 			jumpDownEnd = false;
 			anim.applyRootMotion = true;
+			GetComponent<Thirang> ().onJump = false;
 		}
 
 		if (stateInfo.fullPathHash == ThirangSaT.jumpStart) {

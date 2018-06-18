@@ -51,7 +51,7 @@ public class Mage : Enemy {
 	}
 
 	public void OnDeath() {
-		base.OnDeath (gold: 200, exp: 400, health: thirang.maxHealth, mana: thirang.maxMana);
+		base.OnDeath (gold: 200, exp: 800, health: thirang.maxHealth, mana: thirang.maxMana);
 	}
 
 	protected override bool ThirangEnemyFacingEachOther() {

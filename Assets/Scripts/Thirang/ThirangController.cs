@@ -41,7 +41,7 @@ public class ThirangController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (anim && !th.isDead) {
+		if (anim && !th.isDead && Time.timeScale != 0) {
 
 			AnimatorStateInfo stateInfo = anim.GetCurrentAnimatorStateInfo (0);
 			AnimatorStateInfo blockInfo = anim.GetCurrentAnimatorStateInfo (1);
@@ -143,9 +143,11 @@ public class ThirangController : MonoBehaviour {
 
 			/*Being son of ground make fight animation movements buggy*/
 			if (!rayManagerLeft.onMovingGround && !rayManagerRight.onMovingGround) {
+				th.onMovingGround = false;
+
 				if (fightStarted ||
-				   stateInfo.fullPathHash == ThirangSaT.slash1StateHash || stateInfo.fullPathHash == ThirangSaT.slash2StateHash ||
-				   stateInfo.fullPathHash == ThirangSaT.slash1BackStateHash || stateInfo.fullPathHash == ThirangSaT.slash2BackStateHash) {
+				    stateInfo.fullPathHash == ThirangSaT.slash1StateHash || stateInfo.fullPathHash == ThirangSaT.slash2StateHash ||
+				    stateInfo.fullPathHash == ThirangSaT.slash1BackStateHash || stateInfo.fullPathHash == ThirangSaT.slash2BackStateHash) {
 					if (stateInfo.fullPathHash == ThirangSaT.slash1StateHash || stateInfo.fullPathHash == ThirangSaT.slash1BackStateHash) {
 						fightStarted = false;
 						anim.ResetTrigger ("Slash 1");
@@ -159,15 +161,15 @@ public class ThirangController : MonoBehaviour {
 					onSlash2 = false;
 
 					if (stateInfo.fullPathHash != ThirangSaT.abilitiesStates ["Cyclone Spin"] &&
-					   stateInfo.fullPathHash != ThirangSaT.abilitiesStates ["Cyclone SpinBack"]) {
+					    stateInfo.fullPathHash != ThirangSaT.abilitiesStates ["Cyclone SpinBack"]) {
 						anim.SetBool ("IsFighting", false);
 					}
 				}
 			
 				if (Input.GetButtonDown ("Slash") && !anim.GetBool ("IsShielding") &&
-				   (stateInfo.fullPathHash == ThirangSaT.idleStateHash || stateInfo.fullPathHash == ThirangSaT.idleBackStateHash ||
-				   stateInfo.fullPathHash == ThirangSaT.walkStateHash || stateInfo.fullPathHash == ThirangSaT.runStateHash ||
-				   stateInfo.fullPathHash == ThirangSaT.walkBackStateHash || stateInfo.fullPathHash == ThirangSaT.runBackStateHash)) {
+				    (stateInfo.fullPathHash == ThirangSaT.idleStateHash || stateInfo.fullPathHash == ThirangSaT.idleBackStateHash ||
+				    stateInfo.fullPathHash == ThirangSaT.walkStateHash || stateInfo.fullPathHash == ThirangSaT.runStateHash ||
+				    stateInfo.fullPathHash == ThirangSaT.walkBackStateHash || stateInfo.fullPathHash == ThirangSaT.runBackStateHash)) {
 					anim.SetTrigger ("Slash 1");
 					anim.SetBool ("IsFighting", true);
 					fightStarted = true;
@@ -175,7 +177,7 @@ public class ThirangController : MonoBehaviour {
 					th.SetCurrentAbility ("autoAttack");
 				}
 				if (Input.GetButtonDown ("Slash") &&
-				   (stateInfo.fullPathHash == ThirangSaT.slash1StateHash || stateInfo.fullPathHash == ThirangSaT.slash1BackStateHash)) {
+				    (stateInfo.fullPathHash == ThirangSaT.slash1StateHash || stateInfo.fullPathHash == ThirangSaT.slash1BackStateHash)) {
 					anim.SetTrigger ("Slash 2");
 
 					onSlash2 = true;
@@ -197,10 +199,15 @@ public class ThirangController : MonoBehaviour {
 					adjustRot.y -= speedBackAdjRot;
 					transform.eulerAngles = adjustRot;
 				}
+			} else {
+				th.onMovingGround = true;
 			}
+
+
 			//Jump
 			if (th.berserkEnd) {
 				if (rayManagerLeft.onGround || rayManagerRight.onGround) {
+					th.onGround = true;
 					if (Input.GetButtonDown ("Jump") && !anim.GetBool ("IsShielding") && !anim.GetBool ("IsFighting") &&
 					    stateInfo.fullPathHash != ThirangSaT.jumpStart && stateInfo.fullPathHash != ThirangSaT.jumpIdle &&
 					    stateInfo.fullPathHash != ThirangSaT.jumpDown && stateInfo.fullPathHash != ThirangSaT.jumpBackStart &&
@@ -208,7 +215,10 @@ public class ThirangController : MonoBehaviour {
 					{
 						anim.SetTrigger ("Jump");
 						anim.SetBool ("IsJumping", true);
+						th.onJump = true;
 					}
+				} else {
+					th.onGround = false;
 				}
 
 				if (stateInfo.fullPathHash == ThirangSaT.jumpStart || stateInfo.fullPathHash == ThirangSaT.jumpIdle ||

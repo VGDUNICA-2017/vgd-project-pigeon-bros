@@ -34,6 +34,7 @@ public class EarthBossFight : MonoBehaviour {
 		yield return new WaitForSecondsRealtime (3.05f);
 		movingGroundBoss.GetComponent<MovingGround> ().enabled = true;
 
+		th.GetComponent<Thirang> ().onFight = true;
 		th.GetComponent<ThirangController> ().enabled = true;
 		th.GetComponent<AbilitiesController> ().enabled = true;
 

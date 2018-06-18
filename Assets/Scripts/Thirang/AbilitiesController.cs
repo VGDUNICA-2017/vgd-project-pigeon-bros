@@ -20,6 +20,8 @@ public class AbilitiesController : MonoBehaviour {
 
 	int gameLevel;
 
+	bool manaSpent;
+
 	// Use this for initialization
 	void Start () {
 		anim = GetComponent<Animator> ();
@@ -71,8 +73,13 @@ public class AbilitiesController : MonoBehaviour {
 			if (stateInfo.fullPathHash == ThirangSaT.abilitiesStates ["Berserk"] ||
 			    stateInfo.fullPathHash == ThirangSaT.abilitiesStates ["BerserkBack"]) 
 			{
-				th.mana -= costs ["berserk"];
-			} 
+				if (!manaSpent) {
+					th.mana -= costs ["berserk"];
+					manaSpent = true;
+				}
+			} else {
+				manaSpent = false;
+			}
 
 			if (gameLevel > 1) {
 
@@ -89,10 +96,15 @@ public class AbilitiesController : MonoBehaviour {
 				{
 					anim.SetBool ("IsFighting", true);
 					onCycloneSpin = true;
-					th.mana -= costs ["cycloneSpin"];
+					if (!manaSpent) {
+						th.mana -= costs ["cycloneSpin"];
+						manaSpent = true;
+					}
 				} else if (onCycloneSpin) {
 					anim.SetBool ("IsFighting", false);
 					onCycloneSpin = false;
+				} else {
+					manaSpent = false;
 				}
 
 				if (gameLevel > 2) {
@@ -112,9 +124,14 @@ public class AbilitiesController : MonoBehaviour {
 							SpawnMagicArrow ();
 							arrowSpawned = true;
 						}
-						th.mana -= costs ["magicArrow"];
+
+						if (!manaSpent) {
+							th.mana -= costs ["magicArrow"];
+							manaSpent = true;
+						}
 					} else {
 						arrowSpawned = false;
+						manaSpent = false;
 					}
 
 					if (gameLevel > 3) {
@@ -137,7 +154,12 @@ public class AbilitiesController : MonoBehaviour {
 								th.abilityState = new Character.Ability (0, Character.DamageType.none);
 							}
 
-							th.mana -= costs ["goddessBlessing"];
+							if (!manaSpent) {
+								th.mana -= costs ["goddessBlessing"];
+								manaSpent = true;
+							}
+						} else {
+							manaSpent = false;
 						}
 					}
 				}

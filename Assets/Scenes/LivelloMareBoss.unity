@@ -1193,7 +1193,6 @@ MonoBehaviour:
   pointingDirection: 0
   way: 0
   pointed: {fileID: 1903263305}
-  defSignZ: -181.107
 --- !u!1 &388611520
 GameObject:
   m_ObjectHideFlags: 0
@@ -3542,11 +3541,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4861585751155240, guid: ba4f4c929fec9f14385a2808bc5963b0, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 152
+      value: 4.6
       objectReference: {fileID: 0}
     - target: {fileID: 4861585751155240, guid: ba4f4c929fec9f14385a2808bc5963b0, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 55.9
+      value: 3.45
       objectReference: {fileID: 0}
     - target: {fileID: 4861585751155240, guid: ba4f4c929fec9f14385a2808bc5963b0, type: 2}
       propertyPath: m_LocalPosition.z

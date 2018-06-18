@@ -44,8 +44,6 @@ public class FinalBossFight : MonoBehaviour {
 		if (other.transform.root.CompareTag ("Player") && !eventTriggered) {
 			eventTriggered = true;
 
-			GameObject thirang = other.transform.root.gameObject;
-
 			thirang.GetComponent<ThirangController> ().enabled = false;
 			thirang.GetComponent<AbilitiesController> ().enabled = false;
 			thirang.GetComponent<Animator> ().SetFloat ("Speed", 0);
@@ -53,6 +51,8 @@ public class FinalBossFight : MonoBehaviour {
 
 			Camera.main.GetComponent<LookAt> ().enabled = false;
 			Camera.main.GetComponent<Animator> ().SetTrigger ("BossFight");
+
+			thirang.GetComponent<Thirang> ().onFight = true;
 
 			StartCoroutine (CameraAnimation (thirang));
 		}

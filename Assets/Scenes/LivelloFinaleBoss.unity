@@ -5951,7 +5951,6 @@ MonoBehaviour:
   pointingDirection: 0
   way: 0
   pointed: {fileID: 196107}
-  defSignZ: -183.434
 --- !u!1001 &868170373
 Prefab:
   m_ObjectHideFlags: 0
@@ -10107,7 +10106,6 @@ MonoBehaviour:
   pointingDirection: 1
   way: 0
   pointed: {fileID: 651014123}
-  defSignZ: -180.5
 --- !u!4 &987719455 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4463526825312752, guid: 9d20efdacd901ca499c7d69343fdff5a,
@@ -10264,7 +10262,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 1740452936
+  randomSeed: 1373070398
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -15235,11 +15233,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4861585751155240, guid: ba4f4c929fec9f14385a2808bc5963b0, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 138.3
+      value: 20.53
       objectReference: {fileID: 0}
     - target: {fileID: 4861585751155240, guid: ba4f4c929fec9f14385a2808bc5963b0, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 124.9
+      value: 3.4
       objectReference: {fileID: 0}
     - target: {fileID: 4861585751155240, guid: ba4f4c929fec9f14385a2808bc5963b0, type: 2}
       propertyPath: m_LocalPosition.z
@@ -15910,7 +15908,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 601864365
+  randomSeed: 474875125
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -19905,7 +19903,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 659671384
+  randomSeed: -1581610612
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -23759,7 +23757,6 @@ MonoBehaviour:
   pointingDirection: 0
   way: 0
   pointed: {fileID: 235202351}
-  defSignZ: -183.434
 --- !u!1001 &1939801282
 Prefab:
   m_ObjectHideFlags: 0

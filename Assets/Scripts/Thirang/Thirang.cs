@@ -12,8 +12,10 @@ public class Thirang : Character {
 	public int level { get; set; }
 	public int gold { get; set; }
 	public int exp { get; set; }
-	const int TO_LEVEL_2 = 10000;
-	const int TO_LEVEL_3 = 80000;
+	public int hpPotions { get; set; }
+	public int mpPotions { get; set; }
+	const int TO_LEVEL_2 = 5000;
+	const int TO_LEVEL_3 = 10000;
 
 	Ability autoAttack;
 	Ability berserk;
@@ -35,7 +37,11 @@ public class Thirang : Character {
 
 	public int timeGodBlessed { get; set; }
 
+	public bool onFight { get; set; }
+	public bool onJump { get; set; }
+	public bool onMovingGround { get; set; }
 	public bool isDead { get; set; }
+	public bool onGround { get; set; }
 	int lastHealthValue;
 
 	//Need to control the Raycast from body and not feet
@@ -55,6 +61,8 @@ public class Thirang : Character {
 		attackDamage = PlayerPrefs.GetInt ("attackDamage", 100);
 		armor = PlayerPrefs.GetInt ("armor", 25);
 		magicResist = PlayerPrefs.GetInt ("magicResist", 24);
+		hpPotions = PlayerPrefs.GetInt ("hpPotions", 3);
+		mpPotions = PlayerPrefs.GetInt ("mpPotions", 3);
 		level = PlayerPrefs.GetInt ("level", 1);
 
 		gold = PlayerPrefs.GetInt ("gold", 0);
@@ -84,6 +92,8 @@ public class Thirang : Character {
 
 		lastHealthValue = this.health;
 		berserkEnd = true;
+
+		PlayerPrefs.SetString ("Scene", UnityEngine.SceneManagement.SceneManager.GetActiveScene ().name);
 	}
 	
 	// Update is called once per frame
@@ -105,20 +115,45 @@ public class Thirang : Character {
 			UpdateValues ();
 		}
 
-		if (Input.GetKey (KeyCode.LeftControl) && Input.GetKey (KeyCode.LeftShift) && Input.GetKey (KeyCode.D)) {
-			PlayerPrefs.DeleteAll ();
-			print ("PlayerPrefs deleted");
-			Init ();
-			PlayerPrefs.SetInt ("gameLevel", 1);
-		}
-
 		if (health > maxHealth)
 			health = maxHealth;
 
 		if (mana > maxMana)
 			mana = maxMana;
 
-		print (health);
+		if (Input.GetButtonDown ("HP")) {
+			if (hpPotions > 0) {
+				hpPotions--;
+				health += 4000;
+			}
+		}
+
+		if (Input.GetButtonDown ("MP")) {
+			if (mpPotions > 0) {
+				mpPotions--;
+				mana += 100;
+			}
+		}
+	}
+
+	public bool SpecialAbility (string ability) {
+		switch (ability) {
+			case "destroyRock":
+				if (level > 1)
+					return true;
+				break;
+			case "superJump":
+				if (level > 2)
+					return true;
+				break;
+		}
+
+		return false;
+	}
+
+	public static void NewGame() {
+		PlayerPrefs.DeleteAll ();
+		PlayerPrefs.SetInt ("gameLevel", 1);
 	}
 
 	void LateUpdate() {
@@ -152,8 +187,29 @@ public class Thirang : Character {
 		PlayerPrefs.SetInt ("level", level);
 		PlayerPrefs.SetInt ("gold", gold);
 		PlayerPrefs.SetInt ("exp", exp);
+		PlayerPrefs.SetInt ("hpPotions", hpPotions);
+		PlayerPrefs.SetInt ("mpPotions", mpPotions);
 
 		PlayerPrefs.Save ();
+	}
+
+	public KeyValuePair<bool, string> CanSave() {
+		if (!isDead && !onFight && !onJump && !onMovingGround && onGround)
+			return new KeyValuePair<bool, string> (true, "");
+
+		if (isDead)
+			return new KeyValuePair<bool, string> (false, "Can't save if you're dead");
+
+		if (onFight)
+			return new KeyValuePair<bool, string> (false, "Can't save during fight");
+
+		if (onJump)
+			return new KeyValuePair<bool, string> (false, "Can't save while jumping");
+
+		if (onMovingGround)
+			return new KeyValuePair<bool, string> (false, "Can't save while on MovingGround");
+
+		throw new UnityException ();
 	}
 
 	public void Berserk() {
@@ -221,6 +277,33 @@ public class Thirang : Character {
 				break;
 			default:
 				throw new System.ArgumentException ("Cannot find ability with this name");
+		}
+	}
+
+	public void BuyObject(string type, int value) {
+		switch (type) 
+		{
+		case "hpPotion": 
+			hpPotions += value;
+			break;
+		case "mpPotion":
+			mpPotions += value;
+			break;
+		case "hp":
+			maxHealth += value;
+			break;
+		case "mp":
+			maxMana += value;
+			break;
+		case "atkUp":
+			attackDamage += value;
+			break;
+		case "defUp":
+			magicResist += value;
+			armor += value;
+			break;
+		default:
+			throw new System.ArgumentException ("Cannot find ability with this name");
 		}
 	}
 

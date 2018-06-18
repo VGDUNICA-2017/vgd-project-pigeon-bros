@@ -92,7 +92,7 @@ public class Demon : Enemy {
 	}
 
 	public void OnDeath() {
-		base.OnDeath (gold: 500, exp: 1000, health: thirang.maxHealth, mana: thirang.maxMana);
+		base.OnDeath (gold: 500, exp: 1200, health: thirang.maxHealth, mana: thirang.maxMana);
 	}
 
 	protected override bool ThirangEnemyFacingEachOther() {
