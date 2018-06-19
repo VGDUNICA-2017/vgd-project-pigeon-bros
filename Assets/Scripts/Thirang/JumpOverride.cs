@@ -72,7 +72,7 @@ public class JumpOverride : MonoBehaviour {
 		//Emergency exit from jumpIdle animation, caused by "collision" error with ground
 		if (stateInfo.fullPathHash == ThirangSaT.jumpIdle || stateInfo.fullPathHash == ThirangSaT.jumpBackIdle) {
 			jumpTime += Time.deltaTime;
-			if (jumpTime >= 20f) {
+			if (jumpTime >= 10f) {
 				anim.applyRootMotion = true;
 				anim.SetTrigger ("JumpDown");
 			}
