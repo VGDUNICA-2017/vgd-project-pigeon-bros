@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class TrapDamage : MonoBehaviour {
-	static bool hit;
+	public static bool hit;
 
 	void OnTriggerStay (Collider other) {
 		if (other.transform.root.CompareTag ("Player") && transform.localPosition.y >= 0.58f && !hit) {

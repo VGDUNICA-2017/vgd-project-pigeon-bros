@@ -93,6 +93,7 @@ public class Thirang : Character {
 		berserkEnd = true;
 
 		PlayerPrefs.SetString ("Scene", UnityEngine.SceneManagement.SceneManager.GetActiveScene ().name);
+		TrapDamage.hit = false;
 	}
 	
 	// Update is called once per frame

@@ -20,7 +20,7 @@ public class AbilitiesController : MonoBehaviour {
 
 	int gameLevel;
 
-	bool manaSpent;
+	bool manaSpentBerserk, manaSpentCyclone, manaSpentArrow, manaSpentGoddess;
 
 	// Use this for initialization
 	void Start () {
@@ -44,7 +44,7 @@ public class AbilitiesController : MonoBehaviour {
 			{ "berserk", 35 },
 			{ "cycloneSpin", 60 },
 			{ "magicArrow", 100 },
-			{ "goddessBlessin", 150 }
+			{ "goddessBlessing", 150 }
 		};
 	}
 	
@@ -58,7 +58,7 @@ public class AbilitiesController : MonoBehaviour {
 			/*Being child of MovingGround makes berserk animation buggy because of scale animation*/
 			if (!rayManagerLeft.onMovingGround && !rayManagerRight.onMovingGround) {
 				if (Input.GetButtonDown ("Berserk")) {
-					if (stateInfo.fullPathHash != ThirangSaT.abilitiesStates ["Berserk"] ||
+					if (stateInfo.fullPathHash != ThirangSaT.abilitiesStates ["Berserk"] &&
 					   stateInfo.fullPathHash != ThirangSaT.abilitiesStates ["BerserkBack"]) 
 					{
 						if (th.mana >= costs ["berserk"]) {
@@ -73,21 +73,25 @@ public class AbilitiesController : MonoBehaviour {
 			if (stateInfo.fullPathHash == ThirangSaT.abilitiesStates ["Berserk"] ||
 			    stateInfo.fullPathHash == ThirangSaT.abilitiesStates ["BerserkBack"]) 
 			{
-				if (!manaSpent) {
+				if (!manaSpentBerserk) {
 					th.mana -= costs ["berserk"];
-					manaSpent = true;
+					manaSpentBerserk = true;
 				}
 			} else {
-				manaSpent = false;
+				manaSpentBerserk = false;
 			}
 
 			if (gameLevel > 1) {
 
 				//Cyclone Spin
 				if (Input.GetButtonDown ("Cyclone Spin")) {
-					if (th.mana >= costs ["cycloneSpin"]) {
-						anim.SetTrigger ("Cyclone Spin");
-						th.SetCurrentAbility ("cycloneSpin");
+					if (stateInfo.fullPathHash != ThirangSaT.abilitiesStates ["Cyclone Spin"] &&
+					    stateInfo.fullPathHash != ThirangSaT.abilitiesStates ["Cyclone SpinBack"]) 
+					{
+						if (th.mana >= costs ["cycloneSpin"]) {
+							anim.SetTrigger ("Cyclone Spin");
+							th.SetCurrentAbility ("cycloneSpin");
+						}
 					}
 				}
 
@@ -96,24 +100,28 @@ public class AbilitiesController : MonoBehaviour {
 				{
 					anim.SetBool ("IsFighting", true);
 					onCycloneSpin = true;
-					if (!manaSpent) {
+					if (!manaSpentCyclone) {
 						th.mana -= costs ["cycloneSpin"];
-						manaSpent = true;
+						manaSpentCyclone = true;
 					}
 				} else if (onCycloneSpin) {
 					anim.SetBool ("IsFighting", false);
 					onCycloneSpin = false;
 				} else {
-					manaSpent = false;
+					manaSpentCyclone = false;
 				}
 
 				if (gameLevel > 2) {
 
 					//Magic Arrow
 					if (Input.GetButtonDown ("Magic Arrow")) {
-						if (th.mana >= costs ["magicArrow"]) {
-							anim.SetTrigger ("Magic Arrow");
-							th.SetCurrentAbility ("magicArrow");
+						if (stateInfo.fullPathHash != ThirangSaT.abilitiesStates ["Magic Arrow"] &&
+						    stateInfo.fullPathHash != ThirangSaT.abilitiesStates ["Magic ArrowBack"]) 
+						{
+							if (th.mana >= costs ["magicArrow"]) {
+								anim.SetTrigger ("Magic Arrow");
+								th.SetCurrentAbility ("magicArrow");
+							}
 						}
 					}
 
@@ -125,23 +133,25 @@ public class AbilitiesController : MonoBehaviour {
 							arrowSpawned = true;
 						}
 
-						if (!manaSpent) {
+						if (!manaSpentArrow) {
 							th.mana -= costs ["magicArrow"];
-							manaSpent = true;
+							manaSpentArrow = true;
 						}
 					} else {
 						arrowSpawned = false;
-						manaSpent = false;
+						manaSpentArrow = false;
 					}
 
 					if (gameLevel > 3) {
 
 						//Goddess' Blessing
 						if (Input.GetButtonDown ("Goddess' Blessing")) {
-							if (th.mana >= costs ["goddessBlessing"]) {
-								godLight.enabled = true;
-								godBlessed = true;
-								th.SetCurrentAbility ("goddessBlessing");
+							if (!godBlessed) {
+								if (th.mana >= costs ["goddessBlessing"]) {
+									godLight.enabled = true;
+									godBlessed = true;
+									th.SetCurrentAbility ("goddessBlessing");
+								}
 							}
 						}
 
@@ -154,12 +164,12 @@ public class AbilitiesController : MonoBehaviour {
 								th.abilityState = new Character.Ability (0, Character.DamageType.none);
 							}
 
-							if (!manaSpent) {
+							if (!manaSpentGoddess) {
 								th.mana -= costs ["goddessBlessing"];
-								manaSpent = true;
+								manaSpentGoddess = true;
 							}
 						} else {
-							manaSpent = false;
+							manaSpentGoddess = false;
 						}
 					}
 				}

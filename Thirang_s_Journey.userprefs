@@ -1,21 +1,20 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj" RefactoringSettings.EnableRefactorings="True">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Thirang\JumpOverride.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Thirang\ThirangController.cs">
     <Files>
-      <File FileName="Assets\Scripts\Thirang\Thirang.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Thirang\AbilitiesController.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Thirang\Thirang.cs" Line="96" Column="26" />
+      <File FileName="Assets\Scripts\Thirang\AbilitiesController.cs" Line="67" Column="22" />
       <File FileName="Assets\Scripts\Enemy.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\GUI\PauseMenu.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\GUI\Merchant.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Other Characters\Merchant\MerchantBehaviour.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\GUI\Dialog.cs" Line="35" Column="71" />
-      <File FileName="Assets\Scripts\GUI\DialogDispatcher.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\EnemyController.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Other Characters\Lava Monster\LavaMonsterController.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\LevelsBehaviours\Teleport\TeleportBehaviour.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\GUI\MainMenu.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\LevelsBehaviours\Ground\VibratingGround.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Thirang\JumpOverride.cs" Line="75" Column="23" />
+      <File FileName="Assets\Scripts\Thirang\JumpOverride.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Character.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\LevelsBehaviours\Trap\TrapDamage.cs" Line="6" Column="9" />
+      <File FileName="Assets\Scripts\Thirang\ThirangController.cs" Line="243" Column="1" />
+      <File FileName="Assets\Scripts\Thirang\ThirangSaT.cs" Line="45" Column="73" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

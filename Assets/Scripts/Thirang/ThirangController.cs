@@ -232,7 +232,7 @@ public class ThirangController : MonoBehaviour {
 			}
 
 			//Death
-			if (th.health <= 0) {
+			if (th.health <= 0 && !th.isDead) {
 				th.isDead = true;
 				string deathType;
 
@@ -284,6 +284,7 @@ public class ThirangController : MonoBehaviour {
 	IEnumerator BugDeath(string deathType) {
 		AnimatorStateInfo stateInfo = anim.GetCurrentAnimatorStateInfo (0);
 		yield return new WaitForSeconds (1f);
+
 		if (stateInfo.fullPathHash != ThirangSaT.deathStateHash && stateInfo.fullPathHash != ThirangSaT.deathBackStateHash &&
 			stateInfo.fullPathHash != ThirangSaT.deathTrapBackStateHash && stateInfo.fullPathHash != ThirangSaT.deathTrapStateHash) 
 		{
