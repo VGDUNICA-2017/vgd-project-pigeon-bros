@@ -64,7 +64,7 @@ public class Orc : Enemy {
 	}
 
 	public void OnDeath() {
-		base.OnDeath (gold: 50, exp: 100, health: healthAtInit / 10, mana: 10);
+		base.OnDeath (gold: 50, exp: 100, health: healthAtInit / 10, mana: 5);
 	}
 	
 	protected override bool ThirangEnemyFacingEachOther () {

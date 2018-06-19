@@ -262,10 +262,8 @@ public class ThirangController : MonoBehaviour {
 				//DemonUpperGround ----> Demon Boss Fight
 				if (hit.collider.gameObject.layer == LayerMask.NameToLayer ("DemonUpperGround") && hit.distance <= 20f) {
 					onDemonUpperGround = true;
-					print ("onupper");
 				} else {
 					onDemonUpperGround = false;
-					print ("boh");
 				}
 
 				//DemonLowerGround ----> Demon Boss Fight
@@ -273,7 +271,6 @@ public class ThirangController : MonoBehaviour {
 					onDemonLowerGround = true;
 				} else {
 					onDemonLowerGround = false;
-					print ("tgz");
 				}
 			}
 		}
@@ -287,7 +284,9 @@ public class ThirangController : MonoBehaviour {
 	IEnumerator BugDeath(string deathType) {
 		AnimatorStateInfo stateInfo = anim.GetCurrentAnimatorStateInfo (0);
 		yield return new WaitForSeconds (1f);
-		if (stateInfo.fullPathHash != EnemySaT.deathStateHash || stateInfo.fullPathHash != EnemySaT.deathBackStateHash) {
+		if (stateInfo.fullPathHash != ThirangSaT.deathStateHash && stateInfo.fullPathHash != ThirangSaT.deathBackStateHash &&
+			stateInfo.fullPathHash != ThirangSaT.deathTrapBackStateHash && stateInfo.fullPathHash != ThirangSaT.deathTrapStateHash) 
+		{
 			anim.SetTrigger (deathType);
 			this.enabled = false;
 		}

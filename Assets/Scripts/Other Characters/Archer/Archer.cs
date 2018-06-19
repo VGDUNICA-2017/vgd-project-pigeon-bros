@@ -59,7 +59,7 @@ public class Archer : Enemy {
 	}
 
 	public void OnDeath() {
-		base.OnDeath (gold: 75, exp: 150, health: healthAtInit / 10, mana: 15);
+		base.OnDeath (gold: 75, exp: 150, health: healthAtInit / 10, mana: 5);
 	}
 
 	protected override bool ThirangEnemyFacingEachOther() {

@@ -32,7 +32,7 @@ public class Dialog : MonoBehaviour {
 		new KeyValuePair<string,string> ("fairy", "Use A and D to move, SPACE to jump, LEFT CLICK to attack and CLICK again for SWING ATTACK, " +
 			"RIGHT CLICK to shield, hold LEFT SHIFT to run."), 
 		new KeyValuePair<string,string> ("fairy", "Use 1 to activate Berserk and enhance your attacks, " +
-			"Z to use health potions and X to use mana potions."),
+			"Z to use health potions (+ 4000) and X to use mana potions (+ 100)."),
 		new KeyValuePair<string,string> ("fairy", "If you need a pause just use ESC"),
 		new KeyValuePair<string,string> ("fairy", "Now stop wasting time, GO GO GO!")
 	};
