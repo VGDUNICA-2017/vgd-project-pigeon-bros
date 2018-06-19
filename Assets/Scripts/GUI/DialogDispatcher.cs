@@ -7,11 +7,14 @@ public class DialogDispatcher : MonoBehaviour {
 	public float wait = 1f;
 
 	bool eventTriggered;
+	public bool cantTrigger { get; set; }
 
 	void OnTriggerEnter(Collider other) {
-		if (other.transform.root.CompareTag ("Player") && !eventTriggered) {
-			eventTriggered = true;
-			StartCoroutine (DispatchDialog ());
+		if (!cantTrigger) {
+			if (other.transform.root.CompareTag ("Player") && !eventTriggered) {
+				eventTriggered = true;
+				StartCoroutine (DispatchDialog ());
+			}
 		}
 	}
 

@@ -7,6 +7,9 @@ public class WallOfDeath : MonoBehaviour {
 	public GameObject rightWall, leftWall;
 	public GameObject movingGround1;
 	public GameObject groundDisabled;
+	public AnimationClip cameraDeath;
+	public AnimationClip backOnThirang;
+
 	Animator animWalls, animCamera, animRight, animLeft;
 	LookAt camScript;
 	MovingGround _movingGround1;
@@ -19,6 +22,14 @@ public class WallOfDeath : MonoBehaviour {
 		animLeft = leftWall.GetComponent<Animator> ();
 		animCamera = Camera.main.GetComponent<Animator> ();
 		camScript = Camera.main.GetComponent<LookAt> ();
+
+		float orthoSize = Camera.main.GetComponent<ResizeResolution> ().GetOrthoSize ();
+
+		AnimationCurve curve1 = AnimationCurve.EaseInOut (0f, orthoSize, 1f, orthoSize * (24f / 9f));
+		cameraDeath.SetCurve ("", typeof(Camera), "orthographic size", curve1);
+
+		AnimationCurve curve2 = AnimationCurve.EaseInOut (0f, orthoSize * (24f / 9f), 1f, orthoSize);
+		backOnThirang.SetCurve ("", typeof(Camera), "orthographic size", curve2);
 	}
 		
 	void OnTriggerEnter(Collider other) {

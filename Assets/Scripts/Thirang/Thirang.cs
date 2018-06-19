@@ -24,7 +24,6 @@ public class Thirang : Character {
 	Ability goddessBlessing;
 	private Ability currAbility;
 	public Ability abilityState { get; set; }
-
 		
 	float timer;
 
@@ -133,6 +132,10 @@ public class Thirang : Character {
 				mpPotions--;
 				mana += 100;
 			}
+		}
+
+		if (isDead) {
+			StartCoroutine(WaitDeath ());
 		}
 	}
 
@@ -345,5 +348,10 @@ public class Thirang : Character {
 		}
 
 		return false;
+	}
+
+	IEnumerator WaitDeath() {
+		yield return new WaitForSecondsRealtime (2f);
+		gameObject.AddComponent<MainMenu> ().Load ();
 	}
 }

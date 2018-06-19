@@ -35,8 +35,6 @@ public class Mage : Enemy {
 			FadeDeath (gosRends);
 
 		ReadyNewAttack_ThirangAlive ();
-
-		print (health);
 	}
 
 	void OnTriggerEnter (Collider other) {

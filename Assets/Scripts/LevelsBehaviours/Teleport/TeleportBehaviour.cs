@@ -17,10 +17,11 @@ public class TeleportBehaviour : MonoBehaviour {
 		if (other.transform.root.gameObject.CompareTag ("Player")) {
 			Transform thirang = other.transform.root;
 			if (!loaded && thirang.position.x > teleportBounds.min.x && thirang.position.x < teleportBounds.max.x) {
-				
-				thirang.GetComponent<Thirang> ().SaveThirangData (false);
-				StartCoroutine (LoadScene());
 				loaded = true;
+				thirang.GetComponent<Thirang> ().SaveThirangData (false);
+				PlayerPrefs.SetString ("Scene", UnityEngine.SceneManagement.SceneManager.GetActiveScene ().name + "Boss");
+				PlayerPrefs.Save ();
+				StartCoroutine (LoadScene());
 			}
 		}
 	}
@@ -28,13 +29,20 @@ public class TeleportBehaviour : MonoBehaviour {
 	public void BossKilled(string scene) {
 		SceneToLoad = scene;
 
-		if (!SceneToLoad.Contains ("Boss"))
-			PlayerPrefs.SetInt ("gameLevel", PlayerPrefs.GetInt ("gameLevel") + 1);
+		PlayerPrefs.SetInt ("gameLevel", PlayerPrefs.GetInt ("gameLevel") + 1);
 
 		GameObject thirang = GameObject.FindGameObjectWithTag ("Player");
 
 		thirang.GetComponent<Thirang> ().SaveThirangData (false);
+		PlayerPrefs.SetString ("Scene", SceneToLoad);
+		PlayerPrefs.Save ();
 		StartCoroutine (LoadScene());
+	}
+
+	public void FinalBoss(string scene) {
+		SceneToLoad = scene;
+
+		StartCoroutine (LoadScene ());
 	}
 
 	IEnumerator LoadScene() {

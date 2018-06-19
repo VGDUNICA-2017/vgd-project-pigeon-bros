@@ -81,6 +81,11 @@ public class LavaMonsterController : EnemyController {
 			
 		DeathAnimation (stateInfo);
 
+		if (stateInfo.fullPathHash == EnemySaT.deathStateHash || stateInfo.fullPathHash == EnemySaT.deathBackStateHash) {
+			if (stateInfo.normalizedTime > 1f) {
+				GameObject.Find ("DialogDispatcher").SetActive (true);
+			}
+		}
 	}
 
 	public bool IsThisArmAttacking (string arm) {

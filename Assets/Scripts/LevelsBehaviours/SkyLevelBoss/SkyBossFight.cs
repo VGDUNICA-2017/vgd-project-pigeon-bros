@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class SkyBossFight : MonoBehaviour {
 	Animator anim;
+	public AnimationClip cameraBoss;
+	public AnimationClip startBossFight;
 	public GameObject boss;
 	public GameObject bossGround;
 	GameObject thirang;
@@ -15,7 +17,6 @@ public class SkyBossFight : MonoBehaviour {
 		Vector3 rot = thirang.transform.eulerAngles;
 		rot.y = 90f;
 		thirang.transform.eulerAngles = rot;
-
 	}
 
 	// Use this for initialization
@@ -23,6 +24,19 @@ public class SkyBossFight : MonoBehaviour {
 		anim = GetComponent<Animator> ();
 
 		StartCoroutine (OnBoss ());
+
+		float orthoSize = GetComponent<ResizeResolution> ().GetOrthoSize ();
+
+		Keyframe[] keys = new Keyframe[3];
+		keys [0] = new Keyframe (0f, orthoSize);
+		keys [1] = new Keyframe (2f, orthoSize * 2);
+		keys [2] = new Keyframe (4f, orthoSize);
+
+		AnimationCurve curve1 = new AnimationCurve (keys);
+		cameraBoss.SetCurve ("", typeof(Camera), "orthographic size", curve1);
+
+		AnimationCurve curve2 = AnimationCurve.EaseInOut (0f, orthoSize, 4f, orthoSize * 2);
+		startBossFight.SetCurve ("", typeof(Camera), "orthographic size", curve2);
 	}
 
 	IEnumerator OnBoss () {

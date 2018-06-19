@@ -17,7 +17,7 @@ public class Dialog : MonoBehaviour {
 
 	public enum Dialogs
 	{
-		skyDialog, earthDialog, seaDialog, fireDialog, merchantDialog, rockDialog, superJumpDialog
+		skyDialog, earthDialog, seaDialog, fireDialog, merchantDialog, rockDialog, superJumpDialog, finalDialog
 	}
 
 	public Dialogs currentDialog;
@@ -41,8 +41,8 @@ public class Dialog : MonoBehaviour {
 		new KeyValuePair<string,string> ("fairy", "Good job, Thirang! You defeated the Mage and the power of Sky is back!"),
 		new KeyValuePair<string,string> ("thirang", "Are you ever going to tell me anything about this world?"),
 		new KeyValuePair<string,string> ("fairy", "Sorry, I am Glittercactus, one of the many fairies of this world. Unfortunately I'm the only one with any power left."),
-		new KeyValuePair<string,string> ("fairy", "This is the Reign of Helensia, a world that only the pure hearted souls can reach. It's a peaceful land" +
-			"where people can rest and enjoy the mystical power of this world. But now a evil being came and stole" +
+		new KeyValuePair<string,string> ("fairy", "This is the Reign of Helensia, a world that only the pure hearted souls can reach. It's a peaceful land " +
+			"where people can rest and enjoy the mystical power of this world. But now a evil being came and stole " +
 			"the power of Sky, Earth, Sea and Fire. Only you can save us"),
 		new KeyValuePair<string,string> ("fairy", "Now you can use 2 to attack with Cyclone Spin and hit all the enemies around you."),
 		new KeyValuePair<string,string> ("fairy", "Good luck Thirang")
@@ -51,7 +51,7 @@ public class Dialog : MonoBehaviour {
 	KeyValuePair<string, string>[] seaDialog = new KeyValuePair<string, string>[] {
 		new KeyValuePair<string,string> ("fairy", "Good job, Thirang! You defeated the Demon and the power of Earth is back!"),
 		new KeyValuePair<string,string> ("thirang", "Why was I summoned in this world? Isn't there anyone else?"),
-		new KeyValuePair<string,string> ("fairy", "The purest heart in the Earth is our best warrior. In this world there's no thing as combat skill:" +
+		new KeyValuePair<string,string> ("fairy", "The purest heart in the Earth is our best warrior. In this world there's no thing as combat skill: " +
 			"the purest the heart, the strongest the warrior. You have the purest heart in the Earth, " +
 			"you are our best bet to defeat this evil monster"),
 		new KeyValuePair<string,string> ("fairy", "...")
@@ -59,9 +59,9 @@ public class Dialog : MonoBehaviour {
 
 	KeyValuePair<string, string>[] fireDialog = new KeyValuePair<string,string>[] {
 		new KeyValuePair<string,string> ("fairy", "Good job, Thirang! You defeated the Giant Mutant and the power of Sea is back!"),
-		new KeyValuePair<string,string> ("fairy", "This is the last step before the final fight. There, the Lava Monster will wait for you." +
+		new KeyValuePair<string,string> ("fairy", "This is the last step before the final fight. There, the Lava Monster will wait for you. " +
 			"Defeating him will bring back the peace in the Reign of Helensia, and all of its inhabitants will be free."),
-		new KeyValuePair<string,string> ("fairy", "Right now you need to find 4 power ups disseminated in this level. Once you have got all the 4 power ups," +
+		new KeyValuePair<string,string> ("fairy", "Right now you need to find 4 power ups disseminated in this level. Once you have got all the 4 power ups, " +
 			"you will be able to access to the final fight."),
 		new KeyValuePair<string,string> ("fairy", "The Reign of Helensia has faith in you!"),
 		new KeyValuePair<string,string> ("thirang", "I won't let you all down.")
@@ -73,7 +73,7 @@ public class Dialog : MonoBehaviour {
 	};
 
 	KeyValuePair<string, string>[] rockDialog = new KeyValuePair<string,string>[] {
-		new KeyValuePair<string,string> ("fairy", "This rock can be destoyed once you will reach level 2. You need to earn 5000 XP for level 2, and 10000 XP for level 3." +
+		new KeyValuePair<string,string> ("fairy", "This rock can be destoyed once you will reach level 2. You need to earn 5000 XP for level 2, and 10000 XP for level 3. " +
 			"Level 3 will give you the \"SuperJump\" ability. As soon as you will be in the right situation press F to use the ability.")
 	};
 
@@ -82,7 +82,9 @@ public class Dialog : MonoBehaviour {
 	};
 
 	KeyValuePair<string, string>[] finalDialog = new KeyValuePair<string,string>[] { 
-		new KeyValuePair<string,string> ("fairy", "This is the \"SuperJump\" event. If you reached level 3 press F to use the ability.")
+		new KeyValuePair<string,string> ("fairy", "You did it, you saved it! You saved Helensia! Thank you Thirang!"),
+		new KeyValuePair<string,string> ("thirang", "What will happen now?"),
+		new KeyValuePair<string,string> ("fairy", "You will return to where you came from, it's over. Thank you again")
 	};
 
 	void Start() {
@@ -108,6 +110,9 @@ public class Dialog : MonoBehaviour {
 			case Dialogs.superJumpDialog:
 				_currentDialog = superJumpDialog;
 				break;
+			case Dialogs.finalDialog:
+				_currentDialog = finalDialog;
+				break;
 			default:
 				break;
 		}
@@ -128,6 +133,10 @@ public class Dialog : MonoBehaviour {
 		} else {
 			Resume ();
 			dialogActive = false;
+			if (currentDialog == Dialogs.finalDialog) {
+				this.gameObject.AddComponent<TeleportBehaviour> ().FinalBoss ("Menu");	
+			}
+
 			Destroy (this.gameObject);
 		}
 	}

@@ -6,8 +6,16 @@ public class EarthBossFight : MonoBehaviour {
 	public GameObject upperPart;
 	public GameObject movingGroundBoss;
 	public GameObject demon;
+	public AnimationClip cameraBoss;
 
 	bool eventTriggered;
+
+	void Start() {
+		float orthoSize = Camera.main.GetComponent<ResizeResolution> ().GetOrthoSize ();
+
+		AnimationCurve curve2 = AnimationCurve.EaseInOut (0f, orthoSize, 3f, orthoSize * 2);
+		cameraBoss.SetCurve ("", typeof(Camera), "orthographic size", curve2);
+	}
 
 	void OnTriggerEnter(Collider other) {
 		if (other.transform.root.CompareTag ("Player") && !eventTriggered) {

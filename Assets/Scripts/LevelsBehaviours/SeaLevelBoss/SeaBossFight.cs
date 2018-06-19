@@ -6,6 +6,7 @@ public class SeaBossFight : MonoBehaviour {
 	public GameObject movingGround;
 	public GameObject vibratingGround;
 	public GameObject giantMutant;
+	public AnimationClip cameraBoss;
 	VibratingGround[] vibratingCubes;
 
 	bool eventTriggered;
@@ -17,6 +18,11 @@ public class SeaBossFight : MonoBehaviour {
 		foreach (var v in vibratingCubes) {
 			v.enabled = false;
 		}
+
+		float orthoSize = Camera.main.GetComponent<ResizeResolution> ().GetOrthoSize ();
+
+		AnimationCurve curve2 = AnimationCurve.EaseInOut (0f, orthoSize, 3f, orthoSize * 2);
+		cameraBoss.SetCurve ("", typeof(Camera), "orthographic size", curve2);
 	}
 
 	void OnTriggerEnter(Collider other) {

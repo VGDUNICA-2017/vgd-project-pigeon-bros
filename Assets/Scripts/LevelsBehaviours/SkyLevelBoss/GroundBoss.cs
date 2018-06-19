@@ -27,7 +27,7 @@ public class GroundBoss : MonoBehaviour {
 			Move ();
 		else if (!timerStarted) {
 			if (attackState) {
-				StartCoroutine (Wait (25f));
+				StartCoroutine (Wait (15f));
 				mage.GetComponent<Mage> ().bossFightHit = false;
 			}
 			else

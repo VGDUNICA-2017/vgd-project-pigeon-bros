@@ -1,40 +1,21 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj" RefactoringSettings.EnableRefactorings="True">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Other Characters\Merchant\MerchantBehaviour.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Thirang\Thirang.cs">
     <Files>
-      <File FileName="Assets\Scripts\Thirang\Thirang.cs" Line="134" Column="17" />
+      <File FileName="Assets\Scripts\Thirang\Thirang.cs" Line="351" Column="3" />
       <File FileName="Assets\Scripts\Thirang\AbilitiesController.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Enemy.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\GUI\MainMenu.cs" Line="9" Column="22" />
-      <File FileName="Assets\Scripts\GUI\PauseMenu.cs" Line="57" Column="3" />
-      <File FileName="Assets\Scripts\GUI\Merchant.cs" Line="49" Column="52" />
-      <File FileName="Assets\Scripts\Other Characters\Merchant\MerchantBehaviour.cs" Line="23" Column="29" />
-      <File FileName="Assets\Scripts\GUI\Dialog.cs" Line="130" Column="25" />
-      <File FileName="Assets\Scripts\GUI\DialogDispatcher.cs" Line="7" Column="23" />
-      <File FileName="Assets\Scripts\LevelsBehaviours\SpecialRock\RockDestruction.cs" Line="7" Column="27" />
+      <File FileName="Assets\Scripts\GUI\PauseMenu.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\GUI\Merchant.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Other Characters\Merchant\MerchantBehaviour.cs" Line="47" Column="4" />
+      <File FileName="Assets\Scripts\GUI\Dialog.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\GUI\DialogDispatcher.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\EnemyController.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Other Characters\Lava Monster\LavaMonsterController.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\LevelsBehaviours\Teleport\TeleportBehaviour.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\GUI\MainMenu.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\LevelsBehaviours\Ground\VibratingGround.cs" Line="1" Column="1" />
     </Files>
-    <Pads>
-      <Pad Id="ProjectPad">
-        <State name="__root__">
-          <Node name="Thirang_s_Journey" expanded="True">
-            <Node name="Assembly-CSharp" expanded="True">
-              <Node name="Scripts" expanded="True">
-                <Node name="GUI" expanded="True" />
-                <Node name="LevelsBehaviours" expanded="True">
-                  <Node name="Prize" expanded="True" />
-                </Node>
-                <Node name="Other Characters" expanded="True">
-                  <Node name="Merchant" expanded="True">
-                    <Node name="MerchantBehaviour.cs" selected="True" />
-                  </Node>
-                </Node>
-              </Node>
-            </Node>
-            <Node name="Assembly-CSharp-Editor" expanded="True" />
-          </Node>
-        </State>
-      </Pad>
-    </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />

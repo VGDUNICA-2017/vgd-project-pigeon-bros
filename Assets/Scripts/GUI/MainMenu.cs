@@ -7,7 +7,7 @@ public class MainMenu : MonoBehaviour {
 
 	public void NewGame() {
 		Thirang.NewGame ();
-		StartCoroutine (LoadScene ());
+		SceneManager.LoadScene ("LivelloCielo");
 	}
 
 	public void Load() {
@@ -18,14 +18,5 @@ public class MainMenu : MonoBehaviour {
 	public void Quit() {
 		Application.Quit();
 		Debug.Log("Application.Quit() non fa niente nell'editor");
-	}
-
-	IEnumerator LoadScene() {
-		AsyncOperation sceneLoad = SceneManager.LoadSceneAsync ("LivelloCielo");
-
-		while (!sceneLoad.isDone) {
-			yield return null;
-
-		}
 	}
 }

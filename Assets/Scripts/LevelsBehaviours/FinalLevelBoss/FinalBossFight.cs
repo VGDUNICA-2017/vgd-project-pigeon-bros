@@ -8,6 +8,7 @@ public class FinalBossFight : MonoBehaviour {
 	public GameObject lavaMonster;
 	public GameObject[] groundsBoss;
 	public GameObject[] particleSystems;
+	public AnimationClip cameraAnim;
 
 	GroundRaycast[] rays;
 
@@ -16,6 +17,11 @@ public class FinalBossFight : MonoBehaviour {
 
 	void Start() {
 		rays = thirang.GetComponentsInChildren<GroundRaycast> ();
+
+		float orthoSize = Camera.main.GetComponent<ResizeResolution> ().GetOrthoSize ();
+
+		AnimationCurve curve1 = AnimationCurve.EaseInOut (0f, orthoSize, 3f, orthoSize * (23f / 9f));
+		cameraAnim.SetCurve ("", typeof(Camera), "orthographic size", curve1);
 	}
 
 	void Update() {

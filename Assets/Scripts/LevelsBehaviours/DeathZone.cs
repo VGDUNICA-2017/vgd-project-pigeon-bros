@@ -9,7 +9,8 @@ public class DeathZone : MonoBehaviour {
 		if (!triggered && other.transform.root.CompareTag ("Player")) {
 			triggered = true;
 			other.transform.root.GetComponent<Thirang> ().FatalDamage ();
-			Camera.main.GetComponent<LookAt> ().enabled = false;
+			if (Camera.main.GetComponent<LookAt> ())
+				Camera.main.GetComponent<LookAt> ().enabled = false;
 		}
 	}
 }

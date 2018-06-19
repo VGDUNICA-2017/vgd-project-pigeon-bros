@@ -7,6 +7,7 @@ public class MerchantBehaviour : MonoBehaviour {
 	public GameObject menuStore;
 
 	public static bool onStore;
+	bool firstWait = true;
 
 	void OnTriggerStay(Collider other) {
 		if (other.transform.root.CompareTag ("Player")) {
@@ -36,10 +37,14 @@ public class MerchantBehaviour : MonoBehaviour {
 		UI.SetActive (true);
 		menuStore.SetActive (false);
 		Time.timeScale = 1f;
+		firstWait = true;
 	}
 
 	IEnumerator Wait() {
-		yield return new WaitForSecondsRealtime (0.5f);
+		if (firstWait) {
+			yield return new WaitForSecondsRealtime (0.5f);
+			firstWait = false;
+		}
 		if (Input.GetButtonDown ("Merchant"))
 			CloseMenuStore ();
 	}

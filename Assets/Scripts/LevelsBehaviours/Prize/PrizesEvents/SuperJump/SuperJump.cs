@@ -4,26 +4,41 @@ using UnityEngine;
 
 public class SuperJump : MonoBehaviour {
 	public RuntimeAnimatorController animCtrl;
+	public GameObject dialogDispatcher;
 
 	GameObject thirang;
+	Thirang th;
 
-	bool eventTriggered;
+	bool eventTriggered1, eventTriggered2;
 
-	// Use this for initialization
-	void Start () {
-		
+	void Start() {
+		dialogDispatcher.GetComponent<DialogDispatcher> ().cantTrigger = true;
 	}
 
 	void OnTriggerEnter(Collider other) {
-		if (other.transform.root.CompareTag ("Player") && !eventTriggered) {
-			eventTriggered = true;
+		if (other.transform.root.CompareTag ("Player") && !eventTriggered1) {
+			eventTriggered1 = true;
 
 			thirang = other.transform.root.gameObject;
+			th = thirang.GetComponent<Thirang> ();
 
 			thirang.GetComponent<ThirangController> ().enabled = false;
 
 			thirang.GetComponent<Animator> ().SetFloat ("Speed", 0);
 			thirang.GetComponent<Animator> ().CrossFade (ThirangSaT.idleStateHash, 0.4f);
+
+			dialogDispatcher.GetComponent<DialogDispatcher> ().cantTrigger = false;
+		}
+	}
+
+	void OnTriggerStay(Collider other) {
+		if (other.transform.root.CompareTag ("Player")) {
+			if (th.SpecialAbility (this.tag) && !eventTriggered2) {
+				if (Input.GetButtonDown ("specialAbility")) {
+					eventTriggered2 = true;
+					Jump ();
+				}
+			}
 		}
 	}
 
